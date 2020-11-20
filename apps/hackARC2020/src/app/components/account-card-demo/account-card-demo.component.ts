@@ -40,6 +40,6 @@ export class AccountCardDemoComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.accounts$.next(this.accounts);
-    }, 1500);
+    }, 3000);
   }
 }
