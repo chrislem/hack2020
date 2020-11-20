@@ -1,0 +1,116 @@
+{
+  "npmScope": "ffdc",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "test-e2e": {
+      "tags": []
+    },
+    "test": {
+      "tags": []
+    },
+    "angular-components": {
+      "tags": []
+    },
+    "angular-core": {
+      "tags": []
+    },
+    "angular-theme": {
+      "tags": []
+    },
+    "global-search": {
+      "tags": []
+    },
+    "popover": {
+      "tags": []
+    },
+    "scroll-to-top": {
+      "tags": []
+    },
+    "table": {
+      "tags": []
+    },
+    "filter-tags": {
+      "tags": []
+    },
+    "filter-tree": {
+      "tags": []
+    },
+    "multiselect-tags": {
+      "tags": []
+    },
+    "vector-map": {
+      "tags": []
+    },
+    "repeater": {
+      "tags": []
+    },
+    "wizard": {
+      "tags": []
+    },
+    "chart": {
+      "tags": []
+    },
+    "filter-group": {
+      "tags": []
+    },
+    "filter-toggle": {
+      "tags": []
+    },
+    "skeleton-text": {
+      "tags": []
+    },
+    "global-nav": {
+      "tags": []
+    },
+    "avatar": {
+      "tags": []
+    },
+    "banner": {
+      "tags": []
+    },
+    "expandable-table": {
+      "tags": []
+    },
+    "user-profile-menu": {
+      "tags": []
+    },
+    "entity-menu": {
+      "tags": []
+    },
+    "account-card": {
+      "tags": []
+    },
+    "search-input": {
+      "tags": []
+    },
+    "changelog": {
+      "tags": []
+    },
+    "breadcrumb": {
+      "tags": []
+    },
+    "toaster": {
+      "tags": []
+    },
+    "video-thumbnail": {
+      "tags": []
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}

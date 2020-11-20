@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["**/*"],
+  "files": [],
+  "references": [
+  ],
+  "paths": {
+    "@app/*": ["apps/hackARC2020/src/app/*"],
+    "@src/*": ["src/*"],
+    "@environments/*": ["src/environments/*"]
+
+  }
+}

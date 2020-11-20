@@ -1,0 +1,9 @@
+@import 'lib/core/core';
+@import 'lib/core/theming/all-theme';
+@import 'theme-variables';
+
+@include uxg-core();
+
+.uxg-dark-theme {
+  @include uxg-material-theme($uxg-dark-theme);
+}

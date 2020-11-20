@@ -1,0 +1,75 @@
+@import "angular-theme/lib/core/core";
+@import "angular-theme/lib/core/theming/all-theme";
+@import "angular-theme/lib/core/typography/typography";
+@import "angular-theme/theme-variables";
+
+
+
+$uxg-typography: uxg-typography-config();
+
+@include uxg-core();
+
+
+@mixin app-theme($theme) {
+  @include uxg-material-theme($theme);
+
+}
+
+@include app-theme($uxg-light-theme);
+
+.uxg-dark-theme {
+  @include app-theme($uxg-dark-theme);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 8px;
+  padding: 32px;
+
+  h1.mat-display-1 {
+    flex-grow: 1;
+    margin: 8px;
+  }
+
+  code {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    flex-grow: 1;
+  }
+
+  pre {
+    margin: 8px;
+    color: #414141;
+    border-radius: 6px;
+
+    code {
+      display: block;
+    }
+  }
+}
+
+.example-row {
+  margin-top: $uxg-spacing-3;
+  margin-left: $uxg-spacing-5;
+  display: inline-block;
+}
+
+.block-test {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2 * $uxg-spacing-5;
+  align-items: flex-start;
+}

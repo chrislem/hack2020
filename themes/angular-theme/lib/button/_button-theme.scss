@@ -1,0 +1,113 @@
+@mixin uxg-button-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+
+  .mat-stroked-button {
+    &.mat-primary {
+      border-color: mat-color($primary, default, 0.5);
+    }
+
+    &.mat-accent {
+      border-color: mat-color($accent, default, 0.5);
+    }
+
+    &[disabled] {
+      background-color: mat-color($foreground, text, 0.1);
+      border-color: mat-color($foreground, text, 0.25);
+    }
+  }
+
+  .mat-flat-button,
+  .mat-raised-button,
+  .mat-fab,
+  .mat-mini-fab {
+    &.mat-primary,
+    &.mat-accent,
+    &.mat-warn {
+      & .mat-ripple-element {
+        // since the use of CSS variables,
+        // opacity is already set on rgba background-color.
+        // see #288
+        opacity: unset;
+      }
+    }
+
+    &.cdk-keyboard-focused {
+      &.mat-primary .mat-button-focus-overlay {
+        background: mat-color($primary, default-contrast);
+        opacity: 0.24;
+      }
+
+      &.mat-accent .mat-button-focus-overlay {
+        background: mat-color($accent, default-contrast);
+        opacity: 0.24;
+      }
+
+      &.mat-gradient .mat-button-focus-overlay {
+        background: mat-color($primary, default-contrast);
+        opacity: 0.24;
+      }
+
+      &.mat-warn .mat-button-focus-overlay {
+        background: mat-color($warn, default-contrast);
+        opacity: 0.24;
+      }
+    }
+  }
+
+  .mat-icon-button {
+    &.mat-neutral,
+    &.mat-gradient {
+      .mat-button-ripple {
+        color: mat-color($primary, default);
+      }
+    }
+
+    &.mat-neutral {
+      .mat-icon {
+        color: mat-color($foreground, text, 0.75);
+      }
+    }
+
+    &.mat-gradient {
+      .mat-icon {
+        background: mat-color($uxg-gradient, vertical);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  .mat-fab.mat-gradient {
+    color: mat-color($primary, default-contrast);
+    background: mat-color($uxg-gradient, vertical);
+  }
+
+  // graceful degradation targeting IE10+
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .mat-icon-button {
+      &.mat-gradient {
+        .mat-icon {
+          background: none !important;
+          color: mat-color($accent, default);
+        }
+      }
+    }
+  }
+}
+
+@mixin uxg-button-typography($config) {
+  button[dense],
+  a[dense],
+  *[dense] button {
+    @include mat-typography-level-to-styles($config, button-3);
+  }
+
+  button[large],
+  a[large],
+  *[large] button {
+    @include mat-typography-level-to-styles($config, button-1);
+  }
+}
