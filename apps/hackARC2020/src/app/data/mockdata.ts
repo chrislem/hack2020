@@ -27,7 +27,7 @@ export var tracesmock = [
     }
   ];
 
-  interface ICurveData {
+  interface IMockCurveData {
     dimension: any;
     dimensionName: string;
     measureName: string;
@@ -38,7 +38,7 @@ export var tracesmock = [
  
  
 
- export var curvemock: { [id: string]: ICurveData; } = {
+ export var curvemock: { [id: string]: IMockCurveData; } = {
     "EURAct/Act1darr": 
     {
         dimension: ['15/12/2020','16/12/2020','17/12/2020','18/12/2020','19/12/2020','20/12/2020','21/12/2020','22/12/2020','23/12/2020','24/12/2020','25/12/2020','26/12/2020','27/12/2020','28/12/2020','29/12/2020','30/12/2020','31/12/2020','01/01/2021','02/01/2021','03/01/2021','04/01/2021','05/01/2021','06/01/2021','07/01/2021','08/01/2021'],

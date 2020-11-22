@@ -58,6 +58,9 @@ import { AccountCardModule } from '@ffdc/uxg-angular-components/cards/account-ca
 import { EntityMenuModule } from '@ffdc/uxg-angular-components/entity-menu';
 import { ColorSketchModule } from 'ngx-color/sketch';
 
+import { MatTableModule } from '@angular/material/table'  
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 import { UxgSearchInputModule } from '@ffdc/uxg-angular-components/search-input';
 import { UXGChangelogModule } from '@ffdc/uxg-angular-components/changelog';
 import { UxgBreadcrumbModule } from '@ffdc/uxg-angular-components/breadcrumb';
@@ -70,6 +73,7 @@ import {
 import { NewclientComponent } from './components/newclient/newclient.component';
 import { ClientComponent } from './components/client/client.component';
 import { RateComponent } from './components/rate/rate.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -145,7 +149,10 @@ import { RateComponent } from './components/rate/rate.component';
     UXGChangelogModule,
     UxgBreadcrumbModule,
     ToasterModule,
-    VideoThumbnailModule
+    VideoThumbnailModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   exports: [],
