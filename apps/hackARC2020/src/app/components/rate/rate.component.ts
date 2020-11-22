@@ -1,10 +1,8 @@
-import { AfterViewInit, Component, OnInit,  ViewChild} from '@angular/core';
-import { FormBuilder, Validators, Form, FormGroup } from '@angular/forms';
+import { Component, OnInit,  ViewChild} from '@angular/core';
 import { LegendPosition, ChartType, ChartOrientation } from '@ffdc/uxg-angular-components/chart';
-import { trace } from 'console';
+
 import { basis, currencies, periodicity } from '../../data/common';
 import { ICurveData } from '../../data/interface';
-import { tracesmock, curvemock } from '../../data/mockdata';
 import { ArcInstance } from '../../services/arcInstance.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
