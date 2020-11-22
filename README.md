@@ -6,7 +6,7 @@ Christophe LEMIERE & Jean-Guillaume HUBERT
 
 ```bash
 # clone the repo
-git clone https://github.com/chrislem/arclibor.git
+git clone https://github.com/chrislem/hack2020.git
 
 # change directory
 cd arclibor
