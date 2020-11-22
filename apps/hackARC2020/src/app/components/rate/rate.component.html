@@ -1,58 +1,61 @@
 <div class='uxg-flex-layout'>
+
     <mat-list class="uxg-nav-list">
         <mat-list-item>
           <mat-form-field>
             <mat-label>Currency</mat-label>
-            <mat-select   name="currency" [formControl]="currency" >
-                <mat-option>A</mat-option>
-                <mat-option>B</mat-option>
+            <mat-select   name="currency" [(ngModel)]="currency" (selectionChange)="CheckButton($event)">
+                <mat-option *ngFor="let c of currencies" [value]="c">
+                    {{ c }}
+                  </mat-option>
             </mat-select>
           </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
           <mat-form-field>
             <mat-label>Basis</mat-label>
-            <mat-select   name="basis" [formControl]="basis"  >
-              <mat-option>A</mat-option>
-              <mat-option>B</mat-option>
+            <mat-select   name="basis" [(ngModel)]="basis"  (selectionChange)="CheckButton($event)">
+                <mat-option *ngFor="let b of basislist" [value]="b">
+                    {{ b }}
+                  </mat-option>
             </mat-select>
           </mat-form-field>          
         </mat-list-item>
-        
-        <!-- <div *ngIf="isOtherDisable == false">
-          <mat-list-item>
-   
-          <mat-divider></mat-divider>
-   
-      </mat-list-item>
-      <br> -->
+
+        <mat-list-item>
+            <mat-form-field>
+              <mat-label>Periodicity</mat-label>
+              <mat-select   name="periodicity" [(ngModel)]="periodicity" (selectionChange)="CheckButton($event)">
+                  <mat-option  *ngFor="let p of periodicities" [value]="p">{{p}}</mat-option>
+              </mat-select>
+            </mat-form-field>          
+          </mat-list-item> 
+
+  
 
   
         <mat-list-item>
-          <mat-form-field>
-            <mat-label>Periodicity</mat-label>
-            <mat-select   name="periodicity" [formControl]="periodicity" >
-                <mat-option  *ngFor="let p of periodicities" value = {{p}}>{{p}}</mat-option>
-            </mat-select>
-          </mat-form-field>          
-        </mat-list-item> 
-  
-        <mat-list-item>
-            <mat-slide-toggle>ARR</mat-slide-toggle>
+            <mat-button-toggle-group [(ngModel)]="curve" [value]="curve" (click)="updateCurveType()" (change)="CheckButton($event)">
+                <mat-button-toggle value="standard">Standard</mat-button-toggle>
+                <mat-button-toggle value="arr">&nbsp;&nbsp;&nbsp;ARR&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+              </mat-button-toggle-group>
+
+           
         </mat-list-item> 
     
-        
-
-  
-      <mat-list-item>
-          <button mat-flat-button color="primary"  type="submit" (click)="submitRateDef()">
+        <mat-list-item *ngIf="curve == 'standard'">
+            <mat-button-toggle-group [(ngModel)]="curvemethod" [value]="curvemethod" (change)="CheckButton($event)">
+                <mat-button-toggle value="simple">Simple</mat-button-toggle>
+                <mat-button-toggle value="compounded">Compounded</mat-button-toggle>
+              </mat-button-toggle-group>
+     </mat-list-item>     
+     <!-- *ngIf="isCurveValid == true" -->
+      <mat-list-item >
+          <button mat-flat-button color="primary" [disabled]="isCurveValid?false: true"  type="button" (click)="submitRateDef()">
             <mat-icon>arrow_right_alt</mat-icon>
             View Rates
           </button> 
       </mat-list-item>
-    
-    
-    <!-- </div> -->
       </mat-list>
   
   
@@ -67,10 +70,10 @@
             (onClick)="onClick($event)"
             (onSelected)="onSelected($event)"
             (onDoubleClick)="onDoubleClick($event)"
-          >
+            >
             <uxg-legend [position]="legendPosition"></uxg-legend>
             <uxg-trace
-              *ngFor="let trace of traces2"
+              *ngFor="let trace of traces"
               [dimension]="trace.dimension"
               [dimensionName]="trace.dimensionName"
               [measure]="trace.measure"

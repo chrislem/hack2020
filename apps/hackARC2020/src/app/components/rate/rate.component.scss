@@ -1,3 +1,6 @@
+
+
+
 .row {
     display: flex;
     flex-direction: row;
@@ -16,7 +19,7 @@
 .uxg-flex-layout{
     display: flex;
     .uxg-nav-list {
-    min-width: 270px;
+    min-width: 300px;
     min-height: 900px;
     border-left-color: transparent;
     a[mat-list-item]{
@@ -35,6 +38,13 @@
     justify-content: space-between
     }
   }
+  
+  .testcl{
+    background-color: #FAFAFA
+    }
+  
+
+
   }
   
   .uxg-flex-header {
@@ -53,6 +63,7 @@
     justify-content: center
   }
   }
+
   
   mat-list{
     height: auto;

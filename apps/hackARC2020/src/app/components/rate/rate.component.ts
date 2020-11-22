@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, Validators, Form, FormGroup } from '@angular/forms';
 import { LegendPosition, ChartType, ChartOrientation } from '@ffdc/uxg-angular-components/chart';
+import { basis, currencies, periodicity } from '../../data/common';
+import { tracesmock, curvemock } from '../../data/mockdata';
 
 @Component({
   selector: 'ffdc-rate',
@@ -10,53 +12,71 @@ import { LegendPosition, ChartType, ChartOrientation } from '@ffdc/uxg-angular-c
 export class RateComponent implements OnInit {
   legendPosition = LegendPosition.horizontalBottomCenter;
 
-  currencies = []
-  basislist = []
-  periodicities = []
+  //Data form
+  currencies = currencies
+  basislist = basis
+  periodicities = periodicity
 
+  //form elements
+  currency: any
+  basis: any
+  periodicity: any
+  curve= "standard"
+  curvemethod= "simple"
+  isCurveValid = false
+ 
+  // curve data
+  traces = []
+
+  constructor() {
   
-
-  currency = new FormControl();
-  basis = new FormControl();
-  periodicity = new FormControl();
-  curvemode = new FormControl();
-  curvemethod  = new FormControl();
-
-  constructor() { }
+   }
 
   ngOnInit(): void {
-  }
+
+    }
+
 
   submitRateDef() {
-    console.log(this.currency.value);
+    console.log(this.currency);
+    console.log(this.basis);
+    console.log(this.periodicity);
+    console.log(this.curve);
+    console.log(this.curvemethod);
+
+    let idcurve = ''
+    idcurve += this.currency+this.basis+this.periodicity+this.curve+(this.curve == 'standard'?this.curvemethod:'')
+    console.log('id:'+idcurve)
+    let curvedata = curvemock[idcurve]
+    console.log('curve'+curvedata)
+    if (curvedata != null &&  curvedata != undefined) 
+      this.traces.push(curvedata)
+    else
+     this.traces.push(curvemock['default'])
+
+
+
   }
 
-  traces2 = [
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [100, 50, 70],
-      measureName: 'PNL',
-      type: ChartType.spline,
-      orientation: ChartOrientation.horizontal
-    },
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [75, 10, 90],
-      measureName: 'Asset Values',
-      type: ChartType.spline,
-      orientation: ChartOrientation.horizontal
-    },
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [75, 10, 90],
-      measureName: 'Asset',
-      type: ChartType.bar,
-      orientation: ChartOrientation.horizontal
-    }
-  ];
+  updateCurveType(){
+    if (this.curve === 'standard')
+    this.curvemethod= "simple"
+    else
+    this.curvemethod= null
+  }
+
+  CheckButton(e){
+    console.log(e)
+    
+ if (this.currency != undefined 
+    && this.basis != undefined
+    && this.periodicity != undefined
+    )
+    this.isCurveValid = true
+   console.log(this.isCurveValid)
+  }
+
+  
 
   onClick(event: Array<object>) {
     console.log('simple click: ', event);
@@ -70,4 +90,7 @@ export class RateComponent implements OnInit {
     console.log('double click: ', event);
   }
 
+  
+
+  
 }
