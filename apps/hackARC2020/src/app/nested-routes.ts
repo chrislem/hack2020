@@ -25,6 +25,7 @@ import { VideoThumbnailDemoComponent } from './components/video-thumbnail/video-
 import { NewclientComponent } from './components/newclient/newclient.component';
 import { ClientComponent } from './components/client/client.component';
 import { RateComponent } from './components/rate/rate.component';
+import { OriginationComponent } from './components/origination/origination.component';
 
 
 export const nestedRoutes: { title: string; routes: Routes }[] = [
@@ -33,7 +34,7 @@ export const nestedRoutes: { title: string; routes: Routes }[] = [
     title: 'ARRO',
     routes: [
       //{ path: 'account', loadChildren: AccountModule },
-      { path: 'newclient', component: NewclientComponent, data: { title: 'New customer' }  },
+      { path: 'origination', component: OriginationComponent, data: { title: 'Origination' }  },
       { path: 'client', component: ClientComponent, data: { title: 'Renegociation' } },
       { path: 'rate', component: RateComponent, data: { title: 'Rates' } }
     ]
