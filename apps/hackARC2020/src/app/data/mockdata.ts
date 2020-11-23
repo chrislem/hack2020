@@ -1,31 +1,6 @@
 
 import { ChartType, ChartOrientation } from '@ffdc/uxg-angular-components/chart';
-export var tracesmock = [
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [100, 50, 70],
-      measureName: 'PNL',
-      type: ChartType.spline,
-      orientation: ChartOrientation.horizontal
-    },
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [75, 10, 90],
-      measureName: 'Asset Values',
-      type: ChartType.spline,
-      orientation: ChartOrientation.horizontal
-    },
-    {
-      dimension: ['Banks', 'Foods', 'Energies'],
-      dimensionName: 'Industry',
-      measure: [75, 10, 90],
-      measureName: 'Asset',
-      type: ChartType.spline,
-      orientation: ChartOrientation.horizontal
-    }
-  ];
+
 
   interface IMockCurveData {
     dimension: any;
