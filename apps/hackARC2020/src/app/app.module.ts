@@ -74,6 +74,7 @@ import { NewclientComponent } from './components/newclient/newclient.component';
 import { ClientComponent } from './components/client/client.component';
 import { RateComponent } from './components/rate/rate.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CalcdealComponent } from './components/client/calcdeal/calcdeal.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { MatSortModule } from '@angular/material/sort';
     VideoDialogComponent,
     NewclientComponent,
     ClientComponent,
-    RateComponent
+    RateComponent,
+    CalcdealComponent
   ],
   imports: [
     BrowserModule,
