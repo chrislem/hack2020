@@ -1,23 +1,44 @@
 <div class='uxg-flex-layout'>
 	<mat-list class="uxg-nav-list">
-		<mat-list-item>
-			<a mat-list-item>
-				<mat-icon mat-list-icon>layers</mat-icon>
-				<div mat-line>
-					<p class="uxg-subtitle-1">
-						Form
-					</p>
-				</div>
-			</a>
-		</mat-list-item>
-	</mat-list>
+        <mat-list-item>
+          <mat-form-field>
+			<mat-label>Customer</mat-label>
+			<input matInput type="text" [(ngModel)]="customer" />
+			<mat-hint>Please enter Customer Name</mat-hint>
+          </mat-form-field>          
+        </mat-list-item>
+     
+     <!-- *ngIf="isCurveValid == true" -->
+      <mat-list-item >
+          <button mat-flat-button color="primary"  type="button" (click)="viewCustomer()">
+            <mat-icon>arrow_right_alt</mat-icon>
+            View Customer details
+          </button> 
+      </mat-list-item>
+      </mat-list>
 
 
 
 	<div class="uxg-display">
-		<div class="uxg-flex-header">
-			<h3 class="uxg-h3">Client Component</h3>
-		</div>
-
+		<div class="uxg-display">
+			<mat-tab-group>
+				<mat-tab *ngIf='isnewCustomer' label='Customer detail'>
+						<p>deal1</p>
+						<button mat-flat-button color="primary"  type="button" (click)="ComputeDeal('1', 'deal1')">
+							<mat-icon>arrow_right_alt</mat-icon>
+							Compute deal
+						  </button> 
+						<p>deal2</p>
+						<button mat-flat-button color="primary"  type="button" (click)="ComputeDeal('2', 'deal2')">
+							<mat-icon>arrow_right_alt</mat-icon>
+							Compute deal
+						  </button> 
+				</mat-tab>
+				<mat-tab *ngFor="let tab of tabDeals" [label]="tab.name">
+					<p>{{tab}}</p>
+					<arro-calcdeal [deal]="tab"></arro-calcdeal>
+				</mat-tab>
+				
+			</mat-tab-group>
 	</div>
 </div>

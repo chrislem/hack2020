@@ -74,6 +74,7 @@ import { NewclientComponent } from './components/newclient/newclient.component';
 import { ClientComponent } from './components/client/client.component';
 import { RateComponent } from './components/rate/rate.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CalcdealComponent } from './components/client/calcdeal/calcdeal.component';
 import { OriginationComponent } from './components/origination/origination.component';
 
 @NgModule({
@@ -110,6 +111,7 @@ import { OriginationComponent } from './components/origination/origination.compo
     NewclientComponent,
     ClientComponent,
     RateComponent,
+    CalcdealComponent,
     OriginationComponent
   ],
   imports: [

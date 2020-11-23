@@ -7,9 +7,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientComponent implements OnInit {
 
+  customer: any
+  tabDeals : any = []
+  isnewCustomer = false
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  viewCustomer(){
+    console.log('viewCustomer')
+
+    this.tabDeals=[]
+    this.isnewCustomer = true
+
+
+  }
+
+
+  ComputeDeal(id: string, name:string)
+  {
+    this.tabDeals.push({
+      id: id,
+      name: name})
+    console.log('tabdeals:'+ this.tabDeals)
+
+  }
+
 
 }
