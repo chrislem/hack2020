@@ -44,7 +44,7 @@
            
         </mat-list-item> 
     
-        <mat-list-item *ngIf="curve == 'standard'">
+        <mat-list-item *ngIf="curve == 'arr'">
             <mat-button-toggle-group [(ngModel)]="curvemethod" [value]="curvemethod" (change)="CheckButton($event)">
                 <mat-button-toggle value="simple">Simple</mat-button-toggle>
                 <mat-button-toggle value="compounded">Compounded</mat-button-toggle>
