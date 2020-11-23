@@ -9,7 +9,7 @@ Christophe LEMIERE & Jean-Guillaume HUBERT
 git clone https://github.com/chrislem/hack2020.git
 
 # change directory
-cd arclibor
+cd hack2020
 
 # install the repo with npm
 npm install
