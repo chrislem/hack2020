@@ -34,7 +34,7 @@ export const nestedRoutes: { title: string; routes: Routes }[] = [
     title: 'ARRO',
     routes: [
       //{ path: 'account', loadChildren: AccountModule },
-      { path: 'newclient', component: OriginationComponent, data: { title: 'Origination' }  },
+      { path: 'origination', component: OriginationComponent, data: { title: 'Origination' }  },
       { path: 'client', component: ClientComponent, data: { title: 'Renegociation' } },
       { path: 'rate', component: RateComponent, data: { title: 'Rates' } }
     ]

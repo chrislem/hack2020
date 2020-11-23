@@ -19,3 +19,8 @@ export var periodicity = [
     '3m',
     '6m'
 ];
+
+export var amoType_list = [
+'Bullet',
+'Constant Capital'
+];

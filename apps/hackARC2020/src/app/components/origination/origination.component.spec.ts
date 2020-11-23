@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OriginationComponent } from './origination.component';
 
+
 describe('OriginationComponent', () => {
   let component: OriginationComponent;
   let fixture: ComponentFixture<OriginationComponent>;
