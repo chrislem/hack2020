@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   exports: [
@@ -44,7 +45,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+MatSliderModule
+
   ]
 })
 export class MaterialModule {}
