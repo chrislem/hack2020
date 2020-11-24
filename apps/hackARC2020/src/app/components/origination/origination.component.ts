@@ -23,6 +23,7 @@ originDate: Date
 principal: number
 ARRindex: string
 maturity: string
+maturitySlider: number
 interestMethod: string
 amortizationType: string
 clientRateSpread: number
@@ -43,8 +44,9 @@ maturityLabel(value: number) {
 }
 
 setMaturity(event){
+  this.maturitySlider = event;
   return this.maturity = mapMaturity.get(event.toString());
-  console.log(this.periodicity);  
+
 }
 
 periodicityLabel(value: number) {
@@ -53,7 +55,7 @@ periodicityLabel(value: number) {
 
 setPeriodicity(event){
   return this.periodicity = mapPeriodicity.get(event.toString());
-  console.log(this.periodicity);
+ 
   }
 
 setARRIndex(event: Event) {
@@ -62,6 +64,13 @@ return this.ARRindex = mapCurrencyARR.get(this.currency);
 
 interestMethodLabel(value: string) {
   return mapInterestMethod.get(value);
+}
+
+testMaturity(){
+if (this.maturitySlider < 4)
+{return this.maturitySlider}
+else
+{return 4}
 }
 
 }
