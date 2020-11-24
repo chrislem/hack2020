@@ -47,7 +47,7 @@
                 <mat-label>Interest method</mat-label>
                 <mat-select [(ngModel)]="interestMethod">
                     <mat-option *ngFor="let i of ARRIntMethod_list" [value]="i">
-                        {{ i }}
+                        {{ interestMethodLabel(i) }}
                       </mat-option>
                 </mat-select>
             </mat-form-field>          

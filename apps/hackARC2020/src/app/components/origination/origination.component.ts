@@ -60,5 +60,8 @@ setARRIndex(event: Event) {
 return this.ARRindex = mapCurrencyARR.get(this.currency); 
 }
 
+interestMethodLabel(value: string) {
+  return mapInterestMethod.get(value);
+}
 
 }

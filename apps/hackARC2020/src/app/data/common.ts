@@ -52,8 +52,8 @@ export var ARR_Indexes = [
 ]
 
 export var ARRInterestMethods = [
-    'Simple',
-    'Compounding'
+    'RFRAVRSimple',
+    'RFRAVRCompounding'
 ]
 
 export var amortizationTypes = [
@@ -96,7 +96,12 @@ export var mapMaturity = new Map([
           ]);
 
 export var mapInterestMethod = new Map([
-            ["Simple","RFRAVRSimple"],
-            ["Compounding","RFRAVRcompounding"]
+            ["RFRAVRSimple","Simple"],
+            ["RFRAVRCompounding","Compounding",]
               ]);
 
+export var mapBasis = new Map ([
+    ["Act/Act","Exact/Exact"],
+    ["Act/360","Exact/360"],
+    ["Act/365","Exact/365"]
+])
