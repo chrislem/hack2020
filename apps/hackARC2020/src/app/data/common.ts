@@ -1,4 +1,4 @@
-
+//ENUMS
 export var currencies = [
     'EUR',
     'USD',
@@ -51,6 +51,18 @@ export var ARR_Indexes = [
     'TONAR'
 ]
 
+export var ARRInterestMethods = [
+    'Simple',
+    'Compounding'
+]
+
+export var amortizationTypes = [
+    'Bullet',
+    'ConstantPrincipalAnnuity'
+        ]
+
+
+//MAPS
 export var mapCurrencyARR = new Map([
     ["EUR","ESTER"],
     ["USD","SOFR"],
@@ -60,12 +72,12 @@ export var mapCurrencyARR = new Map([
   ])
 
 export var mapPeriodicity = new Map([
-    ["3","1m"],
-    ["4","3m"],
-    ["5","6m"],
-    ["6","12m"]]);
+    ["1","1m"],
+    ["2","3m"],
+    ["3","6m"],
+    ["4","12m"]]);
 
-    export var mapMaturity = new Map([
+export var mapMaturity = new Map([
         ["1","1m"],
         ["2","3m"],
         ["3","6m"],
@@ -81,5 +93,10 @@ export var mapPeriodicity = new Map([
         ["13","10y"],
         ["14","15y"],
         ["15","20y"]
-  
-    ]);
+          ]);
+
+export var mapInterestMethod = new Map([
+            ["Simple","RFRAVRSimple"],
+            ["Compounding","RFRAVRcompounding"]
+              ]);
+

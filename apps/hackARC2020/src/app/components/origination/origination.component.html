@@ -1,38 +1,61 @@
 <div class='uxg-flex-layout'>
-
     <mat-list class="uxg-nav-list">
         <mat-list-item>
         <mat-form-field>
             <mat-label>Currency</mat-label>
-            <mat-select   name="currency" [(ngModel)]="currency">
+            <mat-select [(ngModel)]="currency" (selectionChange)="setARRIndex($event)">
                 <mat-option *ngFor="let c of currency_list" [value]="c">
                     {{ c }}
                   </mat-option>
             </mat-select>
         </mat-form-field> 
-        </mat-list-item>    
+        </mat-list-item>  
+        <mat-list-item>
+                <mat-label>Index</mat-label>
+                <p>{{ARRindex}}</p>       
+        </mat-list-item>     
         <mat-list-item>
             <mat-form-field>
               <mat-label>Origin date</mat-label>
-                <input matInput type="date" name ="originDate" [(ngModel)]="originDate" />
+                <input matInput type="date" [(ngModel)]="originDate" />
             </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
-            <mat-form-field>
-              <mat-label>Maturity date</mat-label>
-                <input matInput type="date" name ="maturityDate" [(ngModel)]="maturityDate" />
-        </mat-form-field>          
+            <mat-label>Maturity</mat-label>
         </mat-list-item>
+        <mat-list-item>              
+            <mat-slider thumbLabel=true [displayWith]="maturityLabel" tickInterval = "1" min = "1" max ="15" (change)="setMaturity($event.value)"></mat-slider>       
+        </mat-list-item>
+        <mat-list-item>
+            <mat-form-field>
+                <mat-label>Amortization</mat-label>
+                <mat-select [(ngModel)]="amortizationType">
+                    <mat-option *ngFor="let a of amortType_list" [value]="a">
+                        {{ a }}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>          
+            </mat-list-item>  
         <mat-list-item>
             <mat-form-field>
               <mat-label>Principal</mat-label>
-                <input matInput type="number" name ="principal" [(ngModel)]="principal" />
+                <input matInput type="number" [(ngModel)]="principal" />
         </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
+            <mat-form-field>
+                <mat-label>Interest method</mat-label>
+                <mat-select [(ngModel)]="interestMethod">
+                    <mat-option *ngFor="let i of ARRIntMethod_list" [value]="i">
+                        {{ i }}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>          
+            </mat-list-item>
+        <mat-list-item>
         <mat-form-field>
             <mat-label>Basis</mat-label>
-            <mat-select   name="basis" [(ngModel)]="basis" >
+            <mat-select [(ngModel)]="basis" >
                 <mat-option *ngFor="let b of basis_list" [value]="b">
                     {{ b }}
                   </mat-option>
@@ -40,12 +63,28 @@
         </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
-            <mat-form-field>
-              <mat-label>Periodicity</mat-label>
-              <mat-select   name="periodicity" [(ngModel)]="periodicity">
-                  <mat-option  *ngFor="let p of periodicity_list" [value]="p">{{p}}</mat-option>
-              </mat-select>
-            </mat-form-field>          
-          </mat-list-item> 
-     </mat-list>
+            <mat-label>Periodicity</mat-label>
+        </mat-list-item>
+        <mat-list-item>              
+            <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval = "1" min = "1" max ="4" (change)="setPeriodicity($event.value)"></mat-slider>       
+        </mat-list-item>    
+     <mat-list-item>
+    <mat-form-field>
+        <mat-label>Client rate spread</mat-label>
+        <input matInput type="number" [(ngModel)]="clientRateSpread" placeholder = "0" min = "0" max = "10" step = "0.50" />
+    </mat-form-field>          
+    </mat-list-item>
+    <mat-list-item>
+    <mat-form-field>
+        <mat-label>Lookback</mat-label>
+        <input matInput type="number" placeholder = "0" min = "0" max = "10" [(ngModel)]="lookback" />
+    </mat-form-field>          
+    </mat-list-item>
+    <mat-list-item>
+    <mat-form-field>
+        <mat-label>Lockout</mat-label>
+        <input matInput type="number" placeholder = "0" min = "0" max = "10" [(ngModel)]="lockout" />
+    </mat-form-field>          
+    </mat-list-item>
+</mat-list>
 </div>
