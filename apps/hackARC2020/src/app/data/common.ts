@@ -14,8 +14,6 @@ export var basis = [
 ];
 
 export var periodicity = [
-    '1d',
-    '1w',
     '1m',
     '3m',
     '6m',
@@ -62,8 +60,6 @@ export var mapCurrencyARR = new Map([
   ])
 
 export var mapPeriodicity = new Map([
-    ["1","1d"],
-    ["2","1w"],
     ["3","1m"],
     ["4","3m"],
     ["5","6m"],
