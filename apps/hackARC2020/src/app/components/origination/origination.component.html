@@ -47,7 +47,7 @@
                 <mat-label>Interest method</mat-label>
                 <mat-select [(ngModel)]="interestMethod">
                     <mat-option *ngFor="let i of ARRIntMethod_list" [value]="i">
-                        {{ i }}
+                        {{ interestMethodLabel(i) }}
                       </mat-option>
                 </mat-select>
             </mat-form-field>          
@@ -66,7 +66,7 @@
             <mat-label>Periodicity</mat-label>
         </mat-list-item>
         <mat-list-item>              
-            <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval = "1" min = "1" max ="4" (change)="setPeriodicity($event.value)"></mat-slider>       
+            <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval = "1" min = "1" max ="{{testMaturity()}}" (change)="setPeriodicity($event.value)"></mat-slider>       
         </mat-list-item>    
      <mat-list-item>
     <mat-form-field>

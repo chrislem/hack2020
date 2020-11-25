@@ -44,8 +44,9 @@ maturityLabel(value: number) {
 }
 
 setMaturity(event){
+  this.maturitySlider = event;
   return this.maturity = mapMaturity.get(event.toString());
-  console.log(this.periodicity);  
+
 }
 
 periodicityLabel(value: number) {
@@ -54,7 +55,7 @@ periodicityLabel(value: number) {
 
 setPeriodicity(event){
   return this.periodicity = mapPeriodicity.get(event.toString());
-  console.log(this.periodicity);
+
   }
 
 setARRIndex(event: Event) {
@@ -66,6 +67,7 @@ interestMethodLabel(value: string) {
 }
 
 testMaturity(){
+console.log(this.maturitySlider);
 if (this.maturitySlider < 4)
 {return this.maturitySlider}
 else
