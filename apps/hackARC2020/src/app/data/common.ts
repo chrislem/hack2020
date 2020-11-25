@@ -13,6 +13,13 @@ export var basis = [
     'Act/365'
 ];
 
+export var ARCbasis = [
+    'Exact/Exact',
+    'Exact/360',
+    'Exact/365'
+
+]
+
 export var periodicity = [
     '1m',
     '3m',
@@ -105,8 +112,8 @@ export var mapAmotype = new Map([
     ["Constant Capital","ConstantPrincipalAnnuity"]]);
 
 export var mapBasis = new Map( [
-    ['Act/Act', 'Exact/Exact'],
-    ['Act/360', 'Exact/360'],
-    ['Act/365', 'Exact/365']
+    ['Exact/Exact', 'Act/Act'],
+    ['Exact/360', 'Act/360'],
+    ['Exact/365', 'Act/365']
 ]);
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { basis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods,mapInterestMethod } from '../../data/common';
-import { amortizationTypes } from '../../data/common';
+import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods,mapInterestMethod } from '../../data/common';
+import { amortizationTypes,mapBasis } from '../../data/common';
 @Component({
   selector: 'ffdc-origination',
   templateUrl: './origination.component.html',
@@ -9,7 +9,7 @@ import { amortizationTypes } from '../../data/common';
 export class OriginationComponent implements OnInit {
 
 //list
-basis_list = basis
+basis_list = ARCbasis
 periodicity_list = periodicity
 currency_list = currencies
 ARRIntMethod_list = ARRInterestMethods
@@ -73,4 +73,10 @@ if (this.maturitySlider < 4)
 else
 {return 4}
 }
+
+basisLabel(value: string) {
+  return mapBasis.get(value);
 }
+
+}
+

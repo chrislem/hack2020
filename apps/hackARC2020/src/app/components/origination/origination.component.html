@@ -57,7 +57,7 @@
             <mat-label>Basis</mat-label>
             <mat-select [(ngModel)]="basis" >
                 <mat-option *ngFor="let b of basis_list" [value]="b">
-                    {{ b }}
+                    {{ basisLabel(b) }}
                   </mat-option>
             </mat-select>
         </mat-form-field>          
