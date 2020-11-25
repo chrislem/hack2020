@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArcInstance } from '../../services/arcInstance.service';
 
 @Component({
   selector: 'ffdc-client',
@@ -12,7 +13,7 @@ export class ClientComponent implements OnInit {
   isnewCustomer = false
 
 
-  constructor() { }
+  constructor(private arcInstance: ArcInstance) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,7 @@ export class ClientComponent implements OnInit {
     this.tabDeals=[]
     this.isnewCustomer = true
 
-
+    this.arcInstance.test()
   }
 
 

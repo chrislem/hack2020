@@ -100,3 +100,12 @@ export var mapInterestMethod = new Map([
             ["Compounding","RFRAVRcompounding"]
               ]);
 
+export var mapAmotype = new Map([
+    ["Bullet","Bullet"],
+    ["Constant Capital","ConstantPrincipalAnnuity"]]);
+
+export var mapBasis = new Map( [
+    ['Act/Act', 'Exact/Exact'],
+    ['Act/360', 'Exact/360'],
+    ['Act/365', 'Exact/365']
+]);

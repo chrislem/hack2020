@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,6 +62,8 @@ import { ColorSketchModule } from 'ngx-color/sketch';
 
 import { MatTableModule } from '@angular/material/table'  
 import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { UxgSearchInputModule } from '@ffdc/uxg-angular-components/search-input';
 import { UXGChangelogModule } from '@ffdc/uxg-angular-components/changelog';
@@ -156,9 +160,10 @@ import { OriginationComponent } from './components/origination/origination.compo
     VideoThumbnailModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   exports: [],
   bootstrap: [AppComponent]
 })
