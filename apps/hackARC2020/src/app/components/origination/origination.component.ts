@@ -72,5 +72,4 @@ if (this.maturitySlider < 4)
 else
 {return 4}
 }
-
 }
