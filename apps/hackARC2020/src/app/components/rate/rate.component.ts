@@ -2,11 +2,12 @@ import { Component, OnInit,  ViewChild} from '@angular/core';
 import { LegendPosition, ChartType, ChartOrientation } from '@ffdc/uxg-angular-components/chart';
 
 import { basis, currencies, periodicity } from '../../data/common';
-import { ICurveData } from '../../data/interface';
 import { ArcInstance } from '../../services/arcInstance.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Curve } from '../../models/curve.model';
+import { DatePipe } from '@angular/common';
 
 export const COLUMNS = [
   { displayName: 'Curve List', name: 'curves' },
@@ -46,11 +47,16 @@ export class RateComponent implements OnInit {
   isCurveValid = false
  
   // curve data
-  curvedata: { [id: string]: ICurveData; } = {}
+  curvedata: { [id: string]: Curve; } = {}
   curvekey= []
   traces = []
+
+  curvetest : Curve
 //Tab group
 tabInit = 0
+
+loadcurve = false
+
 //table
 displayedColumns: string[] = ['currency', 'basis', 'periodicity', 'curvetype', 'curvemethod', 'date', 'value'];
 dataSource: MatTableDataSource<TableCurevData>;
@@ -58,8 +64,9 @@ dataSource: MatTableDataSource<TableCurevData>;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private arcInstance: ArcInstance) {
-  
+  constructor(private arcInstance: ArcInstance,
+    private datapipe: DatePipe) {
+      this.loadcurve = false
    }
 
   ngOnInit(): void {
@@ -84,35 +91,40 @@ dataSource: MatTableDataSource<TableCurevData>;
 //Action
   addCurve() {
 
-    let curvedata: ICurveData
+    let curve: Curve
 
-    console.log(this.currency);
-    console.log(this.basis);
-    console.log(this.periodicity);
-    console.log(this.curve);
-    console.log(this.curvemethod);
+    // console.log(this.currency);
+    // console.log(this.basis);
+    // console.log(this.periodicity);
+    // console.log(this.curve);
+    // console.log(this.curvemethod);
+    // console.log(this.arcInstance)
 
-    let idcurve = ''
-    idcurve += this.currency+this.basis+this.periodicity+this.curve+(this.curve == 'standard'?this.curvemethod:'')
-    console.log('id:'+idcurve)
+    this.loadcurve = true
+    this.isCurveValid = false
 
-    curvedata = this.arcInstance.getCurveData(
+    this.arcInstance.getCurve(
       this.currency,
       this.basis,
       this.periodicity,
       this.curve,
       this.curvemethod  
+    ).subscribe(curve => {
+
+      console.log(curve)
+
+      if(this.curvedata[curve.getCurveID()] == undefined)
+      {
+        this.curvedata[curve.getCurveID()] = curve
+        this.drawGraph()
+        this.updateTableCurve()
+        this.tabInit = 0;
+        this.loadcurve = false
+        this.isCurveValid = true
+      }}
     )
 
-    if(this.curvedata[idcurve] == undefined)
-    {
-      this.curvedata[idcurve] = curvedata
-      this.updateGraph(idcurve,curvedata)
-      this.updateTableCurve()
-      this.tabInit = 0;
-    }
-
-
+    
   }
 
   updateTableCurve()
@@ -121,16 +133,21 @@ dataSource: MatTableDataSource<TableCurevData>;
 
     for (let key in this.curvedata) {
       console.log('updateTableCurve'+key)
-      for (var i = 0; i < this.curvedata[key].dates.length; i++) {
+      let curve = this.curvedata[key]
+      let dates = curve.timeSeries.getDates()
+      let values = curve.timeSeries.getValues()
+      for (var i = 0; i < dates.length; i++) {
         
+
+
         data.push( {
-          currency: this.curvedata[key].currency,
-          basis: this.curvedata[key].basis,
-          periodicity: this.curvedata[key].periodicity,
-          curvetype: this.curvedata[key].curve,
-          curvemethod: this.curvedata[key].curvemethod,
-          date:this.curvedata[key].dates[i],
-          value: this.curvedata[key].values[i],
+          currency: curve.currency,
+          basis: curve.basis,
+          periodicity: curve.periodicity,
+          curvetype: curve.curve,
+          curvemethod: curve.curvemethod,
+          date:this.datapipe.transform(dates[i], 'yyyy-MM-dd'),
+          value: ''+values[i]
         })
       }
     }
@@ -140,19 +157,19 @@ dataSource: MatTableDataSource<TableCurevData>;
 
   }
 
-  updateGraph(key: string, curvedata: ICurveData)
+  updateGraph(curve: Curve)
   {
 
       this.traces.push(
         {
-            dimension: curvedata.dates,
-            dimensionName: curvedata.currency,
-            measure: curvedata.values,
-            measureName: key,
+            dimension: curve.timeSeries.getDates(),
+            dimensionName: "curve.currency",
+            measure: curve.timeSeries.getValues(),
+            measureName: curve.getCurveID(),
             type: ChartType.spline
         }
       )
-      this.curvekey.push(key)
+      this.curvekey.push(curve.getCurveID())
   }
 
   drawGraph()
@@ -164,14 +181,13 @@ dataSource: MatTableDataSource<TableCurevData>;
       let curvedata = this.curvedata[key]
       this.traces.push(
         {
-            dimension: curvedata.dates,
+            dimension: curvedata.timeSeries.getDates(),
             dimensionName: curvedata.currency,
-            measure: curvedata.values,
+            measure: curvedata.timeSeries.getValues(),
             measureName: key,
             type: ChartType.spline
         }
       )
-           // Use `key` and `value`
     }
   }
 
@@ -179,7 +195,7 @@ dataSource: MatTableDataSource<TableCurevData>;
 
   //UI Event
   updateCurveType(){
-    if (this.curve === 'standard')
+    if (this.curve === 'arr')
     this.curvemethod= "simple"
     else
     this.curvemethod= null

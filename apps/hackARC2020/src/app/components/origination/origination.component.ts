@@ -23,12 +23,12 @@ originDate: Date
 principal: number
 ARRindex: string
 maturity: string
-maturitySlider: number
 interestMethod: string
 amortizationType: string
 clientRateSpread: number
 lookback: number
 lockout: number
+maturitySlider: number
 
   constructor() { 
     this.ARRindex
@@ -44,9 +44,8 @@ maturityLabel(value: number) {
 }
 
 setMaturity(event){
-  this.maturitySlider = event;
   return this.maturity = mapMaturity.get(event.toString());
-
+  console.log(this.periodicity);  
 }
 
 periodicityLabel(value: number) {
@@ -55,7 +54,7 @@ periodicityLabel(value: number) {
 
 setPeriodicity(event){
   return this.periodicity = mapPeriodicity.get(event.toString());
- 
+  console.log(this.periodicity);
   }
 
 setARRIndex(event: Event) {

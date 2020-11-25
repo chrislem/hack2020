@@ -3,6 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { curvemock } from '../data/mockdata';
 import { CurveData } from '../data/interface';
+import { Curve } from '../models/curve.model';
+import { map } from 'rxjs/operators';
+import { TimeSeries } from '../models/timeseries.model';
+import { Contract } from '../models/contract.model';
+import { DatePipe } from '@angular/common';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,9 +23,9 @@ const httpOptions = {
 })
 export class ArcInstance {
 
-  constructor() { }
+  constructor(protected http: HttpClient) { }
 
-
+/*
   getCurveData(currency: string, basis: string, periodicity: string, curve: string, curvemethod: string)
   {
     console.log(currency);
@@ -51,8 +57,47 @@ export class ArcInstance {
     retcurvedata.values = curvedata.measure
 
      return retcurvedata
+  }*/
+
+
+  public getCurve(
+    currency: string
+    , basis: string
+    , periodicity: string
+    , curve: string
+    , curvemethod: string
+  ): Observable<Curve> {
+console.log('getCurve')
+
+    let curveRes = new Curve(currency,basis, periodicity,curve,curvemethod)
+    let inputJSon = curveRes.getInputJson()
+    console.log(inputJSon)
+    return this.http.post('http://192.168.43.241:13350/services/ODRateARRValue', inputJSon, httpOptions).pipe(
+      map(
+        (jsonItem => {
+          console.log(jsonItem)
+          curveRes.addNewTimeSeries(jsonItem['result'][0]['Fixings'])
+          return curveRes
+        })
+      )
+    );
   }
 
+  public test(): Observable<TimeSeries>{
+
+   let timeSeries: TimeSeries
+    let contract: Contract
+    console.log('test')
+    // return this.http.get('http://localhost:3000/ODRateARRValue').subscribe
+    //     (jsonItem => 
+    //       {
+    //         return TimeSeries.fromJson(jsonItem['result'][0]['Fixings'])
+    //       }
+    // )
+
+   return null
+  }
+  
 
 
   // private sendPostRequest(data: any): Observable<any> {

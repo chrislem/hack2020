@@ -7,14 +7,17 @@
 			<mat-hint>Please enter Customer Name</mat-hint>
           </mat-form-field>          
         </mat-list-item>
-     
+		<mat-list-item >
+			<mat-slider min="1" max="5" step="1" valueText="test" thumbLabel="true"></mat-slider>
+		  </mat-list-item>
      <!-- *ngIf="isCurveValid == true" -->
       <mat-list-item >
           <button mat-flat-button color="primary"  type="button" (click)="viewCustomer()">
             <mat-icon>arrow_right_alt</mat-icon>
             View Customer details
           </button> 
-      </mat-list-item>
+	  </mat-list-item>
+
       </mat-list>
 
 

@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   exports: [
@@ -46,7 +47,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatTabsModule,
     MatExpansionModule,
     MatSelectModule,
-MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule
 
   ]
 })
