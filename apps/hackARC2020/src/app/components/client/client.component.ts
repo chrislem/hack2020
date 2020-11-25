@@ -24,7 +24,7 @@ export class ClientComponent implements OnInit {
     this.tabDeals=[]
     this.isnewCustomer = true
 
-    this.arcInstance.test()
+
   }
 
 
