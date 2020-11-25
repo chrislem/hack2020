@@ -78,5 +78,9 @@ basisLabel(value: string) {
   return mapBasis.get(value);
 }
 
+testCompute(){
+  console.log("click!")
+}
+
 }
 

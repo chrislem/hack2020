@@ -86,5 +86,10 @@
         <input matInput type="number" placeholder = "0" min = "0" max = "10" [(ngModel)]="lockout" />
     </mat-form-field>          
     </mat-list-item>
+    <mat-list-item >
+        <button mat-flat-button color="primary" style = "width: 200px" type="button" (click) = "testCompute()">
+          Compute
+        </button> 
+    </mat-list-item>
 </mat-list>
 </div>
