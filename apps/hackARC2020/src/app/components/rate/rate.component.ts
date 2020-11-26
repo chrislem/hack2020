@@ -43,7 +43,7 @@ export class RateComponent implements OnInit {
   basis: any
   periodicity: any
   curve= "arr"
-  curvemethod= undefined
+  curvemethod= 'simple'
   isCurveValid = false
  
   // curve data
@@ -124,18 +124,20 @@ dataSource: MatTableDataSource<TableCurevData>;
     ).subscribe(curve => {
 
       //console.log(curve)
-      console.log(' receive curve')
+      
       if(this.curvedata[curve.getCurveID()] == undefined)
       {
         this.curvedata[curve.getCurveID()] = curve
         this.drawGraph()
         this.updateTableCurve()
-        this.tabInit = 0;
+        //
         this.loadcurve = false
         this.isCurveValid = true
+        console.log(' receive curve')
+        console.log(curve)
       }}
     )
-
+    this.tabInit = 0;
     console.log(' end Add curve')
   }
 

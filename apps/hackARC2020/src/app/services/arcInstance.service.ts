@@ -5,6 +5,7 @@ import { Curve } from '../models/curve.model';
 import { map } from 'rxjs/operators';
 import { TimeSeries } from '../models/timeseries.model';
 import { Contract } from '../models/contract.model';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -33,7 +34,7 @@ console.log('getCurve')
     let curveRes = new Curve(currency,basis, periodicity,curve,curvemethod)
     let inputJSon = curveRes.getInputJson()
     console.log(inputJSon)
-    return this.http.post('http://192.168.0.2:13350/services/ODRateARRValue', inputJSon, httpOptions).pipe(
+    return this.http.post('http://'+environment.arcServer+'/services/ODRateARRValue', inputJSon, httpOptions).pipe(
       map(
         (jsonItem => {
           console.log(jsonItem)
@@ -82,7 +83,7 @@ console.log('getCurve')
     )
     let inputJSon = contract.getInputJson()
     console.log(inputJSon)
-    return this.http.post('http://192.168.0.2:13350/services/ODComputeDeal', inputJSon, httpOptions).pipe(
+    return this.http.post('http://'+environment.arcServer+'/services/ODComputeDeal', inputJSon, httpOptions).pipe(
       map(
         (jsonItem => {
           console.log(jsonItem)

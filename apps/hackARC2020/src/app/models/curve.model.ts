@@ -1,7 +1,7 @@
 
 import { TimeSeries } from './timeseries.model';
 import { DatePipe } from '@angular/common';
-import { mapBasis, mapCurrencyARR } from '../data/common';
+import { mapRevertBasis, mapCurrencyARR } from '../data/common';
 
 export class Curve {
     curveid: string =''
@@ -51,7 +51,7 @@ export class Curve {
             {
                 AmortizationType : "Bullet",
                 BalanceSheetDate : '15/12/2020',///this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
-                Basis : mapBasis.get(this.basis),
+                Basis : mapRevertBasis.get(this.basis),
                 ContractReference : "CurveFixing",
                 ContractStructure : "SimpleInterestStream",
                 Currency : this.currency,
