@@ -50,36 +50,38 @@ console.log('getCurve')
     contractRef: string
     ,currency: string
     , basis: string
-    , amortaizationType: string
+    , amortizationType: string
     , principalperiodicty: string
     , interestmethod: string
     , interestperiodicity: string
     , interestratetype: string
     , interestrateindex: string
     , origindate: Date
-    , maturitydate: Date
+    , maturity: string
     , principal: number
     , clientratespread: number
     , lookback: number
     , lockout: number
+    , fixedrate: number
   ): Observable<Contract> {
     
     let contract = new Contract(
       contractRef
       ,currency
       , basis
-      , amortaizationType
+      , amortizationType
       , principalperiodicty
       , interestmethod
       , interestperiodicity
       , interestratetype
       , interestrateindex
       , origindate
-      , maturitydate
+      , maturity
       , principal
       , clientratespread
       , lookback
-      , lockout    
+      , lockout
+      ,fixedrate    
     )
     let inputJSon = contract.getInputJson()
     console.log(inputJSon)

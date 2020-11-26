@@ -102,28 +102,29 @@ testCompute(){
 
 
   this.arcInstance.computeContract(
-    "Fakedeal"
-    , 'EUR'
-    , 'Act/Act'
-    , 'Bullet'
-    , ''
-    , 'Simple'
-    , '1m'
-    , 'Fixed'
-    , 'EURIBOR'
-    , new  Date ("2020-12-15")
-    , new  Date ("2030-12-15")
-    , 1000
-    , 0.30
-    , 1
-    , 2
+    "ARRO"
+    , this.currency //EUR
+    , this.basis //'Act/Act'
+    , this.amortizationType //'Bullet'
+    , this.periodicity // principalperiodicty
+    , this.interestMethod //'Simple'
+    , this.periodicity//InterestPeriodicity
+    , 'Variable' //'Fixed'
+    , this.ARRindex
+    , new  Date ("2020-12-15")//OriginDate
+    , this.maturity//'1m'
+    , this.principal //1000
+    , this.clientRateSpread//0.30
+    , this.lookback //1
+    , this.lockout //2
+    , null //FixedRate
   ).subscribe(contract => {
 
     console.log('Contract')
     console.log(contract)
     
     var data: Array<TableContractData> = []
-
+    console.log(data)
 
       let dates = contract.cfInterest.getDates()
       let values = contract.cfInterest.getValues()

@@ -20,18 +20,20 @@ export class Contract {
        public contractref: string,
        public  currency: string,
        public  basis: string,
-       public  amortaizationType: string,
+       public  amortizationType: string,
        public  principalperiodicty: string,
        public  interestmethod: string,
        public  interestperiodicity: string,
        public  interestratetype: string,
        public  interestrateindex: string,
        public  origindate: Date,
-       public  maturitydate: Date,
+       public  maturity: string,
        public  principal: number,
        public  clientratespread: number,
        public  lookback: number,
-       public  lockout: number
+       public  lockout: number,
+       public fixedrate
+   
     ){
         this.datepipe = new DatePipe("en-US")
     }
@@ -44,20 +46,20 @@ export class Contract {
             {
                 ContractReference : this.contractref,
                 Currency : this.currency,
-                Basis : mapRevertBasis.get(this.basis),
-                AmortizationType : this.amortaizationType,
+                Basis : this.basis,
+                AmortizationType : this.amortizationType,
                 PrincipalPeriodicity: this.principalperiodicty,
                 InterestMethod : this.interestmethod,
                 InterestPaymentDetermination : "Post",
                 InterestPeriodicity : this.interestperiodicity,
                 InterestRateIndex : this.interestrateindex,
                 InterestRateType : this.interestratetype,
-                MaturityDate : this.datepipe.transform(this.maturitydate, 'dd/MM/yyyy'),
-                OriginDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
+                DealMaturity : this.maturity,
+                OriginDate : this.datepipe.transform(this.origindate, 'dd/MM/yyyy'),
                 BalanceSheetDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
                 Principal : this.principal,
                 ClientRateSpread : this.clientratespread,
-                FixedRate : this.clientratespread,
+                FixedRate : this.fixedrate,
                 LookBackPeriod : this.lookback,
                 LockoutPeriod : this.lockout 
                 
