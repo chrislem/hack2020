@@ -1,21 +1,10 @@
 import { TimeSeries } from './timeseries.model'
-
+import { mapBasis, mapCurrencyARR } from '../data/common';
+import { DatePipe } from '@angular/common';
 export class Contract {
 
     //input data
-    contractReference: string
-    currency: string
-    amortizationType: string
-    principalPeriodicity: string
-    interestRateType: string
-    interestPeriodicity: string
-    interestRateIndex: string
-    interestMethod: string
-    fixedRate: number
-    principal: number
-    originDate: Date
-    maturityDate: Date
-    balanceSheetDate: Date
+
 
     //computed
     npv: number
@@ -25,32 +14,56 @@ export class Contract {
     fixing: TimeSeries
 
 
-    constructor(){
+    datepipe : DatePipe
 
+    constructor(
+       public contractref: string,
+       public  currency: string,
+       public  basis: string,
+       public  amortaizationType: string,
+       public  principalperiodicty: string,
+       public  interestmethod: string,
+       public  interestperiodicity: string,
+       public  interestratetype: string,
+       public  interestrateindex: string,
+       public  origindate: Date,
+       public  maturity: Date,
+       public  principal: number,
+       public  clientratespread: number,
+       public  lookback: number,
+       public  lockout: number
+    ){
+        this.datepipe = new DatePipe("en-US")
     }
 
-    public static fromJson(json: Object): Contract {
 
-        var contract = new Contract()
-        contract.contractReference = json['ContractReference']
-        contract.amortizationType = json['AmortizationType']
-        contract.principalPeriodicity = json['PrincipalPeriodicity']
-        contract.interestRateType = json['InterestRateType']
-        contract.interestPeriodicity = json['InterestPeriodicity']
-        contract.interestRateIndex = json['InterestRateIndex']
-        contract.interestMethod = json['InterestMethod']
-        contract.fixedRate = json['FixedRate']
-        contract.principal = json['Principal']
-        contract.originDate = new Date(json['OriginDate'])
-        contract.maturityDate = new Date(json['MaturityDate'])
-        contract.balanceSheetDate = new Date(json['BalanceSheetDate'])
+    getInputJson(){   
 
-        contract.cfInterest = TimeSeries.fromJson(json['CFInterests'])
-        contract.cfPrincipal = TimeSeries.fromJson(json['CFPrincipals'])
-        contract.cfOutstanding = TimeSeries.fromJson(json['CFOutstandingPrincipals'])      
-        contract.fixing = TimeSeries.fromJson(json['Fixings'])   
-
-        return contract
+        return {
+            records :
+            {
+                ContractReference : this.contractref,
+                Currency : this.currency,
+                Basis : mapBasis.get(this.basis),
+                AmortizationType : this.amortaizationType,
+                PrincipalPeriodicity: this.principalperiodicty,
+                InterestMethod : this.interestmethod,
+                InterestPaymentDetermination : "Post",
+                InterestPeriodicity : this.interestperiodicity,
+                InterestRateIndex : this.interestrateindex,
+                InterestRateType : this.interestratetype,
+                Maturity : this.maturity,
+                OriginDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
+                BalanceSheetDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
+                Principal : this.principal,
+                ClientRateSpread : this.clientratespread,
+                LookBackPeriod : this.lookback,
+                LockoutPeriod : this.lockout 
+                
+            }
+        }
     }
+
+
 
 }

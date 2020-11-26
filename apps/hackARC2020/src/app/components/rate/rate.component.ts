@@ -43,7 +43,7 @@ export class RateComponent implements OnInit {
   basis: any
   periodicity: any
   curve= "arr"
-  curvemethod= undefined
+  curvemethod= 'simple'
   isCurveValid = false
  
   // curve data
@@ -67,6 +67,17 @@ dataSource: MatTableDataSource<TableCurevData>;
   constructor(private arcInstance: ArcInstance,
     private datapipe: DatePipe) {
       this.loadcurve = false
+      
+      this.traces.push(
+        {
+            dimension: [],
+            dimensionName: '',
+            measure: [],
+            measureName: '',
+            type: ChartType.spline
+        }
+      )
+
    }
 
   ngOnInit(): void {
@@ -100,6 +111,7 @@ dataSource: MatTableDataSource<TableCurevData>;
     // console.log(this.curvemethod);
     // console.log(this.arcInstance)
 
+    console.log('Add curve')
     this.loadcurve = true
     this.isCurveValid = false
 
@@ -111,20 +123,22 @@ dataSource: MatTableDataSource<TableCurevData>;
       this.curvemethod  
     ).subscribe(curve => {
 
-      console.log(curve)
-
+      //console.log(curve)
+      
       if(this.curvedata[curve.getCurveID()] == undefined)
       {
         this.curvedata[curve.getCurveID()] = curve
         this.drawGraph()
         this.updateTableCurve()
-        this.tabInit = 0;
+        //
         this.loadcurve = false
         this.isCurveValid = true
+        console.log(' receive curve')
+        console.log(curve)
       }}
     )
-
-    
+    this.tabInit = 0;
+    console.log(' end Add curve')
   }
 
   updateTableCurve()
@@ -175,6 +189,15 @@ dataSource: MatTableDataSource<TableCurevData>;
   drawGraph()
   {
     this.traces = []
+    this.traces.push(
+      {
+          dimension: [],
+          dimensionName: '',
+          measure: [],
+          measureName: '',
+          type: ChartType.spline
+      }
+    )
 
     for (let key in this.curvedata) {
   

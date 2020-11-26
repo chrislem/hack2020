@@ -65,8 +65,8 @@
 
 	<div class="uxg-display">
 
-        <mat-tab-group [(selectedIndex)]="tabInit">
-            <mat-tab label="Rate Graph">
+        <mat-tab-group >
+            <mat-tab label="Rate Graph" >
                 <div >
                     <h3 class="uxg-h3">Rates Overview</h3>
                     <uxg-chart
@@ -87,7 +87,7 @@
                   </uxg-chart>
                 </div>
             </mat-tab>
-            <mat-tab label="Table view"> 
+           <mat-tab label="Table view"> 
                 <div class="ratelist-table">
                     <mat-form-field>
                        <mat-label>Filter</mat-label>
@@ -129,7 +129,7 @@
                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                      
-                         <!-- Row shown when there is no matching data. -->
+                    
                          <tr class="mat-row" *matNoDataRow>
                            <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
                          </tr> 

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4000',
+  arcServer: '10.21.189.120:13350'
 };
 
 /*

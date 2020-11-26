@@ -117,3 +117,10 @@ export var mapBasis = new Map( [
     ['Exact/365', 'Act/365']
 ]);
 
+export var mapRevertBasis = new Map( [
+    ['Act/Act', 'Exact/Exact'],
+    ['Act/Act', 'Exact/360'],
+    ['Act/Act', 'Exact/365']
+]);
+
+
