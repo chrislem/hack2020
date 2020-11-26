@@ -1,5 +1,5 @@
 import { TimeSeries } from './timeseries.model'
-import { mapBasis, mapCurrencyARR } from '../data/common';
+import { mapBasis, mapCurrencyARR, mapRevertBasis } from '../data/common';
 import { DatePipe } from '@angular/common';
 export class Contract {
 
@@ -27,7 +27,7 @@ export class Contract {
        public  interestratetype: string,
        public  interestrateindex: string,
        public  origindate: Date,
-       public  maturity: Date,
+       public  maturitydate: Date,
        public  principal: number,
        public  clientratespread: number,
        public  lookback: number,
@@ -44,7 +44,7 @@ export class Contract {
             {
                 ContractReference : this.contractref,
                 Currency : this.currency,
-                Basis : mapBasis.get(this.basis),
+                Basis : mapRevertBasis.get(this.basis),
                 AmortizationType : this.amortaizationType,
                 PrincipalPeriodicity: this.principalperiodicty,
                 InterestMethod : this.interestmethod,
@@ -52,11 +52,12 @@ export class Contract {
                 InterestPeriodicity : this.interestperiodicity,
                 InterestRateIndex : this.interestrateindex,
                 InterestRateType : this.interestratetype,
-                Maturity : this.maturity,
+                MaturityDate : this.datepipe.transform(this.maturitydate, 'dd/MM/yyyy'),
                 OriginDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
                 BalanceSheetDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
                 Principal : this.principal,
                 ClientRateSpread : this.clientratespread,
+                FixedRate : this.clientratespread,
                 LookBackPeriod : this.lookback,
                 LockoutPeriod : this.lockout 
                 

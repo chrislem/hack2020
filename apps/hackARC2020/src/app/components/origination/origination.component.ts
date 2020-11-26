@@ -1,6 +1,19 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods,mapInterestMethod } from '../../data/common';
 import { amortizationTypes,mapBasis } from '../../data/common';
+import {MatTableDataSource} from '@angular/material/table';
+import { DatePipe } from '@angular/common';
+import { ArcInstance } from '../../services/arcInstance.service';
+
+export interface TableContractData {
+  contractref: string;
+  interestdate: string
+  interestvalue: number
+}
+
+
+
+
 @Component({
   selector: 'ffdc-origination',
   templateUrl: './origination.component.html',
@@ -30,7 +43,13 @@ lookback: number
 lockout: number
 maturitySlider: number
 
-  constructor() { 
+//Table contract
+displayedColumns: string[] = ['contractref', 'interestdate', 'interestvalue']
+dataSource: MatTableDataSource<TableContractData>;
+
+  constructor(private arcInstance: ArcInstance,
+    private datapipe: DatePipe
+    ) { 
     this.ARRindex
 }
 
@@ -80,7 +99,47 @@ basisLabel(value: string) {
 
 testCompute(){
   console.log("click!")
-}
+
+
+  this.arcInstance.computeContract(
+    "Fakedeal"
+    , 'EUR'
+    , 'Act/Act'
+    , 'Bullet'
+    , ''
+    , 'Simple'
+    , '1m'
+    , 'Fixed'
+    , 'EURIBOR'
+    , new  Date ("2020-12-15")
+    , new  Date ("2030-12-15")
+    , 1000
+    , 0.30
+    , 1
+    , 2
+  ).subscribe(contract => {
+
+    console.log('Contract')
+    console.log(contract)
+    
+    var data: Array<TableContractData> = []
+
+
+      let dates = contract.cfInterest.getDates()
+      let values = contract.cfInterest.getValues()
+      for (var i = 0; i < dates.length; i++) {
+        data.push( {
+          contractref: contract.contractref,
+          interestdate :this.datapipe.transform(dates[i], 'yyyy-MM-dd'),
+          interestvalue: values[i]
+        })
+      }
+
+      this.dataSource = new MatTableDataSource(data) 
+
+    })
+      //
+  }
 
 }
 
