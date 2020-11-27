@@ -4,15 +4,15 @@ import { amortizationTypes,mapBasis } from '../../data/common';
 import {MatTableDataSource} from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { ArcInstance } from '../../services/arcInstance.service';
+import { LegendPosition, ChartType, ChartOrientation, TraceComponent } from '@ffdc/uxg-angular-components/chart';
+import { Contract } from '../../models/contract.model';
 
-export interface TableContractData {
+
+export interface TableCFData {
   contractref: string;
-  interestdate: string
-  interestvalue: number
+  date: string
+  value: number
 }
-
-
-
 
 @Component({
   selector: 'ffdc-origination',
@@ -29,23 +29,26 @@ ARRIntMethod_list = ARRInterestMethods
 amortType_list = amortizationTypes
 
 //variable
-periodicity: string
+periodicity: string = '1m'
 currency: string
 basis: string
 originDate: Date
 principal: number
 ARRindex: string
-maturity: string
+maturity: string = '1m'
 interestMethod: string
 amortizationType: string
 clientRateSpread: number
 lookback: number
 lockout: number
 maturitySlider: number
+contract: Contract
 
-//Table contract
-displayedColumns: string[] = ['contractref', 'interestdate', 'interestvalue']
-dataSource: MatTableDataSource<TableContractData>;
+//Data for graphs
+legendPosition = LegendPosition.verticalRightCenter;
+IPtrace 
+
+NPV: number
 
   constructor(private arcInstance: ArcInstance,
     private datapipe: DatePipe
@@ -86,7 +89,7 @@ interestMethodLabel(value: string) {
 }
 
 testMaturity(){
-console.log(this.maturitySlider);
+
 if (this.maturitySlider < 4)
 {return this.maturitySlider}
 else
@@ -98,9 +101,6 @@ basisLabel(value: string) {
 }
 
 testCompute(){
-  console.log("click!")
-
-
   this.arcInstance.computeContract(
     "ARRO"
     , this.currency //EUR
@@ -119,28 +119,25 @@ testCompute(){
     , this.lockout //2
     , null //FixedRate
   ).subscribe(contract => {
-
+    this.contract = contract
     console.log('Contract')
     console.log(contract)
-    
-    var data: Array<TableContractData> = []
-    console.log(data)
-
-      let dates = contract.cfInterest.getDates()
-      let values = contract.cfInterest.getValues()
-      for (var i = 0; i < dates.length; i++) {
-        data.push( {
-          contractref: contract.contractref,
-          interestdate :this.datapipe.transform(dates[i], 'yyyy-MM-dd'),
-          interestvalue: values[i]
-        })
-      }
-
-      this.dataSource = new MatTableDataSource(data) 
-
+    this.drawBarchart()
     })
-      //
+  
   }
-
+    drawBarchart() {
+      console.log('ok drawbar')
+        this.IPtrace =
+         {
+          dimension: this.contract.cfInterest.getDates(),
+          dimensionName: 'Dates',
+          measure: this.contract.cfInterest.getValues(),
+          measureName: 'IP',
+          type: ChartType.bar,
+          orientation: 'horizontal' 
+         }
+      
+    }
 }
 
