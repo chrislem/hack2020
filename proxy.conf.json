@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "https://api.preprod.fusionfabric.cloud",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
