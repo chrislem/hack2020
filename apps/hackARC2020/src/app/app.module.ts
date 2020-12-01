@@ -80,6 +80,7 @@ import { RateComponent } from './components/rate/rate.component';
 import { MatSortModule } from '@angular/material/sort';
 import { CalcdealComponent } from './components/client/calcdeal/calcdeal.component';
 import { OriginationComponent } from './components/origination/origination.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -161,7 +162,8 @@ import { OriginationComponent } from './components/origination/origination.compo
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSliderModule
   ],
   providers: [DatePipe],
   exports: [],

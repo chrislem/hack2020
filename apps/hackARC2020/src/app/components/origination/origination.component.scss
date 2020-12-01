@@ -1,17 +1,18 @@
 .uxg-flex-layout{
     display: flex;
     .uxg-nav-list {
-    min-width: 270px;
+    min-width: 250px;
     min-height: 900px;
     border-left-color: transparent;
     a[mat-list-item]{
       &:hover{
-      background-color: #FAFAFA
+      background-color: grey;
+
       }
     }
     .selected{
       border-left: 5px solid #694ED6;
-      background-color: #FAFAFA
+      background-color:  #FAFAFA;
     }
   
     div[mat-line]{
@@ -41,11 +42,11 @@
   
   mat-list{
     height: auto;
-    width: 300px;
+    width: 200px;
     border-right: 1px solid #eaeaea;
     padding: 0;
     cursor: default;
-    mat-list-item {
+        mat-list-item {
     padding: 0;
   
   .uxg-subtitle-1 {
@@ -63,7 +64,7 @@
     }
   }
   .uxg-display{
-    width:100%;
+    width:300%;
     padding: 0 20px;
     mat-card {
       margin: auto;
@@ -182,6 +183,30 @@ p {
     font-weight: bold;
     text-indent: 30px;
   }
+.results{
+  color: black;
+  display: inline;
+}
+.custom-slider{
+width: 250px;
 
+.ngx-slider {
 
+  .ngx-slider-pointer {
+  background-color: #C137A2 ;  
+
+  }
+  
+}
+.ratelist-table{
+  width: 200px;
+  .optional-table-button{
+    margin: 5px;
+  }
+
+  .optional-header-button{
+    margin-right: 10px;
+  }
+}
+}
 }

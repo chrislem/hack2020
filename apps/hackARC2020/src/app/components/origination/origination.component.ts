@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit,ViewChild } from '@angular/core';
 import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods,mapInterestMethod } from '../../data/common';
 import { amortizationTypes,mapBasis } from '../../data/common';
 import {MatTableDataSource} from '@angular/material/table';
@@ -6,12 +6,20 @@ import { DatePipe } from '@angular/common';
 import { ArcInstance } from '../../services/arcInstance.service';
 import { LegendPosition, ChartType, ChartOrientation, TraceComponent } from '@ffdc/uxg-angular-components/chart';
 import { Contract } from '../../models/contract.model';
+import { scaleLog } from 'd3';
+import { Options } from '@angular-slider/ngx-slider';
+import { ceil } from 'lodash';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import { ppid } from 'process';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 
 export interface TableCFData {
-  contractref: string;
-  date: string
-  value: number
+  date: Date
+  OPvalue: number
+  PPvalue: number
+  IPvalue: number
 }
 
 @Component({
@@ -46,9 +54,17 @@ contract: Contract
 
 //Data for graphs
 legendPosition = LegendPosition.verticalRightCenter;
-IPtrace 
-
+IPtrace = []
+OPtrace = []
+Fixingtrace = []
+mergetrace = []
 NPV: number
+
+//Data for table
+displayedColumns: string[] = ['date', 'op', 'pp', 'ip'];
+dataSource: MatTableDataSource<TableCFData>;
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
 
   constructor(private arcInstance: ArcInstance,
     private datapipe: DatePipe
@@ -99,6 +115,15 @@ else
 basisLabel(value: string) {
   return mapBasis.get(value);
 }
+//slider
+value: number =0;
+
+options: Options = {
+  showTicksValues: true,
+    floor: 0,
+    ceil: 5
+};
+
 
 testCompute(){
   this.arcInstance.computeContract(
@@ -118,17 +143,20 @@ testCompute(){
     , this.lookback //1
     , this.lockout //2
     , null //FixedRate
-  ).subscribe(contract => {
-    this.contract = contract
+  ).subscribe(contractreceived => {
+    this.contract = contractreceived
+    this.NPV = this.contract.npv
     console.log('Contract')
-    console.log(contract)
+    console.log(contractreceived)
     this.drawBarchart()
+    this.drawTable()
     })
   
   }
     drawBarchart() {
       console.log('ok drawbar')
-        this.IPtrace =
+      console.log(this.contract)
+        this.IPtrace = [
          {
           dimension: this.contract.cfInterest.getDates(),
           dimensionName: 'Dates',
@@ -136,8 +164,108 @@ testCompute(){
           measureName: 'IP',
           type: ChartType.bar,
           orientation: 'horizontal' 
-         }
-      
+         }]
+
+         this.OPtrace = [
+         {
+          dimension: this.contract.cfOutstanding.getDates(),
+          dimensionName: 'Dates',
+          measure: this.contract.cfOutstanding.getValues(),
+          measureName: 'OP',
+          type: ChartType.bar,
+          orientation: 'horizontal'
+         }]
+
+         this.Fixingtrace = [
+         {
+          dimension: this.contract.fixing.getDates(),
+          dimensionName: 'Dates',
+          measure: this.contract.fixing.getValues(),
+          measureName: 'Fixing',
+          type: ChartType.scatter,
+          orientation: 'horizontal'
+         }]
     }
+    drawTable() {
+      console.log('ok table')
+
+      let opdate = this.contract.cfOutstanding.getDates()
+      let ppdate = this.contract.cfPrincipal.getDates()
+      let ipdate = this.contract.cfInterest.getDates()
+      let fixingdate = this.contract.fixing.getDates()
+
+      let opvals = this.contract.cfOutstanding.getValues()
+      let ppvals = this.contract.cfPrincipal.getValues()
+      let ipvals = this.contract.cfInterest.getValues()
+      let fixingvals = this.contract.fixing.getValues()
+ 
+      let schedule = []
+
+      let j =0
+      let k = 0
+      let l =0
+      let opval = 0
+
+      for (let i = 0; i< ipdate.length;i++)
+      {
+            
+      if(opdate[l].getTime()==ipdate[i].getTime())
+      {opval = opvals[l]
+      l++}  
+
+      let ppval = 0
+      if(ppdate[j].getTime()==ipdate[i].getTime())
+      {ppval = ppvals[j]
+      j++}
+
+      let ipval = 0
+      if(ipdate[i].getTime()==ipdate[i].getTime())
+      ipval = ipvals[i]
+      
+      /*let fixingval = 0
+      if(fixingdate[k].getTime() == ipdate[i].getTime())
+      {fixingval = fixingvals[k]
+      k++}*/
+
+      schedule.push(
+      {
+      date : this.datapipe.transform(ipdate[i], 'yyyy-MM-dd'),
+      op: opval,
+      pp: ppval,
+      ip: ipval,
+      }
+      )
+
+      }
+  
+                
+      this.dataSource = new MatTableDataSource(schedule) 
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort
+      
+      console.log(this.dataSource)
+    
+    }
+
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
+
+    onClick(event: Array<object>) {
+      console.log('simple click: ', event);
+    }
+  
+    onSelected(event: Array<object>) {
+      console.log('simple click list items selected: ', event);
+    }
+  
+    onDoubleClick(event: Array<object>) {
+      console.log('double click: ', event);
+    } 
 }
 

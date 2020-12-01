@@ -54,6 +54,7 @@
     ]
   },
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "10.2.1",
     "@angular/cdk": "10.2.6",
     "@angular/cdk-experimental": "10.2.6",

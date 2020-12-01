@@ -1,18 +1,17 @@
 <div class='uxg-flex-layout'>
     <mat-list class="uxg-nav-list">
         <mat-list-item>
-        <mat-form-field>
-            <mat-label>Currency</mat-label>
-            <mat-select [(ngModel)]="currency" (selectionChange)="setARRIndex($event)">
-                <mat-option *ngFor="let c of currency_list" [value]="c">
-                    {{ c }}
-                  </mat-option>
-            </mat-select>
-        </mat-form-field> 
+            <mat-form-field>
+                <mat-label>Currency</mat-label>
+                <mat-select [(ngModel)]="currency" (selectionChange)="setARRIndex($event)">
+                    <mat-option *ngFor="let c of currency_list" [value]="c">
+                        {{ c }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
         </mat-list-item>  
         <mat-list-item>
-                <mat-label>Index</mat-label>
-                <p>{{ARRindex}}</p>       
+                <mat-label>Index {{ARRindex}}</mat-label>      
         </mat-list-item>     
         <mat-list-item>
             <mat-form-field>
@@ -40,7 +39,7 @@
             <mat-form-field>
               <mat-label>Principal</mat-label>
                 <input matInput type="number" min = "50000" step = "10000" [(ngModel)]="principal" />
-        </mat-form-field>          
+            </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
             <mat-form-field>
@@ -51,16 +50,16 @@
                       </mat-option>
                 </mat-select>
             </mat-form-field>          
-            </mat-list-item>
+        </mat-list-item>
         <mat-list-item>
-        <mat-form-field>
-            <mat-label>Basis</mat-label>
-            <mat-select [(ngModel)]="basis" >
-                <mat-option *ngFor="let b of basis_list" [value]="b">
-                    {{ basisLabel(b) }}
-                  </mat-option>
-            </mat-select>
-        </mat-form-field>          
+            <mat-form-field>
+                <mat-label>Basis</mat-label>
+                <mat-select [(ngModel)]="basis" >
+                    <mat-option *ngFor="let b of basis_list" [value]="b">
+                        {{ basisLabel(b) }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>          
         </mat-list-item>
         <mat-list-item>
             <mat-label>Periodicity</mat-label>
@@ -68,38 +67,138 @@
         <mat-list-item>              
             <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval = "1" min = "1" max ="{{testMaturity()}}" (change)="setPeriodicity($event.value)"></mat-slider>       
         </mat-list-item>    
-     <mat-list-item>
-    <mat-form-field>
-        <mat-label>Client rate spread</mat-label>
-        <input matInput type="number" [(ngModel)]="clientRateSpread" placeholder = "0" min = "0" max = "10" step = "0.50" />
-    </mat-form-field>          
-    </mat-list-item>
-    <mat-list-item>
-    <mat-form-field>
-        <mat-label>Lookback</mat-label>
-        <input matInput type="number" placeholder = "0" min = "0" max = "10" [(ngModel)]="lookback" />
-    </mat-form-field>          
-    </mat-list-item>
-    <mat-list-item>
-    <mat-form-field>
-        <mat-label>Lockout</mat-label>
-        <input matInput type="number" placeholder = "0" min = "0" max = "10" [(ngModel)]="lockout" />
-    </mat-form-field>          
-    </mat-list-item>
-    <mat-list-item >
-        <button mat-flat-button color="primary" style = "width: 200px" type="button" (click) = "testCompute()">
-        Compute
-        </button> 
-    </mat-list-item>
-</mat-list>
-<uxg-chart>
-    <uxg-legend [position]="legendPosition"></uxg-legend>
-    <uxg-trace  *ngIf = "IPtrace != undefined" 
-      [dimension]="IPtrace.dimension"
-      [dimensionName]="IPtrace.dimensionName"
-      [measure]="IPtrace.measure"
-      [measureName]="IPtrace.measureName"
-      [type]="IPtrace.type"
-    ></uxg-trace>
-  </uxg-chart>
+        <mat-list-item>
+            <mat-form-field>
+                <mat-label>Client rate spread</mat-label>
+                <input matInput type="number" [(ngModel)]="clientRateSpread" placeholder = "0" min = "0" max = "10" step = "0.50" />
+            </mat-form-field>          
+        </mat-list-item>
+        <mat-list-item>
+                <mat-label>Lookback</mat-label>
+        </mat-list-item>
+        <mat-list-item>
+                <div class="custom-slider">
+                    <ngx-slider [options]="options" [(ngModel)]="lookback"></ngx-slider> 
+                </div>      
+        </mat-list-item>
+        <mat-list-item>
+                    <mat-label>Lockout</mat-label>
+        </mat-list-item>
+        <mat-list-item>
+                    <div class="custom-slider">
+                        <ngx-slider [options]="options" [(ngModel)]="lockout"></ngx-slider> 
+                    </div>             
+        </mat-list-item>
+        <mat-list-item >
+            <button mat-flat-button color="primary" style = "width: 200px" type="button" (click) = "testCompute()">
+            Compute
+            </button> 
+        </mat-list-item>
+    </mat-list>
+    <div class = "results"> 
+        <mat-list-item>
+            <mat-label>Index</mat-label>      
+        </mat-list-item> 
+        <mat-list-item>
+            <mat-label>Currency</mat-label>      
+        </mat-list-item>  
+        <mat-list-item>
+            <mat-label>NPV {{NPV}}</mat-label>      
+        </mat-list-item>         
+        <div class="uxg-display">
+                    <mat-tab-group >
+                        <mat-tab label="Outstanding" >
+                            <uxg-chart 
+                            [multiSelect]="true"
+                            (onClick)="onClick($event)"
+                            (onSelected)="onSelected($event)"
+                            (onDoubleClick)="onDoubleClick($event)">
+                                <uxg-legend [position]="legendPosition"></uxg-legend>
+                                <uxg-trace  *ngFor = "let OP of OPtrace" 
+                                [dimension]="OP.dimension"
+                                [dimensionName]="OP.dimensionName"
+                                [measure]="OP.measure"
+                                [measureName]="OP.measureName"
+                                [type]="OP.type"
+                                ></uxg-trace>
+                            </uxg-chart>
+                        </mat-tab>
+                        <mat-tab label = "Interest">
+                                <uxg-chart
+                                    [multiSelect]="true"
+                                    (onClick)="onClick($event)"
+                                    (onSelected)="onSelected($event)"
+                                    (onDoubleClick)="onDoubleClick($event)">
+                                <uxg-legend [position]="legendPosition"></uxg-legend>
+                                <uxg-trace  *ngFor = "let IP of IPtrace" 
+                                    [dimension]="IP.dimension"
+                                    [dimensionName]="IP.dimensionName"
+                                    [measure]="IP.measure"
+                                    [measureName]="IP.measureName"
+                                    [type]="IP.type"
+                                ></uxg-trace>
+                                </uxg-chart>
+                        </mat-tab>
+                        <mat-tab label="Fixing" >
+                            <uxg-chart
+                            [multiSelect]="true"
+                            (onClick)="onClick($event)"
+                            (onSelected)="onSelected($event)"
+                            (onDoubleClick)="onDoubleClick($event)">
+                                <uxg-legend [position]="legendPosition"></uxg-legend>
+                                <uxg-trace  *ngFor = "let fixing of Fixingtrace" 
+                                [dimension]="fixing.dimension"
+                                [dimensionName]="fixing.dimensionName"
+                                [measure]="fixing.measure"
+                                [measureName]="fixing.measureName"
+                                [type]="fixing.type"
+                                ></uxg-trace>
+                            </uxg-chart>
+                        </mat-tab>
+                        <mat-tab label="Table"> 
+                            <div class="ratelist-table">
+                                <mat-form-field>
+                                   <mat-label>Filter</mat-label>
+                                   <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+                                </mat-form-field> 
+                                           
+                                <div class="mat-elevation-z8">
+                                    <table mat-table [dataSource]="dataSource" matSort>               
+                                        <ng-container matColumnDef="date">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="op">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Outstanding </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.op}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="pp">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Principal </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.pp}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="ip">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest </th>
+                                            <td mat-cell *matCellDef="let row"> {{row.ip}} </td>
+                                        </ng-container>
+                                                                        
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                                                    
+                                        <tr class="mat-row" *matNoDataRow>
+                                            <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+                                        </tr> 
+                                    </table>
+                                    <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator> 
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+        </div>
+    </div>
 </div>
+
+
+
+    
+
+
