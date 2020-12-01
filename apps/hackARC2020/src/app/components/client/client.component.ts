@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArcInstance } from '../../services/arcInstance.service';
+import { BankinAPIServiceService } from '../../services/bankin-apiservice.service';
+import { OAuthServiceService } from '../../services/oauth-service.service';
 
 @Component({
   selector: 'ffdc-client',
@@ -13,9 +15,11 @@ export class ClientComponent implements OnInit {
   isnewCustomer = false
 
 
-  constructor(private arcInstance: ArcInstance) { }
+  constructor(private arcInstance: ArcInstance, private oauthService: OAuthServiceService
+    ,private bankingService: BankinAPIServiceService) { }
 
   ngOnInit(): void {
+    //this.oauthService.getAccessToken()
   }
 
   viewCustomer(){
@@ -23,6 +27,13 @@ export class ClientComponent implements OnInit {
 
     this.tabDeals=[]
     this.isnewCustomer = true
+
+    //
+    //this.bankingService.test()
+
+
+
+
 
 
   }

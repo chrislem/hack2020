@@ -123,7 +123,7 @@ dataSource: MatTableDataSource<TableCurevData>;
       this.curvemethod  
     ).subscribe(curve => {
 
-      //console.log(curve)
+      console.log(curve)
       
       if(this.curvedata[curve.getCurveID()] == undefined)
       {

@@ -5,7 +5,18 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:4000',
-  arcServer: '10.21.189.120:32412'
+  arcServer: '10.21.189.120:32412',
+
+  oauthTokenURI: 'http://localhost:4200/api/login/v1/sandbox/oidc/token',
+  oauthClientID : 'addf7ed0-e8e9-4e8d-bbfe-0d2e3bbcabd5',
+  oauthClientSecret : '5176765b-cd23-4c75-9a73-f4f6185b64bf',
+  oauthScope : 'openid',
+
+  bankingBaseURI : 'http://localhost:4200/api/retail-banking/customers/v1/'
+
+
+
+
 };
 
 /*

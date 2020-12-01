@@ -45,6 +45,7 @@ export class Curve {
         else
             interestMethod = 'RFRAVRSimple'
         
+        console.log(this.basis)
 
         return {
             records :
@@ -61,7 +62,7 @@ export class Curve {
                 InterestPeriodicity : this.periodicity,
                 InterestRateIndex : rateindex,
                 InterestRateType : "Variable",
-                MaturityDate : "15/12/2030",
+                DealMaturity : "20y",
                 OriginDate : '15/12/2020',//this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
                 Principal : 1
                   
