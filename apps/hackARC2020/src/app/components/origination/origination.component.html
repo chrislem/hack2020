@@ -1,204 +1,211 @@
-<div class='uxg-flex-layout'>
-    <mat-list class="uxg-nav-list">
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Currency</mat-label>
-                <mat-select [(ngModel)]="currency" (selectionChange)="setARRIndex($event)">
-                    <mat-option *ngFor="let c of currency_list" [value]="c">
-                        {{ c }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> 
-        </mat-list-item>  
-        <mat-list-item>
-                <mat-label>Index {{ARRindex}}</mat-label>      
-        </mat-list-item>     
-        <mat-list-item>
-            <mat-form-field>
-              <mat-label>Origin date</mat-label>
-                <input matInput type="date" [(ngModel)]="originDate" />
-            </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-            <mat-label>Maturity</mat-label>
-        </mat-list-item>
-        <mat-list-item>              
-            <mat-slider thumbLabel=true [displayWith]="maturityLabel" tickInterval = "1" min = "1" max ="15" (change)="setMaturity($event.value)"></mat-slider>       
-        </mat-list-item>
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Amortization</mat-label>
-                <mat-select [(ngModel)]="amortizationType">
-                    <mat-option *ngFor="let a of amortType_list" [value]="a">
-                        {{ a }}
-                      </mat-option>
-                </mat-select>
-            </mat-form-field>          
-            </mat-list-item>  
-        <mat-list-item>
-            <mat-form-field>
-              <mat-label>Principal</mat-label>
-                <input matInput type="number" min = "50000" step = "10000" [(ngModel)]="principal" />
-            </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Interest method</mat-label>
-                <mat-select [(ngModel)]="interestMethod">
-                    <mat-option *ngFor="let i of ARRIntMethod_list" [value]="i">
-                        {{ interestMethodLabel(i) }}
-                      </mat-option>
-                </mat-select>
-            </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Basis</mat-label>
-                <mat-select [(ngModel)]="basis" >
-                    <mat-option *ngFor="let b of basis_list" [value]="b">
-                        {{ basisLabel(b) }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-            <mat-label>Periodicity</mat-label>
-        </mat-list-item>
-        <mat-list-item>              
-            <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval = "1" min = "1" max ="{{testMaturity()}}" (change)="setPeriodicity($event.value)"></mat-slider>       
-        </mat-list-item>    
-        <mat-list-item>
-            <mat-form-field>
-                <mat-label>Client rate spread</mat-label>
-                <input matInput type="number" [(ngModel)]="clientRateSpread" placeholder = "0" min = "0" max = "10" step = "0.50" />
-            </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-                <mat-label>Lookback</mat-label>
-        </mat-list-item>
-        <mat-list-item>
+<div class="containerrow">
+    <div class="uxg-nav-list input elevated-block mat-elevation-z2 padding10px">
+        <mat-list>
+            <mat-list-item>
+                <button mat-flat-button color="primary" style="width: 100%" type="button" (click)="Compute()">
+                    COMPUTE
+                </button>
+            </mat-list-item><br>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Currency</mat-label>
+                    <mat-select [(ngModel)]="currency" (selectionChange)="setARRIndex($event)">
+                        <mat-option *ngFor="let c of currency_list" [value]="c">
+                            {{ c }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-icon class="{{getFlag()}}"></mat-icon>
+                <mat-label class="uxg-display-5">{{ARRindex}}</mat-label>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Origin date</mat-label>
+                    <input matInput type="date" [(ngModel)]="originDate" />
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-label>Maturity</mat-label>
                 <div class="custom-slider">
-                    <ngx-slider [options]="options" [(ngModel)]="lookback"></ngx-slider> 
-                </div>      
-        </mat-list-item>
-        <mat-list-item>
-                    <mat-label>Lockout</mat-label>
-        </mat-list-item>
-        <mat-list-item>
-                    <div class="custom-slider">
-                        <ngx-slider [options]="options" [(ngModel)]="lockout"></ngx-slider> 
-                    </div>             
-        </mat-list-item>
-        <mat-list-item >
-            <button mat-flat-button color="primary" style = "width: 200px" type="button" (click) = "testCompute()">
-            Compute
-            </button> 
-        </mat-list-item>
-    </mat-list>
-    <div class = "results"> 
-        <mat-list-item>
-            <mat-label>Index</mat-label>      
-        </mat-list-item> 
-        <mat-list-item>
-            <mat-label>Currency</mat-label>      
-        </mat-list-item>  
-        <mat-list-item>
-            <mat-label>NPV {{NPV}}</mat-label>      
-        </mat-list-item>         
-        <div class="uxg-display">
-                    <mat-tab-group >
-                        <mat-tab label="Outstanding" >
-                            <uxg-chart 
-                            [multiSelect]="true"
-                            (onClick)="onClick($event)"
-                            (onSelected)="onSelected($event)"
-                            (onDoubleClick)="onDoubleClick($event)">
-                                <uxg-legend [position]="legendPosition"></uxg-legend>
-                                <uxg-trace  *ngFor = "let OP of OPtrace" 
-                                [dimension]="OP.dimension"
-                                [dimensionName]="OP.dimensionName"
-                                [measure]="OP.measure"
-                                [measureName]="OP.measureName"
-                                [type]="OP.type"
-                                ></uxg-trace>
-                            </uxg-chart>
-                        </mat-tab>
-                        <mat-tab label = "Interest">
-                                <uxg-chart
-                                    [multiSelect]="true"
-                                    (onClick)="onClick($event)"
-                                    (onSelected)="onSelected($event)"
-                                    (onDoubleClick)="onDoubleClick($event)">
-                                <uxg-legend [position]="legendPosition"></uxg-legend>
-                                <uxg-trace  *ngFor = "let IP of IPtrace" 
-                                    [dimension]="IP.dimension"
-                                    [dimensionName]="IP.dimensionName"
-                                    [measure]="IP.measure"
-                                    [measureName]="IP.measureName"
-                                    [type]="IP.type"
-                                ></uxg-trace>
-                                </uxg-chart>
-                        </mat-tab>
-                        <mat-tab label="Fixing" >
-                            <uxg-chart
-                            [multiSelect]="true"
-                            (onClick)="onClick($event)"
-                            (onSelected)="onSelected($event)"
-                            (onDoubleClick)="onDoubleClick($event)">
-                                <uxg-legend [position]="legendPosition"></uxg-legend>
-                                <uxg-trace  *ngFor = "let fixing of Fixingtrace" 
-                                [dimension]="fixing.dimension"
-                                [dimensionName]="fixing.dimensionName"
-                                [measure]="fixing.measure"
-                                [measureName]="fixing.measureName"
-                                [type]="fixing.type"
-                                ></uxg-trace>
-                            </uxg-chart>
-                        </mat-tab>
-                        <mat-tab label="Table"> 
-                            <div class="ratelist-table">
-                                <mat-form-field>
-                                   <mat-label>Filter</mat-label>
-                                   <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-                                </mat-form-field> 
-                                           
-                                <div class="mat-elevation-z8">
-                                    <table mat-table [dataSource]="dataSource" matSort>               
-                                        <ng-container matColumnDef="date">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                                            <td mat-cell *matCellDef="let row"> {{row.date}} </td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="op">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Outstanding </th>
-                                            <td mat-cell *matCellDef="let row"> {{row.op}} </td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="pp">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Principal </th>
-                                            <td mat-cell *matCellDef="let row"> {{row.pp}} </td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="ip">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest </th>
-                                            <td mat-cell *matCellDef="let row"> {{row.ip}} </td>
-                                        </ng-container>
-                                                                        
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                                                    
-                                        <tr class="mat-row" *matNoDataRow>
-                                            <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
-                                        </tr> 
-                                    </table>
-                                    <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator> 
+                    <ngx-slider [options]="opt_maturity"></ngx-slider>
+                </div>
+                <!--                 <mat-slider thumbLabel=true [displayWith]="maturityLabel" tickInterval="1" min="1" max="15"
+                    (change)="setMaturity($event.value)"></mat-slider> -->
+            </mat-list-item>
+            <mat-list-item>
+                <mat-label>Periodicity</mat-label>
+                <div class="custom-slider">
+                    <ngx-slider [options]="opt_periodicity"></ngx-slider>
+                </div>
+                <!--                 <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval="1" min="1"
+                    max="{{testMaturity()}}" (change)="setPeriodicity($event.value)"></mat-slider> -->
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Amortization</mat-label>
+                    <mat-select [(ngModel)]="amortizationTypeLabel">
+                        <mat-option *ngFor="let a of amortType_list" [value]="a">
+                            {{ a }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Principal</mat-label>
+                    <input matInput type="number" min="50000" step="10000" [(ngModel)]="principal" />
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Interest method</mat-label>
+                    <mat-select [(ngModel)]="interestMethod">
+                        <mat-option *ngFor="let i of ARRIntMethod_list" [value]="i">
+                            {{ interestMethodLabel(i) }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Basis</mat-label>
+                    <mat-select [(ngModel)]="basis">
+                        <mat-option *ngFor="let b of basis_list" [value]="b">
+                            {{ basisLabel(b) }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-list-item>
+
+
+            <mat-list-item>
+                <mat-form-field>
+                    <mat-label>Client rate spread</mat-label>
+                    <input matInput type="number" [(ngModel)]="clientRateSpread" placeholder="0" min="0" max="10"
+                        step="0.50" />
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-label>Lookback</mat-label>
+                <div class="custom-slider">
+                    <ngx-slider [options]="opt_ARR" [(ngModel)]="lookback"></ngx-slider>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-label>Lockout</mat-label>
+                <div class="custom-slider">
+                    <ngx-slider [options]="opt_ARR" [(ngModel)]="lockout"></ngx-slider>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    <div class="containercol">
+        <div>
+            <mat-card>
+                <mat-card-title>
+                    <div>
+                        <mat-icon class="{{getFlag()}}"></mat-icon>&nbsp;{{ ARRindex }}
+                    </div>
+                </mat-card-title>
+                <mat-card-content>
+                    <div class="account-detail-card-content">
+                        <div class="account-detail-card-content__static">
+                            <div class="account-detail-card-content__line">
+                                <div class="uxg-subtitle-2 account-detail-card-content__line-title">
+                                    Currency
+                                </div>
+                                <div>
+                                    {{ currency }}
                                 </div>
                             </div>
-                        </mat-tab>
-                    </mat-tab-group>
+                            <div class="account-detail-card-content__line">
+                                <div class="uxg-subtitle-2 account-detail-card-content__line-title">
+                                    Origin date
+                                </div>
+                                <div>
+                                    {{ originDate }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider [vertical]="true"></mat-divider>
+                    <div class="account-detail-card-content__status">
+                        <div class="account-detail-card-content__line">
+                            <div class="uxg-subtitle-2 account-detail-card-content__line-title">Principal</div>
+                            <div>{{ principal }}</div>
+                        </div>
+                        <div class="account-detail-card-content__line">
+                            <div class="uxg-subtitle-2 account-detail-card-content__line-title">Basis</div>
+                            <div>{{ basis }}</div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="uxg-display elevated-block mat-elevation-z2 margin10px">
+            <mat-tab-group>
+                <mat-tab label="Graph">
+                    <div class="containerrow">
+                        <div>
+                            <uxg-chart title = "Interest" [multiSelect]="true" (onClick)="onClick($event)"
+                                (onSelected)="onSelected($event)" (onDoubleClick)="onDoubleClick($event)">
+                                <uxg-legend [position]="legendPosition"></uxg-legend>
+                                <uxg-trace *ngFor="let trace of traces" [dimension]="trace.dimension"
+                                    [dimensionName]="trace.dimensionName" [measure]="trace.measure"
+                                    [measureName]="trace.measureName" [type]="trace.type"></uxg-trace>
+                            </uxg-chart>
+                        </div>
+                        <div  *ngIf="showOP">
+                            <uxg-chart [multiSelect]="true" (onClick)="onClick($event)" (onSelected)="onSelected($event)"
+                            (onDoubleClick)="onDoubleClick($event)">
+                            <uxg-legend [position]="legendPosition">Capital</uxg-legend>
+                            <uxg-trace *ngFor="let OP of OPtrace" [dimension]="OP.dimension"
+                                [dimensionName]="OP.dimensionName" [measure]="OP.measure" [measureName]="OP.measureName"
+                                [type]="OP.type"></uxg-trace>
+                        </uxg-chart>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Table">
+                    <div class="ratelist-table">
+                        <mat-form-field>
+                            <mat-label>Filter</mat-label>
+                            <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+                        </mat-form-field>
+                        <div class="mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" matSort>
+                                <ng-container matColumnDef="date">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="op">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Outstanding </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.op}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="pp">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Principal </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.pp}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="ip">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.ip}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>
-
-
-
-    
-
-

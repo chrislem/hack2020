@@ -65,8 +65,9 @@ export var ARRInterestMethods = [
 
 export var amortizationTypes = [
     'Bullet',
-    'ConstantPrincipalAnnuity'
-        ]
+    'Constant Capital'
+  //  'Constant K+I'    
+]
 
 
 //MAPS
@@ -79,37 +80,39 @@ export var mapCurrencyARR = new Map([
   ])
 
 export var mapPeriodicity = new Map([
-    ["1","1m"],
-    ["2","3m"],
-    ["3","6m"],
-    ["4","12m"]]);
+    [1,"1m"],
+    [2,"3m"],
+    [3,"6m"],
+    [4,"12m"]]);
 
 export var mapMaturity = new Map([
-        ["1","1m"],
-        ["2","3m"],
-        ["3","6m"],
-        ["4","1y"],
-        ["5","2y"],
-        ["6","3y"],
-        ["7","4y"],
-        ["8","5y"],
-        ["9","6y"],
-        ["10","7y"],
-        ["11","8y"],
-        ["12","9y"],   
-        ["13","10y"],
-        ["14","15y"],
-        ["15","20y"]
+        [1,"1m"],
+        [2,"3m"],
+        [3,"6m"],
+        [4,"1y"],
+        [5,"2y"],
+        [6,"3y"],
+        [7,"4y"],
+        [8,"5y"],
+        [9,"6y"],
+        [10,"7y"],
+        [11,"8y"],
+        [12,"9y"],   
+        [13,"10y"],
+        [14,"15y"],
+        [15,"20y"]
           ]);
 
 export var mapInterestMethod = new Map([
             ["RFRAVRSimple","Simple"],
-            ["RFRAVRCompounding","Compounding",]
+            ["RFRAVRCompounding","Compounding"]
               ]);
 
 export var mapAmotype = new Map([
-    ["Bullet","Bullet"],
-    ["Constant Capital","ConstantPrincipalAnnuity"]]);
+    ['Bullet',"Bullet"],
+    ['Constant Capital',"ConstantPrincipalAnnuity"]
+   //['Constant K+I',"ConstantPrincipalAndInterestAnnuity"]
+]);
 
 export var mapBasis = new Map( [
     ['Exact/Exact', 'Act/Act'],
@@ -122,5 +125,13 @@ export var mapRevertBasis = new Map( [
     ['Act/360', 'Exact/360'],
     ['Act/365', 'Exact/365']
 ]);
+
+export var mapFlag = new Map( [
+    ['EUR', 'flag-icon-eu'],
+    ['GBP', 'flag-icon-gb'],
+    ['USD', 'flag-icon-us'],
+    ['CHF', 'flag-icon-ch'],
+    ['JPY', 'flag-icon-jp']
+])
 
 

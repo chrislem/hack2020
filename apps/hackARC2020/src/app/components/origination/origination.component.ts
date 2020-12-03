@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit,ViewChild } from '@angular/core';
 import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods,mapInterestMethod } from '../../data/common';
-import { amortizationTypes,mapBasis } from '../../data/common';
+import { amortizationTypes,mapBasis,mapFlag,mapAmotype } from '../../data/common';
 import {MatTableDataSource} from '@angular/material/table';
-import { DatePipe } from '@angular/common';
+import { DatePipe, getLocaleDateFormat } from '@angular/common';
 import { ArcInstance } from '../../services/arcInstance.service';
 import { LegendPosition, ChartType, ChartOrientation, TraceComponent } from '@ffdc/uxg-angular-components/chart';
 import { Contract } from '../../models/contract.model';
@@ -37,28 +37,33 @@ ARRIntMethod_list = ARRInterestMethods
 amortType_list = amortizationTypes
 
 //variable
-periodicity: string = '1m'
-currency: string
-basis: string
-originDate: Date
-principal: number
-ARRindex: string
-maturity: string = '1m'
-interestMethod: string
-amortizationType: string
-clientRateSpread: number
-lookback: number
-lockout: number
-maturitySlider: number
+periodicity: string 
+currency: string = 'GBP'
+basis: string = 'Exact/365'
+today = new Date()
+originDate: Date = this.today
+principal: number = 100000
+ARRindex: string = 'SONIA'
+maturity: string 
+interestMethod: string = 'RFRAVRSimple'
+amortizationTypeLabel: string = 'Bullet'
+amortizationType: string = mapAmotype.get(this.amortizationTypeLabel)
+clientRateSpread: number = 0
+lookback: number = 0
+lockout: number = 0
+maxPeriodicity: number =1
+minMaturity: number = 1
 contract: Contract
+flag: string 
 
 //Data for graphs
 legendPosition = LegendPosition.verticalRightCenter;
 IPtrace = []
 OPtrace = []
 Fixingtrace = []
-mergetrace = []
+traces = []
 NPV: number
+showOP: boolean = false
 
 //Data for table
 displayedColumns: string[] = ['date', 'op', 'pp', 'ip'];
@@ -73,28 +78,27 @@ dataSource: MatTableDataSource<TableCFData>;
 }
 
   ngOnInit(): void {
-
   }
 
 //UI Event
-maturityLabel(value: number) {
-  return mapMaturity.get(value.toString());
-}
+//maturityLabel(value: number) {
+  //return mapMaturity.get(value.toString());
+//}
 
-setMaturity(event){
-  this.maturitySlider = event;
-  return this.maturity = mapMaturity.get(event.toString());
+//setMaturity(event){
+//  this.maturitySlider = event;
+//return this.maturity = mapMaturity.get(event.toString());
 
-}
+//}
 
-periodicityLabel(value: number) {
-    return mapPeriodicity.get(value.toString());
-}
+//periodicityLabel(value: number) {
+ //   return mapPeriodicity.get(value.toString());
+//}
 
-setPeriodicity(event){
-  return this.periodicity = mapPeriodicity.get(event.toString());
+//setPeriodicity(event){
+ // return this.periodicity = mapPeriodicity.get(event.toString());
 
-  }
+ // }
 
 setARRIndex(event: Event) {
 return this.ARRindex = mapCurrencyARR.get(this.currency); 
@@ -104,39 +108,54 @@ interestMethodLabel(value: string) {
   return mapInterestMethod.get(value);
 }
 
-testMaturity(){
-
-if (this.maturitySlider < 4)
-{return this.maturitySlider}
-else
-{return 4}
-}
-
 basisLabel(value: string) {
   return mapBasis.get(value);
 }
+
+getFlag() {
+return mapFlag.get(this.currency)
+}
+
 //slider
 value: number =0;
 
-options: Options = {
+//slider options
+opt_ARR: Options = {
   showTicksValues: true,
     floor: 0,
     ceil: 5
 };
+opt_maturity: Options = {
+  showSelectionBar: true,
+    floor: 1,
+    ceil: 15,
+    translate: (value: number): string => {
+       return this.maturity = mapMaturity.get(value)
+    }   
+};
+opt_periodicity: Options = {
+  
+  showSelectionBar: true,
+    floor: 1,
+    ceil: 4,
+    translate: (value: number): string => {
+      return this.periodicity = mapPeriodicity.get(value)
+      }  
+ 
+};
 
-
-testCompute(){
+Compute(){
   this.arcInstance.computeContract(
     "ARRO"
     , this.currency //EUR
     , this.basis //'Act/Act'
-    , this.amortizationType //'Bullet'
+    , this.amortizationType = mapAmotype.get(this.amortizationTypeLabel) //
     , this.periodicity // principalperiodicty
     , this.interestMethod //'Simple'
     , this.periodicity//InterestPeriodicity
     , 'Variable' //'Fixed'
     , this.ARRindex
-    , new  Date ("2020-12-15")//OriginDate
+    , this.originDate//OriginDate
     , this.maturity//'1m'
     , this.principal //1000
     , this.clientRateSpread//0.30
@@ -151,27 +170,29 @@ testCompute(){
     this.drawBarchart()
     this.drawTable()
     })
-  
-  }
+    }
     drawBarchart() {
       console.log('ok drawbar')
       console.log(this.contract)
+      if (this.amortizationType != "Bullet") {this.showOP=true}
+      console.log(this.showOP)
+        
         this.IPtrace = [
          {
           dimension: this.contract.cfInterest.getDates(),
           dimensionName: 'Dates',
           measure: this.contract.cfInterest.getValues(),
-          measureName: 'IP',
+          measureName: 'Interest',
           type: ChartType.bar,
-          orientation: 'horizontal' 
-         }]
+          orientation: 'horizontal'
+           }]
 
          this.OPtrace = [
          {
           dimension: this.contract.cfOutstanding.getDates(),
           dimensionName: 'Dates',
           measure: this.contract.cfOutstanding.getValues(),
-          measureName: 'OP',
+          measureName: 'Capital',
           type: ChartType.bar,
           orientation: 'horizontal'
          }]
@@ -182,9 +203,12 @@ testCompute(){
           dimensionName: 'Dates',
           measure: this.contract.fixing.getValues(),
           measureName: 'Fixing',
-          type: ChartType.scatter,
-          orientation: 'horizontal'
+          type: ChartType.line,
+          orientation: 'horizontal'   
          }]
+
+         this.traces = this.IPtrace.concat(this.Fixingtrace)
+         console.log(this.traces)
     }
     drawTable() {
       console.log('ok table')

@@ -1,212 +1,173 @@
-.uxg-flex-layout{
-    display: flex;
-    .uxg-nav-list {
-    min-width: 250px;
-    min-height: 900px;
-    border-left-color: transparent;
-    a[mat-list-item]{
-      &:hover{
-      background-color: grey;
-
-      }
-    }
-    .selected{
-      border-left: 5px solid #694ED6;
-      background-color:  #FAFAFA;
-    }
-  
-    div[mat-line]{
-  
-    .uxg-flex-layout{
-    justify-content: space-between
-    }
-  }
-  }
-  
-  .uxg-flex-header {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-  
-  }
-  .uxg-display button {
-    margin-bottom: 0
-  }
-  button {
-    margin: 30px 0; 
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
-  }
-  
-  mat-list{
-    height: auto;
-    width: 200px;
-    border-right: 1px solid #eaeaea;
-    padding: 0;
-    cursor: default;
-        mat-list-item {
-    padding: 0;
-  
-  .uxg-subtitle-1 {
-    margin: 0
-  }
-  .uxg-subtitle-2 {
-    margin: 0
-  }
-  .uxg-subtitle-3 {
-    margin: 0
-  }
-  .uxg-body-3 {
-    margin:0
-  }
-    }
-  }
-  .uxg-display{
-    width:300%;
-    padding: 0 20px;
-    mat-card {
-      margin: auto;
-      margin-bottom: 40px;
-    }
-    button{
-      margin: auto;
-      margin-bottom: 40px;
-    }
-    table{
-      width: 100%;
-      margin-top: 30px;
-      tr{
-        text-align: center
-      }
-    }
-  }
-  
-  
-  .uxg-initial-page-layout {
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    .uxg-h5 {
-      margin: 0 0 30px 0; 
-    }
-    .uxg-display-6{
-    margin: 30px 0 0 0
-    }
-    .uxg-icon-initial-page {
-    font-size: 50px
-    }
-  }
-  
-  .account-detail-card {
-    mat-card {
-      max-width: 629px;
-    }
-    .account-card-detail-summary {
-      display: flex;
-      padding-top: 16px;
-      padding-bottom: 16px;
-      align-items: center;
-    
-      mat-icon{
-        margin-right: 16px;
-      }
-      .account-card-detail-summary-info {
-        display: flex;
-        padding-left: 2px;
-        flex-direction: column;
-      }
-    }
-  
-    .account-detail-card-content {
-      display: flex;
-      .account-detail-card-content__static {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding-right: 16px;
-      }
-      .account-detail-card-content__status {
-        display: flex;
-        padding-left: 16px;
-        flex: 1;
-        flex-direction: column
-      }
-      .account-detail-card-content__line {
-        display: flex;
-        padding-bottom: 8px;
-        .account-detail-card-content__line-title {
-          min-width: 196px;
-        }
-      }
-    }
-  
-    // @media all and (max-width: 600px) {
-    //   .account-detail-card-content {
-    //     flex-direction: column;
-    //     mat-divider {
-    //       display: none;
-    //     }
-    //     .account-detail-card-content__status {
-    //       padding-top: 8px;
-    //       padding-left: 0px;
-    //     }
-    //   }
-    // }
-  }
-  .uxg-block-layout{
-    display: block
-  }
-
-  mat-slider {
-    background-color: rgb(236, 234, 234);
-    width: 200px;
-  }
-::ng-deep{
-.mat-slider-thumb-label {
- 
-    transform: rotate(45deg) !important;
-    border-radius: 50% 50% 0 !important;
-  }
-
-.mat-slider-thumb {
-    transform: scale(0) !important;
+//page management
+containercol {
+  display: flex; 
+  flex-direction: column;
+  flex-wrap:nowrap;
+  //border: 3px red solid;
 }
 
-.mat-slider-thumb-label-text {
-    opacity: 1 !important;
+.containerrow {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap:nowrap;
+  //border: 3px green solid;
 }
-p {
-    color: black;
-    font-weight: bold;
-    text-indent: 30px;
+
+.padding10px{
+	padding: 10px;
+}
+
+.margin10px{
+	margin: 10px;
+}
+
+//navigation bar
+.uxg-nav-list {
+width: 20%;
+height: 100%;
+border-left-color: transparent;
+//background-color: #EAEAEA;
+
+}
+//liste
+mat-list{
+border-right: 1px solid #eaeaea;
+padding: 0;
+cursor: default;
+
+  mat-list-item {
+    width:100%;
+    padding:10px;
+  
+   }
+
+  mat-select {
+    width:250px;
   }
-.results{
+  mat-label {
   color: black;
-  display: inline;
-}
-.custom-slider{
-width: 250px;
-
-.ngx-slider {
-
-  .ngx-slider-pointer {
-  background-color: #C137A2 ;  
-
-  }
-  
-}
-.ratelist-table{
-  width: 200px;
-  .optional-table-button{
-    margin: 5px;
+  margin-right: 10px;
+  font-weight: bold;
   }
 
-  .optional-header-button{
+  mat-icon {
     margin-right: 10px;
   }
 }
+
+
+//Graphs and table
+.uxg-display{
+
+margin-left: 20px;
+  table{
+    width: 100%;
+    margin-top: 30px;
+    tr{
+      text-align: center
+    }
+  }
+  .ratelist-table{
+    width: 400px;
+    .optional-table-button{
+      margin: 5px;
+    }
+  }
 }
+
+/*.mycard{
+  width:100%
 }
+.account-detail-card {
+  mat-card {
+    max-width: 629px;
+  }
+  .account-card-detail-summary {
+    display: flex;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    align-items: center;
+    .account-card-detail-summary-info {
+      display: flex;
+      padding-left: 16px;
+      flex-direction: column;
+    }
+  }
+  .account-detail-card-content {
+    display: flex;
+    .account-detail-card-content__static {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding-right: 16px;
+    }
+    .account-detail-card-content__status {
+      display: flex;
+      padding-left: 16px;
+      flex: 1;
+      flex-direction: column;
+    }
+    .account-detail-card-content__line {
+      display: flex;
+      padding-bottom: 8px;
+      .account-detail-card-content__line-title {
+        min-width: 196px;
+      }
+    }
+  }
+
+  @media all and (max-width: 600px) {
+    .account-detail-card-content {
+      flex-direction: column;
+      mat-divider {
+        display: none;
+      }
+      .account-detail-card-content__status {
+        padding-top: 8px;
+        padding-left: 0px;
+      }
+    }
+  }
+}*/
+
+
+//old slider 
+mat-slider {
+background-color: rgb(236, 234, 234);
+width: 200px;
+}
+
+//slider
+::ng-deep{
+
+  .custom-slider{
+  width: 100%;
+ 
+    .ngx-slider {
+      .ngx-slider-pointer {
+      background-color: #C137A2 ; 
+      }
+      .ngx-slider-tick-value {
+      font-size: 13px;
+      }
+    }
+  
+    .mat-slider-thumb-label {
+    transform: rotate(45deg) !important;
+    border-radius: 50% 50% 0 !important;
+    }
+
+    .mat-slider-thumb {
+    transform: scale(0) !important;
+    }
+
+    .mat-slider-thumb-label-text {
+    opacity: 1 !important;
+    }
+  }
+}
+
+
+
+
+
