@@ -32,7 +32,7 @@
               "apps/hackARC2020/src/assets",
               "apps/hackARC2020/src/_redirects"
             ],
-            "styles": ["apps/hackARC2020/src/styles.scss", "apps/hackARC2020/src/assets/fonts.css"],
+            "styles": ["apps/hackARC2020/src/styles.scss", "apps/hackARC2020/src/assets/fonts.css","node_modules/flag-icon-css/css/flag-icon.min.css"],
             "scripts": [
               {
                 "input": "node_modules/plotly.js/dist/plotly.js",
