@@ -41,7 +41,7 @@ periodicity: string
 currency: string = 'GBP'
 basis: string = 'Exact/365'
 today = new Date()
-originDate: Date = this.today
+originDate: Date
 principal: number = 100000
 ARRindex: string = 'SONIA'
 maturity: string 
@@ -55,6 +55,11 @@ maxPeriodicity: number =1
 minMaturity: number = 1
 contract: Contract
 flag: string 
+
+//Switch between form and card
+showForm: boolean = true
+showCard: boolean = false
+showGraph: boolean = false
 
 //Data for graphs
 legendPosition = LegendPosition.verticalRightCenter;
@@ -144,7 +149,16 @@ opt_periodicity: Options = {
  
 };
 
+openCompute() {
+  this.showForm = true
+  this.showCard = false
+}
+
 Compute(){
+  this.showForm = false
+  this.showCard = true
+  this.showGraph = true
+
   this.arcInstance.computeContract(
     "ARRO"
     , this.currency //EUR
