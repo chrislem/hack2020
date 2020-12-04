@@ -30,10 +30,10 @@ export class TimeSeries{
             for(let i=0; i < jsonarray.length; i=i+2)
             {
                 let  date = new Date(jsonarray[i])
-                let value = jsonarray[i+1]
+                let value: number = jsonarray[i+1]
                 
                 dates.push(date)
-                values.push(value)
+                values.push((Math.round(value*100)/100))
             }
        
         }
