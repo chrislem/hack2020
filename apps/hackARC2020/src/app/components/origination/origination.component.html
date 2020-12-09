@@ -136,14 +136,15 @@
             <mat-tab-group>
                 <mat-tab label="Graph">
                     <div class="containerrow">
-                        <div>
-                            <uxg-chart title = "Interest" [multiSelect]="true" (onClick)="onClick($event)"
+                       <div id ='myDiv'>
+                           <!--  <uxg-chart title = "Interest" [multiSelect]="true" (onClick)="onClick($event)"
                                 (onSelected)="onSelected($event)" (onDoubleClick)="onDoubleClick($event)">
                                 <uxg-legend [position]="legendPosition"></uxg-legend>
                                 <uxg-trace *ngFor="let trace of traces" [dimension]="trace.dimension"
                                     [dimensionName]="trace.dimensionName" [measure]="trace.measure"
-                                    [measureName]="trace.measureName" [type]="trace.type"></uxg-trace>
-                            </uxg-chart>
+                                    [measureName]="trace.measureName" [type]="trace.type" [layout] = "layout">
+                                </uxg-trace>
+                            </uxg-chart> -->
                         </div>
                         <div  *ngIf="showOP">
                             <uxg-chart [multiSelect]="true" (onClick)="onClick($event)" (onSelected)="onSelected($event)"
