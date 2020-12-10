@@ -31,16 +31,12 @@
                 <div class="custom-slider">
                     <ngx-slider [options]="opt_maturity"></ngx-slider>
                 </div>
-                <!--                 <mat-slider thumbLabel=true [displayWith]="maturityLabel" tickInterval="1" min="1" max="15"
-                    (change)="setMaturity($event.value)"></mat-slider> -->
             </mat-list-item>
             <mat-list-item>
                 <mat-label>Periodicity</mat-label>
                 <div class="custom-slider">
                     <ngx-slider [options]="opt_periodicity"></ngx-slider>
                 </div>
-                <!--                 <mat-slider thumbLabel=true [displayWith]="periodicityLabel" tickInterval="1" min="1"
-                    max="{{testMaturity()}}" (change)="setPeriodicity($event.value)"></mat-slider> -->
             </mat-list-item>
             <mat-list-item>
                 <mat-form-field>
@@ -136,24 +132,15 @@
             <mat-tab-group>
                 <mat-tab label="Graph">
                     <div class="containerrow">
-                       <div id ='myDiv'>
-                           <!--  <uxg-chart title = "Interest" [multiSelect]="true" (onClick)="onClick($event)"
-                                (onSelected)="onSelected($event)" (onDoubleClick)="onDoubleClick($event)">
-                                <uxg-legend [position]="legendPosition"></uxg-legend>
-                                <uxg-trace *ngFor="let trace of traces" [dimension]="trace.dimension"
-                                    [dimensionName]="trace.dimensionName" [measure]="trace.measure"
-                                    [measureName]="trace.measureName" [type]="trace.type" [layout] = "layout">
-                                </uxg-trace>
-                            </uxg-chart> -->
-                        </div>
-                        <div  *ngIf="showOP">
-                            <uxg-chart [multiSelect]="true" (onClick)="onClick($event)" (onSelected)="onSelected($event)"
-                            (onDoubleClick)="onDoubleClick($event)">
-                            <uxg-legend [position]="legendPosition">Capital</uxg-legend>
-                            <uxg-trace *ngFor="let OP of OPtrace" [dimension]="OP.dimension"
-                                [dimensionName]="OP.dimensionName" [measure]="OP.measure" [measureName]="OP.measureName"
-                                [type]="OP.type"></uxg-trace>
-                        </uxg-chart>
+                        <div fxFlex>
+                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="IPData"
+                            [config]="config" [layout]="layoutInt">
+                            </plotly-plot>
+                        </div> 
+                       <div fxFlex *ngIf="showOP">
+                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="OPData"
+                            [config]="config" [layout]="layoutOP">
+                            </plotly-plot>
                         </div>
                     </div>
                 </mat-tab>

@@ -63,12 +63,12 @@ export class OriginationComponent implements OnInit {
 
   //Data for graphs
   legendPosition = LegendPosition.verticalRightCenter;
-  IPtrace = []
-  OPtrace = []
-  Fixingtrace = []
-  traces = []
-  layout: any
-  Plotly: any
+  OPData = []
+  IPData = []
+  layoutInt: object
+  layoutOP: object
+  config: object
+  style: object
   NPV: number
   showOP: boolean = false
 
@@ -171,57 +171,57 @@ export class OriginationComponent implements OnInit {
   }
   drawBarchart() {
     console.log('ok drawbar')
-    console.log(this.contract)
     if (this.amortizationType != "Bullet") { this.showOP = true }
-    console.log(this.showOP)
-
-    this.IPtrace = [
+  
+    this.IPData = [
       {
-        dimension: this.contract.cfInterest.getDates(),
-        dimensionName: 'Dates',
-        measure: this.contract.cfInterest.getValues(),
-        measureName: 'Interest',
-        type: ChartType.bar,
-        orientation: 'horizontal',
-        name: 'yaxis'
+        x: this.contract.cfInterest.getDates(),
+        y: this.contract.cfInterest.getValues(),
+        type: 'bar',
+        name: 'Interests',
+        marker: {color: 'rgb(12, 36, 97)'}
+      },
+      {
+        x: this.contract.fixing.getDates(),
+        y: this.contract.fixing.getValues(),
+        type: 'line',
+        name: 'Fixings',
+        yaxis: 'y2',
+        line: {color: 'rgb(246, 185, 59)'}
       }]
 
-    this.OPtrace = [
+    this.OPData = [
       {
-        dimension: this.contract.cfOutstanding.getDates(),
-        dimensionName: 'Dates',
-        measure: this.contract.cfOutstanding.getValues(),
-        measureName: 'Capital',
-        type: ChartType.bar,
-        orientation: 'horizontal'
+        x: this.contract.cfOutstanding.getDates(),
+        y: this.contract.cfOutstanding.getValues(),
+        type: 'scatter',
+        name: 'Outstanding',
+        fill: 'tonexty'
+        
       }]
-
-    this.Fixingtrace = [
-      {
-        dimension: this.contract.fixing.getDates(),
-        dimensionName: 'Dates',
-        measure: this.contract.fixing.getValues(),
-        measureName: 'Fixing',
-        type: ChartType.line,
-        orientation: 'horizontal',
-        name: 'yaxis2'
-      }]
-     
-    this.traces = this.IPtrace.concat(this.Fixingtrace)
-    this.layout = {
-      title: 'Double Y Axis Example',
-      IPtrace: {title: 'yaxis title'},
-      Fixingtrace: {
-        title: 'yaxis2 title',
-        titlefont: {color: 'rgb(148, 103, 189)'},
-        tickfont: {color: 'rgb(148, 103, 189)'},
-        overlaying: 'y',
-        side: 'right'
-      }
+       
+    this.layoutInt = {
+      title: 'Interest',
+      autosize: true,
+      xaxis: {title: 'Date'},
+      yaxis: {title: 'Amount'},
+      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'}
     }
-    this.Plotly.newPlot('myDiv', this.traces, this.layout);
-    
-    console.log(this.traces)
+
+    this.layoutOP = {
+      title: 'Outstanding',
+      autosize: true,
+      xaxis: {title: 'Date'},
+      yaxis: {title: 'Amount'},
+    }
+      this.config = {
+      responsive: true
+    }
+    this.style = {
+      width: '600px',
+      height: '500px'
+    }
+    console.log(this.IPData)
 
   }
   drawTable() {

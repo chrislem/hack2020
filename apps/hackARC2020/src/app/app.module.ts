@@ -82,6 +82,10 @@ import { CalcdealComponent } from './components/client/calcdeal/calcdeal.compone
 import { OriginationComponent } from './components/origination/origination.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS;
+
 @NgModule({
   declarations: [
     AvatarDemoComponent,
@@ -163,7 +167,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     MatPaginatorModule,
     MatSortModule,
     HttpClientModule,
-    NgxSliderModule
+    NgxSliderModule,
+    PlotlyModule
   ],
   providers: [DatePipe],
   exports: [],

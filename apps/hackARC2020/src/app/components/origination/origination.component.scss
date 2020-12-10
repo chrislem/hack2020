@@ -30,8 +30,11 @@ containercol {
 width: 20%;
 height: 100%;
 border-left-color: transparent;
-//background-color: #EAEAEA;
-
+background-color: #82ccdd;
+  button { 
+   background-color: #3c6382;
+   color: white;
+  }
 }
 //liste
 mat-list{
@@ -170,7 +173,7 @@ width: 200px;
  
     .ngx-slider {
       .ngx-slider-pointer {
-      background-color: #C137A2 ; 
+      background-color: #b71540 ; 
       }
       .ngx-slider-tick-value {
       font-size: 13px;
