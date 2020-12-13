@@ -46,7 +46,7 @@ export class OriginationComponent implements OnInit {
   ARRindex: string = 'SONIA'
   maturity: string
   interestMethod: string = 'RFRAVRSimple'
-  amortizationTypeLabel: string = 'Bullet'
+  amortizationTypeLabel: string = 'Constant Capital'
   amortizationType: string = mapAmotype.get(this.amortizationTypeLabel)
   clientRateSpread: number = 0
   lookback: number = 0
@@ -55,6 +55,7 @@ export class OriginationComponent implements OnInit {
   minMaturity: number = 1
   contract: Contract
   flag: string
+ 
 
   //Switch between form and card
   showForm: boolean = true
@@ -88,9 +89,9 @@ export class OriginationComponent implements OnInit {
   }
 
   //UI Event
-
-  setARRIndex(event: Event) {
-    return this.ARRindex = mapCurrencyARR.get(this.currency);
+  getCurrency(value: string) {
+    this.currency = value;
+    this.ARRindex = mapCurrencyARR.get(this.currency);
   }
 
   interestMethodLabel(value: string) {
@@ -133,19 +134,19 @@ export class OriginationComponent implements OnInit {
 
   };
 
-  openCompute() {
+/*  openCompute() {
     this.showForm = true
     this.showCard = false
-  }
+  }*/
 
   Compute() {
-    this.showForm = false
-    this.showCard = true
-    this.showGraph = true
+    //this.showForm = false
+    //this.showCard = true
+    //this.showGraph = true
 
     this.arcInstance.computeContract(
       "ARRO"
-      , this.currency //EUR
+      , this.currency //GBP
       , this.basis //'Act/Act'
       , this.amortizationType = mapAmotype.get(this.amortizationTypeLabel) //
       , this.periodicity // principalperiodicty
@@ -179,7 +180,7 @@ export class OriginationComponent implements OnInit {
         y: this.contract.cfInterest.getValues(),
         type: 'bar',
         name: 'Interests',
-        marker: {color: 'rgb(12, 36, 97)'}
+        marker: {color: 'rgb(240, 200, 8)'}
       },
       {
         x: this.contract.fixing.getDates(),
@@ -187,7 +188,7 @@ export class OriginationComponent implements OnInit {
         type: 'line',
         name: 'Fixings',
         yaxis: 'y2',
-        line: {color: 'rgb(246, 185, 59)'}
+        line: {color: 'rgb(221, 28, 26)'}
       }]
 
     this.OPData = [
@@ -196,6 +197,7 @@ export class OriginationComponent implements OnInit {
         y: this.contract.cfOutstanding.getValues(),
         type: 'scatter',
         name: 'Outstanding',
+        marker: {color: 'rgb(240, 200, 8)'},
         fill: 'tonexty'
         
       }]
