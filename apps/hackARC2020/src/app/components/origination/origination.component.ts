@@ -59,7 +59,8 @@ export class OriginationComponent implements OnInit {
   currencyFactor: number = 1
   currencySymbol: string = '£'
   FTP: number = 0
-  profitability_status: string = 'test'
+  margin: number
+  margin_status: string
 
   //Data for graphs
   legendPosition = LegendPosition.verticalRightCenter;
@@ -69,8 +70,7 @@ export class OriginationComponent implements OnInit {
   layoutOP: object
   config: object
   style: object
-  NPV: number
-  showOP: boolean = false
+  NPV: number = 0
 
   //Data for table
   displayedColumns: string[] = ['date', 'op', 'pp', 'ip'];
@@ -94,23 +94,13 @@ export class OriginationComponent implements OnInit {
     this.ARRindex = mapCurrencyARR.get(this.currency);
   }
 
-  interestMethodLabel(value: string) {
-    return mapInterestMethod.get(value);
-  }
-
-  basisLabel(value: string) {
-    return mapBasis.get(value);
-  }
-
   getFlag() {
     return mapFlag.get(this.currency)
   }
 
+  
 
-  //slider
-  
   //slider options
-  
   opt_principal: Options = {
     floor: 10000,
     ceil: 1000000,
@@ -175,17 +165,17 @@ opt_spread: Options = {
       , null //FixedRate
     ).subscribe(contractreceived => {
       this.contract = contractreceived
-      this.NPV = this.contract.npv
+      this.NPV = Math.round(this.contract.npv*100)/100
       console.log('Contract')
       console.log(contractreceived)
       this.drawBarchart()
       this.drawTable()
+      this.computeMargin()
     })
   }
   drawBarchart() {
     console.log('ok drawbar')
-    if (this.amortizationType != "Bullet") { this.showOP = true }
-  
+ 
     this.IPData = [
       {
         x: this.contract.cfInterest.getDates(),
@@ -297,7 +287,13 @@ opt_spread: Options = {
     this.dataSource.sort = this.sort
 
   }
-
+  computeMargin() {
+    this.margin = this.clientRateSpread - this.FTP
+  }
+  
+  
+  
+  //Events
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
