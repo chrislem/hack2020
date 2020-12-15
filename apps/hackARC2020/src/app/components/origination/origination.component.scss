@@ -4,9 +4,10 @@ $darkGrey: #898D90;
 $darkBlue: #040D14;
 $flashyRed:#DD1C1A;
 
-//body {
+body {
   //background-image: url("Background_image1.png");
-//}
+  background-color: $lightGrey;
+}
 
 //Page management
 .containercol {
@@ -29,9 +30,9 @@ $flashyRed:#DD1C1A;
   padding: 10px;
   //border-style: solid;
  // border-color: $flashyGreen;
- background-color: $darkBlue;
+  background-color: $darkBlue;
   width: 300px;
-    
+
   .title {
     font-weight: bold;
     font-size: 25px;
@@ -124,11 +125,59 @@ width: 220px;
 //card
 .card1 {
   position:absolute;
-  left:25%;
-  top: 2%;
+  left:24%;
+  top: 5%;
   //background-color:$lightGrey;
   color: $darkBlue;
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+     div {
+      flex: 50%;
+      padding: 10px;
+    }
+  }
+   div {
+    flex: 20%;
+    border-radius: 10px;
+    padding: 10px;
+  }
+   .outlook {
+    color: black;
+    background: rgba(0,0,0,0.1);
+  }
+   .spread {
+    background: $darkBlue;
+    color: $flashyGreen;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .FTP {
+    background: $flashyGreen;
+    color: $darkBlue;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .value {
+    background: $darkGrey;
+    color: $lightGrey;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
+
 .card2 {
   position:absolute;
   left:50%;
@@ -136,8 +185,8 @@ width: 220px;
 }
 .graph {
  position:absolute;
- top:30%; 
- left:25%;
+ top:5%; 
+ left:40%;
  //background-color: $darkBlue;
 }
 .mat-tab-label {

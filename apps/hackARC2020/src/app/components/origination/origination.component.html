@@ -81,19 +81,34 @@
                 </tbody>
         </table>
         <mat-card class = "card1 elevated-block mat-elevation-z2">  
-            <mat-card-header>
-                <mat-card-title>Profitability</mat-card-title>
-                <mat-card-subtitle>{{profitability_status}}</mat-card-subtitle>
-            </mat-card-header> 
+<!--             <mat-card-header>
+                <mat-card-title></mat-card-title>
+            </mat-card-header>  -->
             <mat-card-content>
-                <label>FTP</label>
-                <label>Spread</label>
-                <label>Margin</label>
+                <div class="flex-column">
+                    <div class="spread">
+                      <span>SPREAD</span>
+                      <span>{{clientRateSpread}} % </span>
+                    </div>
+                    <div class="FTP">
+                        <span>FTP</span>
+                        <span>{{FTP}} </span>
+                    </div>
+                    <div class="value">
+                        <span>VALUE</span>
+                        <span>{{NPV}}</span>
+                    </div>
+                    <div class="outlook">
+                      <img src="https://openweathermap.org/img/wn/02d@2x.png" />
+                      <span>{{margin}} %</span>
+                    </div>
+
+                </div>    
             </mat-card-content>
-            <mat-card-actions>
+<!--             <mat-card-actions>
                 <button mat-button>ADJUST</button>
                 <button mat-button>CLEAR</button>
-            </mat-card-actions>
+            </mat-card-actions> -->
         </mat-card>       
 
         <!-- <table class = "card2 elevated-block mat-elevation-z2">
@@ -110,11 +125,11 @@
                             [config]="config" [layout]="layoutInt">
                             </plotly-plot>
                         </div> 
-                       <div fxFlex>
+                      <!--  <div fxFlex>
                             <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="OPData"
                             [config]="config" [layout]="layoutOP">
                             </plotly-plot>
-                        </div>
+                        </div> -->
                     </div>
                 </mat-tab>
                 <div>
