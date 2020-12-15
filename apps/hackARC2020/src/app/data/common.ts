@@ -134,4 +134,10 @@ export var mapFlag = new Map( [
     ['JPY', 'flag-icon-jp']
 ])
 
-
+export var mapCurrencySymbol = new Map( [
+    ['EUR', '€'],
+    ['GBP', '£'],
+    ['USD', '$'],
+    ['CHF', 'CHF'],
+    ['JPY', '¥']
+])

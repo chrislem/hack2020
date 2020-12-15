@@ -1,45 +1,40 @@
-$flashyGreen: #21CE99;
+$flashyGreen: #00C5C8;//#21CE99;
 $lightGrey:#D0D1D3;
 $darkGrey: #898D90;
 $darkBlue: #040D14;
 $flashyRed:#DD1C1A;
 
-body {
-  background-color: $darkBlue;
-}
+//body {
+  //background-image: url("Background_image1.png");
+//}
 
 //Page management
-/*.containercol {
+.containercol {
   display: flex; 
   flex-direction: column;
   flex-wrap:nowrap;
-  border: 3px red solid;
+  //border: 3px red solid;
 }
-
 .containerrow {
   display: flex; 
   flex-direction: row;
   flex-wrap:nowrap;
-  border-style: solid;
-  border-color: $flashyGreen;
-  background-color: $darkBlue;
-  width: 300px;
-  height: 100%;
-}*/
+  //border: 3px green solid;
+}
 //Form for ARR
 .ARRform {
+  position: relative;
   color: $flashyGreen;
   margin-left: 10px;
   padding: 10px;
-  margin-top: 10px;
   //border-style: solid;
  // border-color: $flashyGreen;
- // background-color: $darkBlue;
+ background-color: $darkBlue;
   width: 300px;
     
   .title {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     margin-bottom: 10px;
     text-align: left;
     .flag-icon {
@@ -58,7 +53,7 @@ body {
     border-color: $flashyGreen;
     background-color:$darkBlue;
     padding:5px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -72,13 +67,10 @@ body {
     color:$darkBlue;
   }
   .button-group button:focus {
-    background-color: $flashyGreen;
-    color:$darkBlue;
-  }
-  .slider-label {
-    font-size: 20px;   
-    font-weight: bold;
-  }
+  background-color: $flashyGreen;
+  color:$darkBlue;
+    }
+
   .icon {
     color: $flashyGreen;
     size: 20px;
@@ -95,7 +87,88 @@ body {
   }
 }
 
+//slider
+.slider-label {
+  font-size: 15px;   
+  font-weight: bold;
+}
 
+.custom-slider{
+width: 220px;
+  .ngx-slider {
+    .ngx-slider-pointer {
+    background-color:$flashyGreen ;
+    }
+    .ngx-slider-bubble {
+      color: $lightGrey ;   
+      font-size:14px;
+    }
+    .ngx-slider-bar {
+      background-color: $lightGrey ;   
+    }
+    .ngx-slider-selection {
+      background: $flashyGreen;
+    }
+    .ngx-slider-tick {
+      color: lightGrey;
+        .ngx-slider-tick-value{
+          font-size: 13px;
+        }
+        .ngx-slider-tick-legend {
+          size: 13px;
+        }
+    }
+  }
+}
 
-
-
+//card
+.card1 {
+  position:absolute;
+  left:25%;
+  top: 2%;
+  //background-color:$lightGrey;
+  color: $darkBlue;
+}
+.card2 {
+  position:absolute;
+  left:50%;
+  top: 1%;
+}
+.graph {
+ position:absolute;
+ top:30%; 
+ left:25%;
+ //background-color: $darkBlue;
+}
+.mat-tab-label {
+  color:$flashyRed;
+  background-color:$darkBlue;
+}
+.mat-tab-label:active {
+  background-color: $darkBlue;
+  color: $flashyRed;
+}
+.mat-tab-label.selected {
+  background-color: $darkBlue;
+  color: $flashyRed;
+}
+.margin10px {
+  margin-bottom:10px;
+}
+//toggle button
+mat-button-toggle{
+  background-color:$darkBlue !important;
+  color: $flashyGreen !important;
+}
+mat-button-toggle:hover {
+  background-color: $flashyGreen !important;
+  color: $darkBlue !important;
+  border-color: none !important;
+}
+.mat-button-toggle-checked {
+  background-color: $flashyGreen !important;
+  color: $darkBlue !important;
+}
+.mat-button-toggle-input {
+  background-color: none !important;
+}

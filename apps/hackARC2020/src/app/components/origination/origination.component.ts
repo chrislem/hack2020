@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild,ViewEncapsulation } from '@angular/core';
 import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods, mapInterestMethod } from '../../data/common';
-import { amortizationTypes, mapBasis, mapFlag, mapAmotype } from '../../data/common';
+import { amortizationTypes, mapBasis, mapFlag, mapAmotype,mapCurrencySymbol } from '../../data/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe, getLocaleDateFormat } from '@angular/common';
 import { ArcInstance } from '../../services/arcInstance.service';
@@ -25,7 +25,8 @@ export interface TableCFData {
 @Component({
   selector: 'ffdc-origination',
   templateUrl: './origination.component.html',
-  styleUrls: ['./origination.component.scss']
+  styleUrls: ['./origination.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class OriginationComponent implements OnInit {
 
@@ -42,7 +43,7 @@ export class OriginationComponent implements OnInit {
   basis: string = 'Exact/365'
   today = new Date()
   originDate: Date = this.today
-  principal: number = 100000
+  principal: number=10000
   ARRindex: string = 'SONIA'
   maturity: string
   interestMethod: string = 'RFRAVRSimple'
@@ -55,12 +56,10 @@ export class OriginationComponent implements OnInit {
   minMaturity: number = 1
   contract: Contract
   flag: string
- 
-
-  //Switch between form and card
-  showForm: boolean = true
-  showCard: boolean = false
-  showGraph: boolean = false
+  currencyFactor: number = 1
+  currencySymbol: string = '£'
+  FTP: number = 0
+  profitability_status: string = 'test'
 
   //Data for graphs
   legendPosition = LegendPosition.verticalRightCenter;
@@ -89,8 +88,9 @@ export class OriginationComponent implements OnInit {
   }
 
   //UI Event
-  getCurrency(value: string) {
-    this.currency = value;
+  getCurrency() {
+    this.currencySymbol = mapCurrencySymbol.get(this.currency);
+    if(this.currency=="JPY"){this.currencyFactor=100};
     this.ARRindex = mapCurrencyARR.get(this.currency);
   }
 
@@ -106,15 +106,27 @@ export class OriginationComponent implements OnInit {
     return mapFlag.get(this.currency)
   }
 
-  //slider
-  value: number = 0;
 
+  //slider
+  
   //slider options
+  
+  opt_principal: Options = {
+    floor: 10000,
+    ceil: 1000000,
+    step: 5000,
+    showSelectionBar: true,
+    translate: (value: number): string => {
+      this.principal = value;
+      return this.currencySymbol+this.principal;
+    }
+  }
+
   opt_ARR: Options = {
     showTicksValues: true,
     floor: 0,
-    ceil: 5
-  };
+    ceil: 5,
+   };
   opt_maturity: Options = {
     showSelectionBar: true,
     floor: 1,
@@ -124,25 +136,25 @@ export class OriginationComponent implements OnInit {
     }
   };
   opt_periodicity: Options = {
-
     showSelectionBar: true,
     floor: 1,
     ceil: 4,
     translate: (value: number): string => {
       return this.periodicity = mapPeriodicity.get(value)
     }
-
   };
-
-/*  openCompute() {
-    this.showForm = true
-    this.showCard = false
-  }*/
+opt_spread: Options = {
+  showSelectionBar: true,
+  floor: this.FTP,
+  ceil: 10,
+  step: 0.05,
+  translate: (value: number): string => {
+    this.clientRateSpread = value
+    return this.clientRateSpread+"%"
+  }
+};
 
   Compute() {
-    //this.showForm = false
-    //this.showCard = true
-    //this.showGraph = true
 
     this.arcInstance.computeContract(
       "ARRO"
@@ -150,7 +162,7 @@ export class OriginationComponent implements OnInit {
       , this.basis //'Act/Act'
       , this.amortizationType = mapAmotype.get(this.amortizationTypeLabel) //
       , this.periodicity // principalperiodicty
-      , this.interestMethod //'Simple'
+      , this.interestMethod //'RFRAVRSimple'
       , this.periodicity//InterestPeriodicity
       , 'Variable' //'Fixed'
       , this.ARRindex
@@ -180,7 +192,7 @@ export class OriginationComponent implements OnInit {
         y: this.contract.cfInterest.getValues(),
         type: 'bar',
         name: 'Interests',
-        marker: {color: 'rgb(240, 200, 8)'}
+        marker: {color: '#040D14'}
       },
       {
         x: this.contract.fixing.getDates(),
@@ -188,7 +200,7 @@ export class OriginationComponent implements OnInit {
         type: 'line',
         name: 'Fixings',
         yaxis: 'y2',
-        line: {color: 'rgb(221, 28, 26)'}
+        line: {color: '#DD1C1A'}
       }]
 
     this.OPData = [
@@ -197,7 +209,7 @@ export class OriginationComponent implements OnInit {
         y: this.contract.cfOutstanding.getValues(),
         type: 'scatter',
         name: 'Outstanding',
-        marker: {color: 'rgb(240, 200, 8)'},
+        marker: {color: '#00C5C8'},
         fill: 'tonexty'
         
       }]
@@ -207,7 +219,8 @@ export class OriginationComponent implements OnInit {
       autosize: true,
       xaxis: {title: 'Date'},
       yaxis: {title: 'Amount'},
-      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'}
+      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'},
+      plot_bgcolor:"#D0D1D3"
     }
 
     this.layoutOP = {
@@ -215,6 +228,7 @@ export class OriginationComponent implements OnInit {
       autosize: true,
       xaxis: {title: 'Date'},
       yaxis: {title: 'Amount'},
+      plot_bgcolor:"#D0D1D3"
     }
       this.config = {
       responsive: true
