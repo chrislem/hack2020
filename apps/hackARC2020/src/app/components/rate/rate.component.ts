@@ -31,7 +31,7 @@ export interface TableCurevData {
   styleUrls: ['./rate.component.scss']
 })
 export class RateComponent implements OnInit {
-  legendPosition = LegendPosition.verticalRightCenter;
+  legendPosition = LegendPosition.horizontalBottomCenter;
 
   //Data form
   currencies = currencies

@@ -1,147 +1,140 @@
-<div class='uxg-flex-layout'>
-
-    <mat-list class="uxg-nav-list">
-        <mat-list-item>
-          <mat-form-field>
-            <mat-label>Currency</mat-label>
-            <mat-select   name="currency" [(ngModel)]="currency" (selectionChange)="CheckButton($event)">
-                <mat-option *ngFor="let c of currencies" [value]="c">
-                    {{ c }}
-                  </mat-option>
-            </mat-select>
-          </mat-form-field>          
-        </mat-list-item>
-        <mat-list-item>
-          <mat-form-field>
-            <mat-label>Basis</mat-label>
-            <mat-select   name="basis" [(ngModel)]="basis"  (selectionChange)="CheckButton($event)">
-                <mat-option *ngFor="let b of basislist" [value]="b">
-                    {{ b }}
-                  </mat-option>
-            </mat-select>
-          </mat-form-field>          
-        </mat-list-item>
-
-        <mat-list-item>
-            <mat-form-field>
-              <mat-label>Periodicity</mat-label>
-              <mat-select   name="periodicity" [(ngModel)]="periodicity" (selectionChange)="CheckButton($event)">
-                  <mat-option  *ngFor="let p of periodicities" [value]="p">{{p}}</mat-option>
-              </mat-select>
-            </mat-form-field>          
-          </mat-list-item> 
-
-  
-
-  
-        <mat-list-item>
-            <mat-button-toggle-group [(ngModel)]="curve" [value]="curve" (click)="updateCurveType()" (change)="CheckButton($event)">
-                
-                <mat-button-toggle value="arr">&nbsp;&nbsp;&nbsp;ARR&nbsp;&nbsp;&nbsp;</mat-button-toggle>
-                <mat-button-toggle value="standard">Standard</mat-button-toggle>
-              </mat-button-toggle-group>
-
-           
-        </mat-list-item> 
-    
-        <mat-list-item *ngIf="curve == 'arr'">
-            <mat-button-toggle-group [(ngModel)]="curvemethod" [value]="curvemethod" (change)="CheckButton($event)">
-                <mat-button-toggle value="simple">Simple</mat-button-toggle>
-                <mat-button-toggle value="compounded">Compounded</mat-button-toggle>
-              </mat-button-toggle-group>
-     </mat-list-item>     
-     <!-- *ngIf="isCurveValid == true" -->
-      <mat-list-item >
-          <button mat-flat-button color="primary" [disabled]="isCurveValid?false: true"  type="button" (click)="addCurve()">
-            <mat-icon>arrow_right_alt</mat-icon>
-            View Rates
-          </button> 
+<div> 
+  <div class="myspacing elevated-block mat-elevation-z2">
+    <mat-list class=" list-horizontal ">
+      <mat-list-item>
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <mat-select name="currency" [(ngModel)]="currency" (selectionChange)="CheckButton($event)">
+            <mat-option *ngFor="let c of currencies" [value]="c">
+              {{ c }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-list-item>
-      </mat-list>
-  
-  
+      <mat-list-item>
+        <mat-form-field>
+          <mat-label>Basis</mat-label>
+          <mat-select name="basis" [(ngModel)]="basis" (selectionChange)="CheckButton($event)">
+            <mat-option *ngFor="let b of basislist" [value]="b">
+              {{ b }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-form-field>
+          <mat-label>Periodicity</mat-label>
+          <mat-select name="periodicity" [(ngModel)]="periodicity" (selectionChange)="CheckButton($event)">
+            <mat-option *ngFor="let p of periodicities" [value]="p">{{p}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
 
 
 
-	<div class="uxg-display">
 
-        <mat-tab-group >
-            <mat-tab label="Rate Graph" >
-                <div >
-                    <h3 class="uxg-h3">Rates Overview</h3>
-                    <uxg-chart
-                    [multiSelect]="true"
-                    (onClick)="onClick($event)"
-                    (onSelected)="onSelected($event)"
-                    (onDoubleClick)="onDoubleClick($event)"
-                    >
-                    <uxg-legend [position]="legendPosition"></uxg-legend>
-                    <uxg-trace
-                      *ngFor="let trace of traces"
-                      [dimension]="trace.dimension"
-                      [dimensionName]="trace.dimensionName"
-                      [measure]="trace.measure"
-                      [measureName]="trace.measureName"
-                      [type]="trace.type"
-                    ></uxg-trace>
-                  </uxg-chart>
-                </div>
-            </mat-tab>
-           <mat-tab label="Table view"> 
-                <div class="ratelist-table">
-                    <mat-form-field>
-                       <mat-label>Filter</mat-label>
-                       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. EUR" #input>
-                     </mat-form-field> 
-           
-                     
-                     <div class="mat-elevation-z8">
-                       <table mat-table [dataSource]="dataSource" matSort>               
-                         <ng-container matColumnDef="currency">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency </th>
-                           <td mat-cell *matCellDef="let row"> {{row.currency}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="basis">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Basis </th>
-                           <td mat-cell *matCellDef="let row"> {{row.basis}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="periodicity">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Periodicity </th>
-                           <td mat-cell *matCellDef="let row"> {{row.periodicity}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="curvetype">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Curve Type </th>
-                           <td mat-cell *matCellDef="let row"> {{row.curvetype}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="curvemethod">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Basis </th>
-                           <td mat-cell *matCellDef="let row"> {{row.curvemethod}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="date">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                           <td mat-cell *matCellDef="let row"> {{row.date}} </td>
-                         </ng-container>
-                         <ng-container matColumnDef="value">
-                           <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
-                           <td mat-cell *matCellDef="let row"> {{row.value}} </td>
-                         </ng-container>                  
-                     
-                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                     
-                    
-                         <tr class="mat-row" *matNoDataRow>
-                           <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
-                         </tr> 
-                         
-                       </table>
-                     
-                        <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator> 
-                     </div>
-                   </div>
-            </mat-tab>
+      <mat-list-item>
+        <mat-button-toggle-group [(ngModel)]="curve" [value]="curve" (click)="updateCurveType()"
+          (change)="CheckButton($event)">
 
-        </mat-tab-group>
-    
-    </div>
+          <mat-button-toggle value="arr">&nbsp;&nbsp;&nbsp;ARR&nbsp;&nbsp;&nbsp;</mat-button-toggle>
+          <mat-button-toggle value="standard">Standard</mat-button-toggle>
+        </mat-button-toggle-group>
+
+
+      </mat-list-item>
+
+      <mat-list-item *ngIf="curve == 'arr'">
+        <mat-button-toggle-group [(ngModel)]="curvemethod" [value]="curvemethod" (change)="CheckButton($event)">
+          <mat-button-toggle value="simple">Simple</mat-button-toggle>
+          <mat-button-toggle value="compounded">Compounded</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-list-item>
+      <!-- *ngIf="isCurveValid == true" -->
+      <mat-list-item>
+        <button mat-flat-button color="primary" [disabled]="isCurveValid?false: true" type="button"
+          (click)="addCurve()">
+          <mat-icon>arrow_right_alt</mat-icon>
+          View Rates
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+
+
+
+  <div class="myspacing elevated-block mat-elevation-z2">
+
+    <mat-tab-group>
+      <mat-tab label="Rate Graph">
+        <div>
+          <h3 class="uxg-h3">Rates Overview</h3>
+          <uxg-chart [multiSelect]="true" (onClick)="onClick($event)" (onSelected)="onSelected($event)"
+            (onDoubleClick)="onDoubleClick($event)" class="graph">
+            <uxg-legend [position]="legendPosition"></uxg-legend>
+            <uxg-trace *ngFor="let trace of traces" [dimension]="trace.dimension" [dimensionName]="trace.dimensionName"
+              [measure]="trace.measure" [measureName]="trace.measureName" [type]="trace.type"></uxg-trace>
+          </uxg-chart>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Table view">
+        <div class="ratelist-table ">
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. EUR" #input>
+          </mat-form-field>
+
+
+          <div class="tableview">
+            <table class="" mat-table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="currency">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Currency </th>
+                <td mat-cell *matCellDef="let row"> {{row.currency}} </td>
+              </ng-container>
+              <ng-container matColumnDef="basis">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Basis </th>
+                <td mat-cell *matCellDef="let row"> {{row.basis}} </td>
+              </ng-container>
+              <ng-container matColumnDef="periodicity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Periodicity </th>
+                <td mat-cell *matCellDef="let row"> {{row.periodicity}} </td>
+              </ng-container>
+              <ng-container matColumnDef="curvetype">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Curve Type </th>
+                <td mat-cell *matCellDef="let row"> {{row.curvetype}} </td>
+              </ng-container>
+              <ng-container matColumnDef="curvemethod">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Basis </th>
+                <td mat-cell *matCellDef="let row"> {{row.curvemethod}} </td>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let row"> {{row.date}} </td>
+              </ng-container>
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+                <td mat-cell *matCellDef="let row"> {{row.value}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+              </tr>
+
+            </table>
+
+            <mat-paginator  [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+          </div>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
 </div>
