@@ -24,7 +24,7 @@ contractTypes = contractTypes
 displayedColumns: string[] = ['contractref', 'balance', 'origindate', 'maturitydate', 'interestrateindex', 'clientratespread', 'name', 'status'];
 dataSource: MatTableDataSource<object>;
 
-test = "toto"
+test: any
   contractType: any
   minValue: number = 100;
   maxValue: number = 400;
@@ -139,7 +139,7 @@ test = "toto"
      showClient(id: string)
      {
        console.log(id)
-       this.test = id
+       this.test = Customers[id]
        let client = Customers[id]
      }
 

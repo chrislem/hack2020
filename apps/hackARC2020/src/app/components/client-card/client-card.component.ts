@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ClientCardComponent implements OnInit {
 
-  @Input() deal: string;
+  @Input() deal;
 
   constructor() { }
 
