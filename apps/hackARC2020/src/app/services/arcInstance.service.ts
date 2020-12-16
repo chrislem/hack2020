@@ -94,6 +94,7 @@ console.log('getCurve')
           contract.cfOutstanding = TimeSeries.fromJson(jsonItem['result'][0]['CFOutstandingPrincipals'])
           contract.fixing = TimeSeries.fromJson(jsonItem['result'][0]['Fixings'])
           contract.npv = jsonItem['result'][0]['NPV']
+          contract.FTP = jsonItem['result'][0]['FTP']
           return contract
         })
       )

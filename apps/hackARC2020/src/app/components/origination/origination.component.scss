@@ -4,10 +4,10 @@ $darkGrey: #898D90;
 $darkBlue: #040D14;
 $flashyRed:#DD1C1A;
 
-body {
+//body {
   //background-image: url("Background_image1.png");
-  background-color: $lightGrey;
-}
+ // background-color: $lightGrey;
+//}
 
 //Page management
 .containercol {
@@ -21,6 +21,7 @@ body {
   flex-direction: row;
   flex-wrap:nowrap;
   //border: 3px green solid;
+  background-color: $lightGrey;
 }
 //Form for ARR
 .ARRform {
@@ -144,6 +145,8 @@ width: 220px;
   }
    .outlook {
     color: black;
+    font-size: 20px;
+    font-weight: bold;
     background: rgba(0,0,0,0.1);
   }
    .spread {
@@ -168,7 +171,7 @@ width: 220px;
   }
   .value {
     background: $darkGrey;
-    color: $lightGrey;
+    color: $darkBlue;
     font-size: 25px;
     margin-bottom:10px;
     display: flex;
@@ -180,8 +183,8 @@ width: 220px;
 
 .card2 {
   position:absolute;
-  left:50%;
-  top: 1%;
+  left:65%;
+  top: 5%;
 }
 .graph {
  position:absolute;

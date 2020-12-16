@@ -12,7 +12,7 @@ export class Contract {
     cfPrincipal: TimeSeries
     cfOutstanding: TimeSeries
     fixing: TimeSeries
-
+    FTP: number
 
     datepipe : DatePipe
 

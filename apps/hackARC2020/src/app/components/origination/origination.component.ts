@@ -61,6 +61,8 @@ export class OriginationComponent implements OnInit {
   FTP: number = 0
   margin: number
   margin_status: string
+  showStatus: boolean = false
+  weatherImage: string
 
   //Data for graphs
   legendPosition = LegendPosition.verticalRightCenter;
@@ -136,7 +138,7 @@ export class OriginationComponent implements OnInit {
 opt_spread: Options = {
   showSelectionBar: true,
   floor: this.FTP,
-  ceil: 10,
+  ceil: 5,
   step: 0.05,
   translate: (value: number): string => {
     this.clientRateSpread = value
@@ -145,7 +147,7 @@ opt_spread: Options = {
 };
 
   Compute() {
-
+    
     this.arcInstance.computeContract(
       "ARRO"
       , this.currency //GBP
@@ -166,6 +168,7 @@ opt_spread: Options = {
     ).subscribe(contractreceived => {
       this.contract = contractreceived
       this.NPV = Math.round(this.contract.npv*100)/100
+      this.FTP=Math.round(this.contract.FTP*10000)/100
       console.log('Contract')
       console.log(contractreceived)
       this.drawBarchart()
@@ -288,12 +291,16 @@ opt_spread: Options = {
 
   }
   computeMargin() {
-    this.margin = this.clientRateSpread - this.FTP
+    this.showStatus = true
+    this.margin = Math.round((this.clientRateSpread - this.FTP)*100)/100
+    if(this.margin>2) { this.weatherImage = "assets/Sunny.png"}
+     else if (this.margin>1) {this.weatherImage = "assets/Cloudy-Sunny.png"}
+      else if (this.margin>=0) {this.weatherImage = "assets/Cloudy.png"}
+        else if (this.margin>-1) {this.weatherImage = "assets/Rainy.png"}
+        else if (this.margin<=-1) {this.weatherImage = "assets/Lightning.png"}
   }
   
-  
-  
-  //Events
+    //Events
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
