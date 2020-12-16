@@ -36,3 +36,5 @@ git push
 ***** DO NOT COMMIT node_modules *****
 ```
 
+sudo kill $(sudo lsof -t -i:4200)
+ng serve --proxy-config proxy.conf.json

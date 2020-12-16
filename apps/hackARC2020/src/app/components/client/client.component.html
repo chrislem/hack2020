@@ -1,47 +1,82 @@
-<div class='uxg-flex-layout'>
-	<mat-list class="uxg-nav-list">
-        <mat-list-item>
-          <mat-form-field>
-			<mat-label>Customer</mat-label>
-			<input matInput type="text" [(ngModel)]="customer" />
-			<mat-hint>Please enter Customer Name</mat-hint>
-          </mat-form-field>          
-        </mat-list-item>
-		<mat-list-item >
-			<mat-slider min="1" max="5" step="1" valueText="test" thumbLabel="true"></mat-slider>
-		  </mat-list-item>
-     <!-- *ngIf="isCurveValid == true" -->
-      <mat-list-item >
-          <button mat-flat-button color="primary"  type="button" (click)="viewCustomer()">
-            <mat-icon>arrow_right_alt</mat-icon>
-            View Customer details
-          </button> 
-	  </mat-list-item>
+<div> 
+	<div class="myspacing elevated-block mat-elevation-z2">
+	  <mat-list class=" list-horizontal ">
+		<mat-list-item>
+		  <mat-form-field>
+			<mat-label>Portfolio</mat-label>
+			<mat-select name="contractType" [(ngModel)]="contractType" (selectionChange)="portfolioChange($event)">
+			  <mat-option *ngFor="let c of contractTypes" [value]="c">
+				{{ c }}
+			  </mat-option>
+			</mat-select>
+		</mat-form-field>
+		</mat-list-item>
 
-      </mat-list>
-
-
-
-	<div class="uxg-display">
-		<div class="uxg-display">
-			<mat-tab-group>
-				<mat-tab *ngIf='isnewCustomer' label='Customer detail'>
-						<p>deal1</p>
-						<button mat-flat-button color="primary"  type="button" (click)="ComputeDeal('1', 'deal1')">
-							<mat-icon>arrow_right_alt</mat-icon>
-							Compute deal
-						  </button> 
-						<p>deal2</p>
-						<button mat-flat-button color="primary"  type="button" (click)="ComputeDeal('2', 'deal2')">
-							<mat-icon>arrow_right_alt</mat-icon>
-							Compute deal
-						  </button> 
-				</mat-tab>
-				<mat-tab *ngFor="let tab of tabDeals" [label]="tab.name">
-					<p>{{tab}}</p>
-					<arro-calcdeal [deal]="tab"></arro-calcdeal>
-				</mat-tab>
-				
-			</mat-tab-group>
+	  </mat-list>
 	</div>
-</div>
+  
+  <!-- <div>
+	<div class="custom-slider margin10px">
+		<ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" ></ngx-slider>
+	</div>
+  </div> -->
+  <p>  </p>
+  
+  <div class="tableview">
+	<table class="" mat-table [dataSource]="dataSource" matSort>
+	  <ng-container matColumnDef="contractref">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Deal ID </th>
+		<td mat-cell *matCellDef="let row"> {{row.contractref}} </td>
+	  </ng-container>
+	  <ng-container matColumnDef="balance">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+		<td mat-cell *matCellDef="let row"> {{row.balance | number:'4.0-5' }} </td>
+	  </ng-container>
+	  <ng-container matColumnDef="origindate">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Origin Date </th>
+		<td mat-cell *matCellDef="let row"> {{row.origindate}} </td>
+	  </ng-container>
+	  <ng-container matColumnDef="maturitydate">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Maturity </th>
+		<td mat-cell *matCellDef="let row"> {{row.maturitydate | number:'4.0-5'}} </td>
+	  </ng-container>
+	  <ng-container matColumnDef="interestrateindex">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Interest Rate Curve </th>
+		<td mat-cell *matCellDef="let row"> {{row.interestrateindex}} </td>
+	  </ng-container>
+	  <ng-container matColumnDef="clientratespread">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Client Rate Spread </th>
+		<td mat-cell *matCellDef="let row"> {{row.clientratespread | number}}%</td>
+	  </ng-container>
+	  <ng-container matColumnDef="name">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+		<td mat-cell *matCellDef="let row"> <a [routerLink]="" (click)="showClient(row.clientRef)">{{row.name}}</a>
+			
+		</td>
+	  </ng-container>	  
+	  <ng-container matColumnDef="status">
+		<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+		<td mat-cell *matCellDef="let row"> <mat-spinner *ngIf="row.status">
+			
+		</mat-spinner>
+		</td>
+	  </ng-container>	
+	  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+	  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+<!-- 
+	  <tr class="mat-row" *matNoDataRow>
+		<td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+	  </tr> -->
+
+	</table> 
+
+
+	
+
+	<arro-client-card [deal]="test" ></arro-client-card>
+	
+	  
+
+  
+  </div>

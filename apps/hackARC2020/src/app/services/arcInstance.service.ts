@@ -6,6 +6,9 @@ import { map } from 'rxjs/operators';
 import { TimeSeries } from '../models/timeseries.model';
 import { Contract } from '../models/contract.model';
 import { environment } from '../../environments/environment';
+import { IContract } from '../data/interface';
+import { stockDeals } from '../data/common';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,6 +17,11 @@ const httpOptions = {
   
   })
 };
+
+function filterDeals(element:IContract)
+{
+
+}
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +89,8 @@ console.log('getCurve')
       , clientratespread
       , lookback
       , lockout
-      ,fixedrate    
+      ,fixedrate
+      ,principal    
     )
     let inputJSon = contract.getInputJson()
     console.log(inputJSon)
@@ -101,6 +110,19 @@ console.log('getCurve')
 
 
   }
+
+
+
+
+getDeals(
+  contractType: string
+)
+{
+
+  return stockDeals.filter(deal => deal.contractType === contractType)
+ 
+}
+
 
   
 }

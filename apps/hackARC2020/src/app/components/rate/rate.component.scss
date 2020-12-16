@@ -1,5 +1,8 @@
 
-
+.main-container {
+  height: 100%;
+  width: 100%;
+}
 
 .row {
     display: flex;
@@ -14,6 +17,29 @@
 :host {
     display: flex;
     flex-direction: column;
+}
+
+.mat-list-item {
+  float: right;
+}
+
+.graph {
+  height: 500px;
+  width: 800px;
+}
+
+.tableview{
+  height: 500px;
+  width: 700px;
+}
+
+.list-horizontal {
+  display: flex;
+  flex-direction: row;
+ }
+
+ .myspacing {
+  padding: 16px;
 }
 
 .uxg-flex-layout{

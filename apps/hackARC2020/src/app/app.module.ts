@@ -84,6 +84,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
+import { ClientCardComponent } from './components/client-card/client-card.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
@@ -121,7 +122,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ClientComponent,
     RateComponent,
     CalcdealComponent,
-    OriginationComponent
+    OriginationComponent,
+    ClientCardComponent
   ],
   imports: [
     BrowserModule,

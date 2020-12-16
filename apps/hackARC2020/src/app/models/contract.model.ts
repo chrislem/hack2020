@@ -12,6 +12,8 @@ export class Contract {
     cfPrincipal: TimeSeries
     cfOutstanding: TimeSeries
     fixing: TimeSeries
+    contractType: string
+    partyRef: string
 
 
     datepipe : DatePipe
@@ -32,12 +34,11 @@ export class Contract {
        public  clientratespread: number,
        public  lookback: number,
        public  lockout: number,
-       public fixedrate
-   
+       public fixedrate: number,
+       public balance: number
     ){
         this.datepipe = new DatePipe("en-US")
     }
-
 
     getInputJson(){   
 
@@ -58,6 +59,7 @@ export class Contract {
                 OriginDate : this.datepipe.transform(this.origindate, 'dd/MM/yyyy'),
                 BalanceSheetDate : this.datepipe.transform(Date.now(), 'dd/MM/yyyy'),
                 Principal : this.principal,
+                Balance : this.principal,
                 ClientRateSpread : this.clientratespread,
                 FixedRate : this.fixedrate,
                 LookBackPeriod : this.lookback,

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Contract } from '../../../models/contract.model';
 
 @Component({
   selector: 'arro-calcdeal',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CalcdealComponent implements OnInit {
 
 
-  @Input() deal: any;
+  @Input() deal: Contract;
 
   constructor() { }
 
