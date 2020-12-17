@@ -63,7 +63,7 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
 				<td mat-cell *matCellDef="let row"> <mat-spinner *ngIf="row.status">
 					
-				</mat-spinner>
+				</mat-spinner><p *ngIf="row.NPV">{{row.NPV}}</p>
 				</td>
 			  </ng-container>	
 			  <ng-container matColumnDef="detail">

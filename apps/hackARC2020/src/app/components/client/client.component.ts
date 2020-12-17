@@ -98,6 +98,7 @@ customer: any
         , "Variable"
         , deal.interestrateindex
         , deal.origindate
+        , undefined
         , deal.maturitydate
         , deal.balance
         , deal.clientratespread
@@ -107,6 +108,7 @@ customer: any
       ).subscribe(contractreceived => {
         console.log(contractreceived)
         this.dataSource.data[index]["status"] = 0;
+        this.dataSource.data[index]["NPV"] = contractreceived.npv
       })
       
 
@@ -139,7 +141,8 @@ customer: any
             name: client.first_name+" "+client.last_name,
             status: 1,
             clientRef: deal.partyref,
-            index: index
+            index: index,
+            NPV: undefined
           })
 
           index++

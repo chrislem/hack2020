@@ -66,6 +66,7 @@ console.log('getCurve')
     , interestrateindex: string
     , origindate: Date
     , maturity: string
+    , maturitydate: Date
     , principal: number
     , clientratespread: number
     , lookback: number
@@ -85,6 +86,7 @@ console.log('getCurve')
       , interestrateindex
       , origindate
       , maturity
+      , maturitydate
       , principal
       , clientratespread
       , lookback

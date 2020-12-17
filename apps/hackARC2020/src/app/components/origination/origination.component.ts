@@ -168,6 +168,7 @@ opt_spread: Options = {
       , this.ARRindex
       , this.originDate//OriginDate
       , this.maturity//'1m'
+      , undefined
       , this.principal //1000
       , this.clientRateSpread//0.30
       , this.lookback //1
