@@ -22,59 +22,95 @@
   </div> -->
   <p>  </p>
   
-  <div class="tableview">
-	<table class="" mat-table [dataSource]="dataSource" matSort>
-	  <ng-container matColumnDef="contractref">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Deal ID </th>
-		<td mat-cell *matCellDef="let row"> {{row.contractref}} </td>
-	  </ng-container>
-	  <ng-container matColumnDef="balance">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
-		<td mat-cell *matCellDef="let row"> {{row.balance | number:'4.0-5' }} </td>
-	  </ng-container>
-	  <ng-container matColumnDef="origindate">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Origin Date </th>
-		<td mat-cell *matCellDef="let row"> {{row.origindate}} </td>
-	  </ng-container>
-	  <ng-container matColumnDef="maturitydate">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Maturity </th>
-		<td mat-cell *matCellDef="let row"> {{row.maturitydate | number:'4.0-5'}} </td>
-	  </ng-container>
-	  <ng-container matColumnDef="interestrateindex">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Interest Rate Curve </th>
-		<td mat-cell *matCellDef="let row"> {{row.interestrateindex}} </td>
-	  </ng-container>
-	  <ng-container matColumnDef="clientratespread">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Client Rate Spread </th>
-		<td mat-cell *matCellDef="let row"> {{row.clientratespread | number}}%</td>
-	  </ng-container>
-	  <ng-container matColumnDef="name">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
-		<td mat-cell *matCellDef="let row"> <a [routerLink]="" (click)="showClient(row.clientRef)">{{row.name}}</a>
-			
-		</td>
-	  </ng-container>	  
-	  <ng-container matColumnDef="status">
-		<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-		<td mat-cell *matCellDef="let row"> <mat-spinner *ngIf="row.status">
-			
-		</mat-spinner>
-		</td>
-	  </ng-container>	
-	  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-	  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-<!-- 
-	  <tr class="mat-row" *matNoDataRow>
-		<td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
-	  </tr> -->
+  <div class="myspacing elevated-block mat-elevation-z2">
 
-	</table> 
+    <mat-tab-group>
+      <mat-tab label="Search Deals">
+		<div class="tableview">
+			<table class="" mat-table [dataSource]="dataSource" matSort>
+			  <ng-container matColumnDef="contractref">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Deal ID </th>
+				<td mat-cell *matCellDef="let row"> {{row.contractref}} </td>
+			  </ng-container>
+			  <ng-container matColumnDef="balance">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+				<td mat-cell *matCellDef="let row"> {{row.balance | number:'4.0-5' }} </td>
+			  </ng-container>
+			  <ng-container matColumnDef="origindate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Origin Date </th>
+				<td mat-cell *matCellDef="let row"> {{row.origindate}} </td>
+			  </ng-container>
+			  <ng-container matColumnDef="maturitydate">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Maturity </th>
+				<td mat-cell *matCellDef="let row"> {{row.maturitydate | number:'4.0-5'}} </td>
+			  </ng-container>
+			  <ng-container matColumnDef="interestrateindex">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Interest Rate Curve </th>
+				<td mat-cell *matCellDef="let row"> {{row.interestrateindex}} </td>
+			  </ng-container>
+			  <ng-container matColumnDef="clientratespread">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Client Rate Spread </th>
+				<td mat-cell *matCellDef="let row"> {{row.clientratespread | number}}%</td>
+			  </ng-container>
+			  <ng-container matColumnDef="name">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+				<td mat-cell *matCellDef="let row"> <a [routerLink]="" (click)="showClient(row.clientRef)">{{row.name}}</a>
+					
+				</td>
+			  </ng-container>	  
+			  <ng-container matColumnDef="status">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+				<td mat-cell *matCellDef="let row"> <mat-spinner *ngIf="row.status">
+					
+				</mat-spinner>
+				</td>
+			  </ng-container>	
+			  <ng-container matColumnDef="detail">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+				<td mat-cell *matCellDef="let row">           
+					<button mat-flat-button color="primary" dense (click)="viewContract(row.index)">
+					<mat-icon>bar_chart</mat-icon>
+					View Deal
+				  </button>
+				</td>
+			  </ng-container>	
+
+			  
+			  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		
+		<!-- 
+			  <tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"</td>
+			  </tr> -->
+		
+			</table> 
+		</div>
+      </mat-tab>
+	  <ng-container *ngFor="let tab of tabs; let index = index">
+		<mat-tab *ngIf="closedTabs.indexOf(index) < 0">
+			<ng-template mat-tab-label>
+				<div class="col" style="margin-left: 20px;">{{tab.name}}</div>
+				<button style="color:black" mat-icon-button (click)="closeTab(index)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-template>
+
+    
+  </mat-tab>
+  </ng-container>
+
+    </mat-tab-group>
+  </div>
+
+
+ 
 
 
 	
 
-	<arro-client-card *ngIf="test" [client]="test" ></arro-client-card>
+	<arro-client-card *ngIf="customer" [client]="customer" ></arro-client-card>
 	
 	  
 

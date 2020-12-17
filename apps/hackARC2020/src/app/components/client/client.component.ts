@@ -1,13 +1,18 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule, ViewChild } from '@angular/core';
 import { ArcInstance } from '../../services/arcInstance.service';
 import { BankinAPIServiceService } from '../../services/bankin-apiservice.service';
 import { OAuthServiceService } from '../../services/oauth-service.service';
 import { contractTypes, Customers} from '../../data/common';
 import { Options , LabelType} from '@angular-slider/ngx-slider';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 import { IContract, ICurveData, ICustomer } from '../../data/interface';
 import { DatePipe } from '@angular/common';
 import { ClientCardComponent } from '../client-card/client-card.component';
+import {QueryList, ViewChildren } from '@angular/core';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+
 
 @Component({
   selector: 'ffdc-client',
@@ -16,15 +21,29 @@ import { ClientCardComponent } from '../client-card/client-card.component';
 })
 export class ClientComponent implements OnInit {
 
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
 //data
 contractTypes = contractTypes
 
-displayedColumns: string[] = ['contractref', 'balance', 'origindate', 'maturitydate', 'interestrateindex', 'clientratespread', 'name', 'status'];
+displayedColumns: string[] = ['contractref', 'balance', 'origindate', 'maturitydate', 'interestrateindex', 'clientratespread', 'name', 'status', 'detail'];
 dataSource: MatTableDataSource<object>;
 
-test: any
+@ViewChild(MatTabGroup, {read: MatTabGroup})
+public tabGroup: MatTabGroup;
+@ViewChildren(MatTab, {read: MatTab})
+public tabNodes: QueryList<MatTab>;
+public closedTabs = [];
+public tabs = []
+
+closeTab(index: number) {
+  event.stopPropagation();
+  this.closedTabs.push(index);
+  this.tabGroup.selectedIndex = this.tabNodes.length - 1;
+}
+
+customer: any
   contractType: any
   minValue: number = 100;
   maxValue: number = 400;
@@ -54,17 +73,6 @@ test: any
 
   viewCustomer(){
     console.log('viewCustomer')
-
-
-
-    //
-    //this.bankingService.test()
-
-
-
-
-
-
   }
 
 
@@ -112,6 +120,7 @@ test: any
       this.deals = this.arcInstance.getDeals(e.value)
       console.log(this.deals)
       var data = []
+      var index = 0
       for (var deal of this.deals) {
 
         let client = Customers[deal.partyref]
@@ -129,8 +138,11 @@ test: any
             clientratespread: deal.clientratespread,
             name: client.first_name+" "+client.last_name,
             status: 1,
-            clientRef: deal.partyref
+            clientRef: deal.partyref,
+            index: index
           })
+
+          index++
         }
       this.dataSource = new MatTableDataSource(data) 
       this.updateStatus()
@@ -139,8 +151,14 @@ test: any
      showClient(id: string)
      {
        console.log(id)
-       this.test = Customers[id]
+       this.customer = Customers[id]
        let client = Customers[id]
      }
+
+     viewContract(cindex: number)
+     {
+       console.log(cindex)
+     }
+
 
 }
