@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ppid } from 'process';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-
+import { ClientCardComponent } from '../client-card/client-card.component';
 
 export interface TableCFData {
   date: Date
@@ -63,7 +63,8 @@ export class OriginationComponent implements OnInit {
   margin_status: string
   showStatus: boolean = false
   weatherImage: string
-
+  test: any
+  
   //Data for graphs
   legendPosition = LegendPosition.verticalRightCenter;
   OPData = []
