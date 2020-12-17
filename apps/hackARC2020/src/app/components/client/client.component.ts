@@ -161,6 +161,14 @@ customer: any
      viewContract(cindex: number)
      {
        console.log(cindex)
+       let deal = this.deals[cindex]
+        this.tabs.push(
+          {
+            name: deal.contractref,
+            deal: deal
+          }
+        )
+
      }
 
 

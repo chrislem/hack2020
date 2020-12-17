@@ -1,0 +1,236 @@
+
+//body {
+  //background-image: url("Background_image1.png");
+ // background-color: $lightGrey;
+//}
+$flashyGreen: #00C5C8;//#21CE99;
+$lightGrey:#D0D1D3;
+$darkGrey: #898D90;
+$darkBlue: #040D14;
+$flashyRed:#DD1C1A;
+
+//Page management
+.containercol {
+  display: flex; 
+  flex-direction: column;
+  flex-wrap:nowrap;
+  //border: 3px red solid;
+}
+.containerrow {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap:nowrap;
+  //border: 3px green solid;
+  background-color: $lightGrey;
+}
+//Form for ARR
+.ARRform {
+  position: relative;
+  color: $flashyGreen;
+  margin-left: 10px;
+  padding: 10px;
+  //border-style: solid;
+ // border-color: $flashyGreen;
+  background-color: $darkBlue;
+  width: 300px;
+
+  .title {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: left;
+    .flag-icon {
+      margin-right: 30px;
+      //border: 1px;
+     // border-style: solid;
+     // border-color: $flashyGreen;
+    }
+  }
+  .button-group button{
+    margin-top:10px;
+    margin-bottom:10px;
+    color:$flashyGreen;
+    border: 1px;
+    border-style: solid;
+    border-color: $flashyGreen;
+    background-color:$darkBlue;
+    padding:5px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .button-group button:hover {
+    background-color: $flashyGreen;
+    color:$darkBlue;
+  }
+  .button-group button:active {
+    background-color: $flashyGreen;
+    color:$darkBlue;
+  }
+  .button-group button:focus {
+  background-color: $flashyGreen;
+  color:$darkBlue;
+    }
+
+  .icon {
+    color: $flashyGreen;
+    size: 20px;
+  }
+  .standard {
+  font-weight: bold;
+  font-size: 20px;
+    }
+  .selector {
+  margin-left: 10px;
+  font-size:15px;
+  color: $darkBlue;  
+  width: 50px;
+  }
+}
+
+//slider
+.slider-label {
+  font-size: 15px;   
+  font-weight: bold;
+}
+
+.custom-slider{
+width: 220px;
+  .ngx-slider {
+    .ngx-slider-pointer {
+    background-color:$flashyGreen ;
+    }
+    .ngx-slider-bubble {
+      color: $lightGrey ;   
+      font-size:14px;
+    }
+    .ngx-slider-bar {
+      background-color: $lightGrey ;   
+    }
+    .ngx-slider-selection {
+      background: $flashyGreen;
+    }
+    .ngx-slider-tick {
+      color: lightGrey;
+        .ngx-slider-tick-value{
+          font-size: 13px;
+        }
+        .ngx-slider-tick-legend {
+          size: 13px;
+        }
+    }
+  }
+}
+
+//card
+.card1 {
+  position:absolute;
+  left:24%;
+  top: 5%;
+  //background-color:$lightGrey;
+  color: $darkBlue;
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+     div {
+      flex: 50%;
+      padding: 10px;
+    }
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+     div {
+      flex: 50%;
+      padding: 10px;
+    }
+  }
+   div {
+    flex: 20%;
+    border-radius: 10px;
+    padding: 10px;
+  }
+   .outlook {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.1);
+  }
+   .spread {
+    background: $darkBlue;
+    color: $flashyGreen;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .FTP {
+    background: $flashyGreen;
+    color: $darkBlue;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .value {
+    background: $darkGrey;
+    color: $darkBlue;
+    font-size: 25px;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.card2 {
+  position:absolute;
+  left:65%;
+  top: 5%;
+}
+.graph {
+ position:absolute;
+ top:5%; 
+ left:40%;
+ //background-color: $darkBlue;
+}
+.mat-tab-label {
+  color:$flashyRed;
+  background-color:$darkBlue;
+}
+.mat-tab-label:active {
+  background-color: $darkBlue;
+  color: $flashyRed;
+}
+.mat-tab-label.selected {
+  background-color: $darkBlue;
+  color: $flashyRed;
+}
+.margin10px {
+  margin-bottom:10px;
+}
+//toggle button
+mat-button-toggle{
+  background-color:$darkBlue !important;
+  color: $flashyGreen !important;
+}
+mat-button-toggle:hover {
+  background-color: $flashyGreen !important;
+  color: $darkBlue !important;
+  border-color: none !important;
+}
+.mat-button-toggle-checked {
+  background-color: $flashyGreen !important;
+  color: $darkBlue !important;
+}
+.mat-button-toggle-input {
+  background-color: none !important;
+}
