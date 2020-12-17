@@ -9,9 +9,14 @@ export class ClientCardComponent implements OnInit {
 
   @Input() client;
 
-  constructor() { }
+deals: any
+
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

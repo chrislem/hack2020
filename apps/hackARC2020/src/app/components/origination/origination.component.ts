@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, ViewChild,ViewEncapsulation } from '@angular/core';
-import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods, mapInterestMethod } from '../../data/common';
+import { ARCbasis, currencies, mapCurrencyARR, mapPeriodicity, periodicity, mapMaturity, ARRInterestMethods, mapInterestMethod, Customers } from '../../data/common';
 import { amortizationTypes, mapBasis, mapFlag, mapAmotype,mapCurrencySymbol } from '../../data/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe, getLocaleDateFormat } from '@angular/common';
@@ -81,10 +81,17 @@ export class OriginationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+
+  //Clients
+  currentclient: any;
+  clients = []
+
   constructor(private arcInstance: ArcInstance,
     private datapipe: DatePipe
   ) {
-    this.ARRindex
+    for (let key in Customers) {
+      this.clients.push({key: key, first: Customers[key].first_name, last: Customers[key].last_name});
+    }
   }
 
   ngOnInit(): void {
@@ -321,6 +328,12 @@ opt_spread: Options = {
 
   onDoubleClick(event: Array<object>) {
     console.log('double click: ', event);
+  }
+
+  clientChange(event)
+  {
+    console.log('clientChange: ', event);
+    this.currentclient = Customers[event.value]
   }
 }
 
