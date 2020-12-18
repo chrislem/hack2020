@@ -1,3 +1,26 @@
-.client {
-    background-color: red;
+$colorHeader: black;
+$colorFont: white;
+$colorCard: red;
+
+
+.header {
+    margin-left:35px;
+}
+
+.iconHeader {
+font-size:50px;
+}
+
+.containerrow {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap:nowrap;
+    padding:10px;
+    background-color: white;
+ 
+}
+
+img {
+    padding:10px;
+    align-items: center;
 }

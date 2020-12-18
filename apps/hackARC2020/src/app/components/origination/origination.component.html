@@ -127,38 +127,7 @@
                 <button mat-button>ADJUST</button>
                 <button mat-button>CLEAR</button>
             </mat-card-actions> -->
-        </mat-card>       
-        <mat-card class = "card2 elevated-block mat-elevation-z2">  
-            <!--             <mat-card-header>
-                            <mat-card-title></mat-card-title>
-                        </mat-card-header>  -->
-        <mat-card-content>
-            <div class="flex-column">
-                <div class="spread">
-                    <span>SPREAD</span>
-                    <span>{{clientRateSpread}}% </span>
-                </div>
-                <div class="FTP">
-                    <span>FTP</span>
-                    <span>{{FTP}}%</span>
-                </div>
-                <div class="value">
-                    <span>VALUE</span>
-                    <span>{{NPV}}</span>
-                </div>
-                <div class="outlook" *ngIf="showStatus">
-                    <img src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
-                    <span>{{margin}}%</span>
-                </div>
-
-            </div>    
-                </mat-card-content>
-            <!--             <mat-card-actions>
-                            <button mat-button>ADJUST</button>
-                            <button mat-button>CLEAR</button>
-                        </mat-card-actions> -->
-         </mat-card>
-        
+        </mat-card>              
         <div class="graph elevated-block mat-elevation-z2">
             <mat-tab-group>
                 <mat-tab label="Graph">
@@ -211,8 +180,9 @@
                 </div>  
             </mat-tab-group>
         </div>
-        <div>
-            <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card>
+        <div class = "card2">
+            <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
+            <arro-client-card [client]="currentclient" ></arro-client-card>
         </div>
     </div>
 </body>
