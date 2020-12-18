@@ -187,7 +187,6 @@ opt_spread: Options = {
   }
   drawBarchart() {
     console.log('ok drawbar')
- 
     this.IPData = [
       {
         x: this.contract.cfInterest.getDates(),
@@ -217,7 +216,7 @@ opt_spread: Options = {
       }]
        
     this.layoutInt = {
-      title: 'Interest',
+      title: this.ARRindex + ' projection',
       autosize: true,
       xaxis: {title: 'Date'},
       yaxis: {title: 'Amount'},
