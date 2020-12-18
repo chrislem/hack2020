@@ -56,7 +56,6 @@ import { NewclientComponent } from './components/newclient/newclient.component';
 import { ClientComponent } from './components/client/client.component';
 import { RateComponent } from './components/rate/rate.component';
 import { MatSortModule } from '@angular/material/sort';
-import { CalcdealComponent } from './components/client/calcdeal/calcdeal.component';
 import { OriginationComponent } from './components/origination/origination.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -64,27 +63,22 @@ import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
 import { ClientCardComponent } from './components/client-card/client-card.component';
 import { DealrenegoComponent } from './components/dealrenego/dealrenego.component';
+import { DealCardComponent } from './components/deal-card/deal-card.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
-
-
     HomeComponent,
     PopoverDemoComponent,
-
     AppComponent,
-
     GlobalNavDemoComponent,
-
-
     NewclientComponent,
     ClientComponent,
     RateComponent,
-    CalcdealComponent,
     OriginationComponent,
     ClientCardComponent,
-    DealrenegoComponent
+    DealrenegoComponent,
+    DealCardComponent
   ],
   imports: [
     BrowserModule,

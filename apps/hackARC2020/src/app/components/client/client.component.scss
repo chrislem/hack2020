@@ -1,3 +1,12 @@
+
+.containerrow {
+  display: flex; 
+  flex-direction: row;
+  flex-wrap:nowrap;
+
+}
+
+
 .uxg-flex-layout{
     display: flex;
     .uxg-nav-list {

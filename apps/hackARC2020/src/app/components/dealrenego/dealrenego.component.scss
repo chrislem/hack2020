@@ -3,10 +3,11 @@
   //background-image: url("Background_image1.png");
  // background-color: $lightGrey;
 //}
-$flashyGreen: #00C5C8;//#21CE99;
+$tesxtcolor: white;
+$flashyGreen: #ae296d;
 $lightGrey:#D0D1D3;
 $darkGrey: #898D90;
-$darkBlue: #040D14;
+$darkBlue: #eb823d;
 $flashyRed:#DD1C1A;
 
 //Page management
@@ -20,13 +21,14 @@ $flashyRed:#DD1C1A;
   display: flex; 
   flex-direction: row;
   flex-wrap:nowrap;
+  min-height: 900px;
   //border: 3px green solid;
   background-color: $lightGrey;
 }
 //Form for ARR
 .ARRform {
   position: relative;
-  color: $flashyGreen;
+  color: $tesxtcolor;
   margin-left: 10px;
   padding: 10px;
   //border-style: solid;
@@ -125,9 +127,8 @@ width: 220px;
 
 //card
 .card1 {
-  position:absolute;
-  left:24%;
-  top: 5%;
+  position: relative;;
+  left:5%;
   //background-color:$lightGrey;
   color: $darkBlue;
   .flex-column {
@@ -197,10 +198,11 @@ width: 220px;
   top: 5%;
 }
 .graph {
- position:absolute;
+ position:relative;
  top:5%; 
- left:40%;
+ left:5%;
  //background-color: $darkBlue;
+ width: 700px
 }
 .mat-tab-label {
   color:$flashyRed;

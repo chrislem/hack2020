@@ -1,5 +1,19 @@
 import { IContract, ICustomer } from "./interface";
 
+
+export var graphbg = '#3f3f3f'
+export var barcolor = [
+    '#eb823d',
+    '#d1204e',
+    ''
+]
+
+export var linecolor = [
+    '#c85a51',
+    '#ae296d',
+    ''
+]
+
 //ENUMS
 export var currencies = [
     'EUR',

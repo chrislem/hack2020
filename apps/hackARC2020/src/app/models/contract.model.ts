@@ -11,6 +11,8 @@ export class Contract {
     cfInterest: TimeSeries
     cfPrincipal: TimeSeries
     cfOutstanding: TimeSeries
+    cfDiscInterest: TimeSeries
+    cfDiscPrincipal: TimeSeries    
     fixing: TimeSeries
     FTP: number
     contractType: string

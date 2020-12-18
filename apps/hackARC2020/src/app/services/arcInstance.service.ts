@@ -103,6 +103,8 @@ console.log('getCurve')
           contract.cfInterest = TimeSeries.fromJson(jsonItem['result'][0]['CFInterests'])
           contract.cfPrincipal = TimeSeries.fromJson(jsonItem['result'][0]['CFPrincipals'])
           contract.cfOutstanding = TimeSeries.fromJson(jsonItem['result'][0]['CFOutstandingPrincipals'])
+          contract.cfDiscInterest = TimeSeries.fromJson(jsonItem['result'][0]['InterestDiscounts'])
+          contract.cfDiscPrincipal = TimeSeries.fromJson(jsonItem['result'][0]['PrincipalDiscounts'])
           contract.fixing = TimeSeries.fromJson(jsonItem['result'][0]['Fixings'])
           contract.npv = jsonItem['result'][0]['NPV']
           contract.FTP = jsonItem['result'][0]['FTP']

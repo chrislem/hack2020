@@ -1,5 +1,6 @@
 
     <div class="containerrow">
+        <div>
         <table class = "ARRform elevated-block mat-elevation-z2">
                 <thead class = "title">
                     <tr>
@@ -8,40 +9,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="slider-label">
-                        <label>Principal</label>
-                    </tr>  
                     <tr>
-                        {{originalDeal.balance}}
+                        <label>{{currencySymbol}} {{originalDeal.balance | number:'4.0-0'}}</label>
                     </tr>
-                    <tr class="slider-label">
-                        <label>Maturity</label>
-                    </tr>  
-                    <tr>
-                        {{originalDeal.maturityDate}}
-                    </tr>
+
                     <tr class="slider-label">
                         <label>Spread</label>
                     </tr>  
                     <tr>
                         <div class="custom-slider">
-                            <ngx-slider [options]="opt_spread" (click)="ComputeARR()"></ngx-slider>
+                            <ngx-slider   [options]="opt_spread" [(ngModel)]="breakEvenForm" (click)="ComputeARR()"></ngx-slider>
                         </div>
                     </tr>
-                    <tr class="slider-label">
-                        <label>Periodicity</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_periodicity" (click)="ComputeAll()"></ngx-slider>
-                        </div>
-                    </tr> 
                     <tr class="slider-label">
                         <label>LookBack</label>
                     </tr>  
                     <tr>
                         <div class="custom-slider">
-                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lookback" (click)="ComputeAll()"></ngx-slider>
+                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lookback" (click)="ComputeARRFull()"></ngx-slider>
                         </div>
                     </tr>
                     <tr class="slider-label">
@@ -49,17 +34,17 @@
                     </tr>  
                     <tr>
                         <div class="custom-slider margin10px">
-                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lockout" (click)="ComputeAll()"></ngx-slider>
+                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lockout" (click)="ComputeARRFull()"></ngx-slider>
                         </div>
                     </tr> 
                     <tr>
-                        <mat-button-toggle-group [(ngModel)]="interestMethod" (click)="ComputeAll()">
+                        <mat-button-toggle-group [(ngModel)]="interestMethod" (click)="ComputeARRFull()">
                             <mat-button-toggle value="RFRAVRSimple">Simple</mat-button-toggle>
                             <mat-button-toggle value="RFRAVRCompounding">Compounding</mat-button-toggle>
                         </mat-button-toggle-group>  
                     </tr>   
                     <tr>
-                            <mat-button-toggle-group [(ngModel)]="basis" (click)="ComputeAll()">
+                            <mat-button-toggle-group [(ngModel)]="basis" (click)="ComputeARRFull()">
                                 <mat-button-toggle value="Exact/365">365</mat-button-toggle>
                                 <mat-button-toggle value="Exact/360">360</mat-button-toggle>
                                 <mat-button-toggle value="Exact/Exact">ACT</mat-button-toggle>
@@ -67,6 +52,8 @@
                     </tr>                       
                 </tbody>
         </table>
+    </div>
+    <div>
         <mat-card class = "card1 elevated-block mat-elevation-z2">  
 <!--             <mat-card-header>
                 <mat-card-title></mat-card-title>
@@ -76,127 +63,102 @@
                     <div class="flex-row">
                         <div class="spread">
                         <span>SPREAD Libor</span>
-                        <span>{{spreadlibor}} % </span>
+                        <span>{{spreadlibor| number:'1.2-2'}} % </span>
                         </div>
                         <div class="spread">
                             <span>SPREAD Libor/ARR</span>
-                            <span>{{spreadliborarr}} % </span>
+                            <mat-spinner *ngIf="runningARRfull" diameter="20"></mat-spinner><span *ngIf="!runningARRfull">{{spreadliborarr| number:'1.2-2'}} %</span>
                         </div>
                     </div>
                     <div class="flex-row">
                         <div class="FTP">
                             <span>Value Libor</span>
-                            <span>{{vallibor}}%</span>
+                            <span >{{currencySymbol}} {{vallibor | number:'4.0-0' }}</span>
                         </div>
                         <div class="FTP">
                             <span>Value ARR</span>
-                            <span>{{valueARR}}%</span>
+                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{currencySymbol}} {{valueARR | number:'4.0-0'}}</span>
                         </div>
                     </div>
                     <div class="flex-row">
                         <div class="value">
                             <span>Break Even</span>
-                            <span>{{breakEven}}</span>
+                            <mat-spinner *ngIf="runningARRfull" diameter="20"></mat-spinner><span *ngIf="!runningARRfull">{{breakEven| number:'1.2-2'}}%</span>
                         </div>
                         <div class="value">
-                            <span>VALUE</span>
-                            <span>{{NPV}}</span>
+                            <span>Spread ARR</span>
+                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{breakEvenForm| number:'1.2-2'}}%</span>
                         </div>
                     </div>
-                    <div class="outlook" *ngIf="showStatus">
-                      <img src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
-                      <span>{{margin}}%</span>
+                    <div class="flex-row">
+                        <div class="value">
+                            <span>Margin</span>
+                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{margin | number:'1.2-2'}}%</span>
+                        </div>
+                        
+                        <div class="value" >
+                            <span *ngIf="runningARR"></span>
+                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner>
+                            <img *ngIf="!runningARR" src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
+                          </div>
                     </div>
 
                 </div>    
             </mat-card-content>
-<!--             <mat-card-actions>
-                <button mat-button>ADJUST</button>
-                <button mat-button>CLEAR</button>
-            </mat-card-actions> -->
-        </mat-card>       
-        <mat-card class = "card2 elevated-block mat-elevation-z2">  
-            <!--             <mat-card-header>
-                            <mat-card-title></mat-card-title>
-                        </mat-card-header>  -->
-        <mat-card-content>
-            <div class="flex-column">
-                <div class="spread">
-                    <span>SPREAD</span>
-                    <span>{{clientRateSpread}}% </span>
-                </div>
-                <div class="FTP">
-                    <span>FTP</span>
-                    <span>{{FTP}}%</span>
-                </div>
-                <div class="value">
-                    <span>VALUE</span>
-                    <span>{{NPV}}</span>
-                </div>
-                <div class="outlook" *ngIf="showStatus">
-                    <img src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
-                    <span>{{margin}}%</span>
-                </div>
 
-            </div>    
-                </mat-card-content>
-            <!--             <mat-card-actions>
-                            <button mat-button>ADJUST</button>
-                            <button mat-button>CLEAR</button>
-                        </mat-card-actions> -->
-         </mat-card>
+        </mat-card>  
+    </div>     
+ 
         
         <div class="graph elevated-block mat-elevation-z2">
             <mat-tab-group>
                 <mat-tab label="Graph">
                     <div class="containerrow">
                         <div fxFlex>
-                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="IPData"
+                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="GraphData"
                             [config]="config" [layout]="layoutInt">
                             </plotly-plot>
                         </div> 
-                      <!--  <div fxFlex>
-                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="OPData"
-                            [config]="config" [layout]="layoutOP">
-                            </plotly-plot>
-                        </div> -->
+
                     </div>
                 </mat-tab>
                 <div>
-                    <mat-tab label="Table">  
+                    <mat-tab label="Interests Libor/ARR">  
                         <div>
-                            <table mat-table [dataSource]="dataSource" matSort>
+                            <table mat-table [dataSource]="TabledataSource" matSort>
                                 <ng-container matColumnDef="date">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
                                     <td mat-cell *matCellDef="let row"> {{row.date}} </td>
                                 </ng-container>
-                                <ng-container matColumnDef="op">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Outstanding </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.op}} </td>
+                                <ng-container matColumnDef="IPLibor">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest Libor </th>
+                                    <td mat-cell *matCellDef="let row">{{currencySymbol}} {{row.IPLibor}} </td>
                                 </ng-container>
-                                <ng-container matColumnDef="pp">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Principal </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.pp}} </td>
+                                <ng-container matColumnDef="IPARR">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest ARR </th>
+                                    <td mat-cell *matCellDef="let row">{{currencySymbol}} {{row.IPARR}} </td>
                                 </ng-container>
-                                <ng-container matColumnDef="ip">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.ip}} </td>
-                                </ng-container>
-
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                                <tr class="mat-row" *matNoDataRow>
-                                    <td class="mat-cell" colspan="7">No data matching the filter "{{input.value}}"
+ 
+                                <!-- <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="3"> <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
                                     </td>
-                                </tr>
+                                </tr> -->
+                               
                             </table>
-                            <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+                            
                         </div> 
                             
                     </mat-tab>
+                    <mat-tab label="Deal details">  
+                        <arro-deal-card [deal]="originalDeal" ></arro-deal-card>
+                        <arro-deal-card *ngIf="dealARR" [deal]="dealARR" ></arro-deal-card>
+                    </mat-tab>
+
                 </div>  
             </mat-tab-group>
-        </div>
+        </div> 
 
     </div>
