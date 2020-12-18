@@ -194,7 +194,7 @@ opt_spread: Options = {
         y: this.contract.cfInterest.getValues(),
         type: 'bar',
         name: 'Interests',
-        marker: {color: '#040D14'}
+        marker: {color: '#ae296d'}
       },
       {
         x: this.contract.fixing.getDates(),
@@ -202,7 +202,7 @@ opt_spread: Options = {
         type: 'line',
         name: 'Fixings',
         yaxis: 'y2',
-        line: {color: '#DD1C1A'}
+        line: {color: '#eb823d'}
       }]
 
     this.OPData = [
