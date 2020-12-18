@@ -64,7 +64,7 @@ dealARR: any
  //variable
  periodicity: string
  currency: string = 'GBP'
- basis: string = 'Exact/365'
+ basis: string
  today = new Date()
  originDate: Date = this.today
  principal: number=10000
@@ -127,6 +127,7 @@ dealARR: any
   this.currencySymbol = mapCurrencySymbol.get(this.originalDeal.currency)
   this.spreadlibor = this.originalDeal.clientratespread
   this.vallibor = this.originalDeal.npv
+  this.basis = this.originalDeal.basis
   this. _computeARRWithLiborCaracteristic()
  }
 
@@ -251,6 +252,7 @@ opt_spread: Options = {
     console.log(contractreceived)
    this.dealARR = contractreceived
    this.valueARR = this.dealARR.npv
+   //this.basis = this.originalDeal.basis
 
    this.margin = this.breakEvenForm - this.breakEven
    this.runningARR = false
