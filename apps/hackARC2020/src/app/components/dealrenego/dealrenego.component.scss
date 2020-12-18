@@ -93,31 +93,33 @@ $flashyRed:#DD1C1A;
   font-weight: bold;
 }
 
-.custom-slider{
-width: 220px;
-padding: 10px;
- /deep/ .ngx-slider {
-    .ngx-slider-pointer {
-    background-color:$flashyGreen ;
-    }
-    /deep/  .ngx-slider-bubble {
-      color: black ;   
-      font-size:14px;
-    }
-    /deep/  .ngx-slider-bar {
-      background-color: $lightGrey ;   
-    }
-    /deep/  .ngx-slider-selection {
-      background: $flashyGreen;
-    }
-    /deep/  .ngx-slider-tick {
-      color: lightGrey;
-        .ngx-slider-tick-value{
-          font-size: 13px;
-        }
-        .ngx-slider-tick-legend {
-          size: 13px;
-        }
+::ng-deep {
+  .custom-slider{
+  width: 220px;
+  padding: 10px;
+    .ngx-slider {
+      .ngx-slider-pointer {
+      background-color:$flashyGreen ;
+      }
+      .ngx-slider-bubble {
+        color: black ;   
+        font-size:14px;
+      }
+      .ngx-slider-bar {
+        background-color: $lightGrey ;   
+      }
+      .ngx-slider-selection {
+        background: $flashyGreen;
+      }
+      .ngx-slider-tick {
+        color: lightGrey;
+          .ngx-slider-tick-value{
+            font-size: 13px;
+          }
+          .ngx-slider-tick-legend {
+            size: 13px;
+          }
+      }
     }
   }
 }
