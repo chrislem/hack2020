@@ -41,7 +41,7 @@ spreadliborarr
 vallibor 
 valueARR 
 breakEven 
-breakEvenForm
+breakEvenForm=0
 margin
 
 //running

@@ -13,7 +13,7 @@ export class DealCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    console.log("deal card")
     console.log(this.deal)
   }
 

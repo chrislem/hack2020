@@ -1,3 +1,52 @@
+$flashyGreen: #00C5C8;//#21CE99;
+$lightGrey:#D0D1D3;
+$darkGrey: #898D90;
+$darkBlue: #040D14;
+$flashyRed:#DD1C1A;
+
+
+.headerdeals{
+  font-weight: bold;
+  font-size: 15px;
+
+  text-align: center;
+}
+
+
+.headerExpo{
+margin: 15px;
+font-size: 25px;
+}
+
+.page-container
+{
+  width: 100%;
+  height: 100%;
+  background-size: 200% 200%;
+  background: linear-gradient(45deg, #eb823d, #c85a51, #ae296d);
+
+  animation: Gradient 10s ease infinite;
+}
+
+.filterbar{
+  background-color: #FAFAFA;
+  height: 70px;
+  align-items: center;
+}
+.client-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+ 
+}
+.client-card {
+
+  padding: 5px;
+
+ 
+}
+
 
 .containerrow {
   display: flex; 
@@ -172,3 +221,12 @@
     display: flex;
     flex-direction: row;
    }
+
+   ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color:white;
+    }
+    
+    ::ng-deep .mat-tab-list .mat-tab-labels {
+    color:blue;
+    }
+    

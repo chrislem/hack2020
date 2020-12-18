@@ -33,7 +33,8 @@ export class TimeSeries{
                 let value: number = jsonarray[i+1]
                 
                 dates.push(date)
-                values.push((Math.round(value*100)/100))
+                values.push(value)
+                //values.push((Math.round(value*100)/100))
             }
        
         }

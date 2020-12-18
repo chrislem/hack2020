@@ -9,11 +9,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr style="padding:10px;">
                         <label>{{currencySymbol}} {{originalDeal.balance | number:'4.0-0'}}</label>
                     </tr>
 
-                    <tr class="slider-label">
+                    <tr style="padding:10px;" class="slider-label">
                         <label>Spread</label>
                     </tr>  
                     <tr>
@@ -54,111 +54,25 @@
         </table>
     </div>
     <div>
-        <mat-card class = "card1 elevated-block mat-elevation-z2">  
-<!--             <mat-card-header>
-                <mat-card-title></mat-card-title>
-            </mat-card-header>  -->
-            <mat-card-content>
-                <div class="flex-column">
-                    <div class="flex-row">
-                        <div class="spread">
-                        <span>SPREAD Libor</span>
-                        <span>{{spreadlibor| number:'1.2-2'}} % </span>
-                        </div>
-                        <div class="spread">
-                            <span>SPREAD Libor/ARR</span>
-                            <mat-spinner *ngIf="runningARRfull" diameter="20"></mat-spinner><span *ngIf="!runningARRfull">{{spreadliborarr| number:'1.2-2'}} %</span>
-                        </div>
-                    </div>
-                    <div class="flex-row">
-                        <div class="FTP">
-                            <span>Value Libor</span>
-                            <span >{{currencySymbol}} {{vallibor | number:'4.0-0' }}</span>
-                        </div>
-                        <div class="FTP">
-                            <span>Value ARR</span>
-                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{currencySymbol}} {{valueARR | number:'4.0-0'}}</span>
-                        </div>
-                    </div>
-                    <div class="flex-row">
-                        <div class="value">
-                            <span>Break Even</span>
-                            <mat-spinner *ngIf="runningARRfull" diameter="20"></mat-spinner><span *ngIf="!runningARRfull">{{breakEven| number:'1.2-2'}}%</span>
-                        </div>
-                        <div class="value">
-                            <span>Spread ARR</span>
-                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{breakEvenForm| number:'1.2-2'}}%</span>
-                        </div>
-                    </div>
-                    <div class="flex-row">
-                        <div class="value">
-                            <span>Margin</span>
-                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner><span *ngIf="!runningARR">{{margin | number:'1.2-2'}}%</span>
-                        </div>
-                        
-                        <div class="value" >
-                            <span *ngIf="runningARR"></span>
-                            <mat-spinner *ngIf="runningARR" diameter="20"></mat-spinner>
-                            <img *ngIf="!runningARR" src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
-                          </div>
-                    </div>
+        <div class="containerrow">
+            <div class="containercol">
+                <div> <!-- resultat -->
+                    <table class = "ResTable elevated-block mat-elevation-z2">
+                        <tr class="cellviolet" colspan="2"><td>SPREAD</td></tr>
+                        <tr><td class="cellorange">SPREAD LIBOR</td><td>SPREAD LIBOR/</td></tr>
+                        <tr><td>BREAK EVEN</td><td>SPREAD LIBOR/</td></tr>
+                    </table>
+                </div>
+                <div>2</div>
+            </div>
+            <div class="containercol">
+                <div>1</div>
+                <div>2</div>
+            </div>
+        </div>
 
-                </div>    
-            </mat-card-content>
 
-        </mat-card>  
     </div>     
  
-        
-        <div class="graph elevated-block mat-elevation-z2">
-            <mat-tab-group>
-                <mat-tab label="Graph">
-                    <div class="containerrow">
-                        <div fxFlex>
-                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="GraphData"
-                            [config]="config" [layout]="layoutInt">
-                            </plotly-plot>
-                        </div> 
-
-                    </div>
-                </mat-tab>
-                <div>
-                    <mat-tab label="Interests Libor/ARR">  
-                        <div>
-                            <table mat-table [dataSource]="TabledataSource" matSort>
-                                <ng-container matColumnDef="date">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.date}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="IPLibor">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest Libor </th>
-                                    <td mat-cell *matCellDef="let row">{{currencySymbol}} {{row.IPLibor}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="IPARR">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Interest ARR </th>
-                                    <td mat-cell *matCellDef="let row">{{currencySymbol}} {{row.IPARR}} </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
- 
-                                <!-- <tr class="mat-row" *matNoDataRow>
-                                    <td class="mat-cell" colspan="3"> <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
-                                    </td>
-                                </tr> -->
-                               
-                            </table>
-                            
-                        </div> 
-                            
-                    </mat-tab>
-                    <mat-tab label="Deal details">  
-                        <arro-deal-card [deal]="originalDeal" ></arro-deal-card>
-                        <arro-deal-card *ngIf="dealARR" [deal]="dealARR" ></arro-deal-card>
-                    </mat-tab>
-
-                </div>  
-            </mat-tab-group>
-        </div> 
 
     </div>

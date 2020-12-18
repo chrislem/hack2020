@@ -1,18 +1,10 @@
 <div class="home-container">
-  <div class="home-title">
-  <img src="assets/backgroundhome.png">
-  </div>
+  
+   
+      
+    <img src="assets/arro-black-white-final.png" width="800" height="800">
 
-  <div class="home-list">
-    <ng-container *ngFor="let nestedRoute of nestedRoutes">
-      <h5 class="uxg-h5">{{ nestedRoute.title }}</h5>
-      <div class="home-list-grid">
-        <ng-container *ngFor="let route of nestedRoute.routes">
-          <mat-card [routerLink]="route.path" class="uxg-card-product">
-            <span class="uxg-h4 uxg-card-product-name">{{ route.data?.title }}</span>
-          </mat-card>
-        </ng-container>
-      </div>
-    </ng-container>
-  </div>
+
+
+
 </div>

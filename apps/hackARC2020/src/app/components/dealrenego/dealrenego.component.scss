@@ -10,6 +10,28 @@ $darkGrey: #898D90;
 $darkBlue: #eb823d;
 $flashyRed:#DD1C1A;
 
+
+.ResTable{
+  position: relative;
+  margin-left: 10px;
+  padding: 0px;
+  //border-style: solid;
+ // border-color: $flashyGreen;
+ background-color: white;
+  width: 300px;
+  //border-style: solid;
+ // border-color: $flashyGreen;
+ background-color: white;
+  width: 300px;
+}
+.cellviolet{
+  background-color: #ae296d ;
+}
+
+.cellorange{
+  background-color: #eb823d ;
+}
+
 //Page management
 .containercol {
   display: flex; 
@@ -21,24 +43,23 @@ $flashyRed:#DD1C1A;
   display: flex; 
   flex-direction: row;
   flex-wrap:nowrap;
-  min-height: 900px;
+  padding: 10px;
   //border: 3px green solid;
-  background-color: $lightGrey;
+  //background-color: $lightGrey;
 }
 //Form for ARR
 .ARRform {
   position: relative;
-  color: $tesxtcolor;
   margin-left: 10px;
-  padding: 10px;
+
   //border-style: solid;
  // border-color: $flashyGreen;
-  background-color: $darkBlue;
+ background-color: white;
   width: 300px;
 
   .title {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     margin-bottom: 10px;
     text-align: left;
     .flag-icon {
@@ -48,32 +69,7 @@ $flashyRed:#DD1C1A;
      // border-color: $flashyGreen;
     }
   }
-  .button-group button{
-    margin-top:10px;
-    margin-bottom:10px;
-    color:$flashyGreen;
-    border: 1px;
-    border-style: solid;
-    border-color: $flashyGreen;
-    background-color:$darkBlue;
-    padding:5px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .button-group button:hover {
-    background-color: $flashyGreen;
-    color:$darkBlue;
-  }
-  .button-group button:active {
-    background-color: $flashyGreen;
-    color:$darkBlue;
-  }
-  .button-group button:focus {
-  background-color: $flashyGreen;
-  color:$darkBlue;
-    }
+  
 
   .icon {
     color: $flashyGreen;
@@ -99,21 +95,22 @@ $flashyRed:#DD1C1A;
 
 .custom-slider{
 width: 220px;
-  .ngx-slider {
+padding: 10px;
+ /deep/ .ngx-slider {
     .ngx-slider-pointer {
     background-color:$flashyGreen ;
     }
-    .ngx-slider-bubble {
-      color: $lightGrey ;   
+    /deep/  .ngx-slider-bubble {
+      color: black ;   
       font-size:14px;
     }
-    .ngx-slider-bar {
+    /deep/  .ngx-slider-bar {
       background-color: $lightGrey ;   
     }
-    .ngx-slider-selection {
+    /deep/  .ngx-slider-selection {
       background: $flashyGreen;
     }
-    .ngx-slider-tick {
+    /deep/  .ngx-slider-tick {
       color: lightGrey;
         .ngx-slider-tick-value{
           font-size: 13px;
@@ -124,6 +121,10 @@ width: 220px;
     }
   }
 }
+
+
+
+
 
 //card
 .card1 {
@@ -163,8 +164,8 @@ width: 220px;
    .spread {
     background: $darkBlue;
     color: $flashyGreen;
-    font-size: 25px;
-    margin-bottom:10px;
+    font-size: 15px;
+    margin-bottom:5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -173,8 +174,8 @@ width: 220px;
   .FTP {
     background: $flashyGreen;
     color: $darkBlue;
-    font-size: 25px;
-    margin-bottom:10px;
+    font-size: 15px;
+    margin-bottom:5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -183,8 +184,8 @@ width: 220px;
   .value {
     background: $darkGrey;
     color: $darkBlue;
-    font-size: 25px;
-    margin-bottom:10px;
+    font-size: 15px;
+    margin-bottom:5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
