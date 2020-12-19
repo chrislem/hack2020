@@ -10,11 +10,107 @@ $darkGrey: #898D90;
 $darkBlue: #eb823d;
 $flashyRed:#DD1C1A;
 
+
+.filterbar{
+  background-color: #FAFAFA;
+  height: 70px;
+  align-items: center;
+}
+
+.page-container
+{
+  width: 100%;
+  height: 100%;
+  background-size: 200% 200%;
+  background: linear-gradient(45deg, #eb823dc0, #c85a51c0, #ae296dc0);
+
+  animation: Gradient 10s ease infinite;
+}
+
+.client-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+ 
+}
+
+.switchMode{
+  margin: 5px;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.ResTable{
+ 
+  margin-left: 10px;
+  padding: 0px;
+  font-size: 25px;
+  text-align:center;
+  //border-style: solid;
+ // border-color: $flashyGreen;
+
+  width: 300px;
+
+ 
+  border-spacing : 0px;
+}
+.cellviolet{
+  
+  background-color: #ae296d ;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.cellorange{
+  color: white;
+  background-color: #eb823d ;
+  padding: 10px;
+}
+
+.cellblanc{
+  
+  background-color: #ffffff ;
+  color: #3f3f3f;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  width: 50%;
+  padding: 5px;
+ 
+}
+
+.textviolet{
+  
+  color: #ae296d ;
+  font-weight: bolder;
+
+}
+
+.textorange{
+  color: #eb823d ;
+  font-weight: bolder;
+  vertical-align: middle;
+}
+
+
 //Page management
 .containercol {
   display: flex; 
   flex-direction: column;
   flex-wrap:nowrap;
+  //border: 3px red solid;
+}
+
+//Page management
+.containercol2 {
+  display: flex; 
+  flex-direction: column;
+  flex-wrap:nowrap;
+  padding-left: 20px;
+  background-color: white;
   //border: 3px red solid;
 }
 .containerrow {
@@ -189,23 +285,12 @@ width: 220px;
 }
 
 .graph {
- position:relative;
- top:5%; 
- left:4%;
- //background-color: $darkBlue;
-}
-.mat-tab-label {
-  color:$flashyRed;
-  background-color:$darkBlue;
-}
-.mat-tab-label:active {
-  background-color: $darkBlue;
-  color: $flashyRed;
-}
-.mat-tab-label.selected {
-  background-color: $darkBlue;
-  color: $flashyRed;
-}
+  position:relative;
+ 
+  //background-color: $darkBlue;
+  width: 800px
+ }
+
 .margin10px {
   margin-bottom:10px;
 }
@@ -226,12 +311,19 @@ mat-button-toggle{
 .mat-button-toggle-input {
   background-color: none !important;
 }*/
+
+.mat-spinner {
+  ::ng-deep circle {
+      stroke: $flashyGreen;
+  }
+}
+
 .page-container
 {
  width: 100%;
  height: 100%;
  background-size: 200% 200%;
- background: linear-gradient(45deg, #eb823d, #c85a51, #ae296d);
+ background: linear-gradient(45deg, #eb823dc0, #c85a51c0, #ae296dc0);
  
  animation: Gradient 10s ease infinite;
 }

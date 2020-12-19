@@ -1,0 +1,46 @@
+$tesxtcolor: white;
+$flashyGreen: #ae296d;
+$lightGrey:#D0D1D3;
+$darkGrey: #898D90;
+$darkBlue: #eb823d;
+$flashyRed:#DD1C1A;
+
+
+.header {
+    margin-left:35px;
+    margin-top: 10px;
+    color: $flashyGreen;
+
+}
+
+.iconHeader {
+font-size:50px;
+color: $flashyGreen;
+}
+
+.containerrow {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap:nowrap;
+   
+    //background-color: white;
+    
+    display: table-cell; /* comportement visuel de cellule */
+    vertical-align: middle;
+ 
+    white-space: nowrap;
+    
+ 
+}
+
+.item{
+    padding-left:10px;
+}
+.label {
+    margin-left:20px;
+}
+
+img {
+    padding:10px;
+    align-items: center;
+}

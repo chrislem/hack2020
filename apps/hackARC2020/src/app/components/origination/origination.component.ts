@@ -86,6 +86,10 @@ export class OriginationComponent implements OnInit {
   currentclient: any;
   clients = []
 
+//running
+runningCompute: boolean
+switchTable: boolean = false
+
   constructor(private arcInstance: ArcInstance,
     private datapipe: DatePipe
   ) {
@@ -155,7 +159,7 @@ opt_spread: Options = {
 };
 
   Compute() {
-    
+    this.runningCompute = true
     this.arcInstance.computeContract(
       "ARRO"
       , this.currency //GBP
@@ -180,6 +184,7 @@ opt_spread: Options = {
       this.FTP=Math.round(this.contract.FTP*10000)/100
       console.log('Contract')
       console.log(contractreceived)
+      this.runningCompute = false
       this.drawBarchart()
       this.drawTable()
       this.computeMargin()

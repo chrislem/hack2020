@@ -1,110 +1,111 @@
-<div class="page-container">
+<div class="page-container ">
+    <div class="client-container">
+        <div class="containerrow  filterbar  myspacing elevated-block mat-elevation-z2 ">
+            <mat-list class=" ">
+                <mat-list-item>
+                    <mat-form-field>
+                        <mat-label>Client</mat-label>
+                        <mat-select name="clients" [(ngModel)]="currentclient" (selectionChange)="clientChange($event)">
+                            <mat-option *ngFor="let c of clients" [value]="c.key">
+                                {{ c.first }} {{ c.last }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-list-item>
 
-    <div>
-        <mat-list class=" list-horizontal ">
-          <mat-list-item>
-            <mat-form-field>
-              <mat-label>Client</mat-label>
-              <mat-select name="clients" [(ngModel)]="currentclient" (selectionChange)="clientChange($event)">
-                <mat-option *ngFor="let c of clients" [value]="c.key">
-                  {{ c.first }} {{ c.last }} 
-                </mat-option>
-              </mat-select>
-          </mat-form-field>
-          </mat-list-item>
-  
-        </mat-list>
-      </div>
-
-
-    <div class="containerrow">
-        <table class = "ARRform">
-                <thead class = "title">
-                    <tr>
-                            <span class ="flag-icon {{getFlag()}}"></span>
+            </mat-list>
+            <div class="">
+                <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
+                <arro-client-card-hor *ngIf="currentclient" [client]="currentclient"></arro-client-card-hor>
+            </div>
+        </div>
+        <p> </p>
+        <div  *ngIf="currentclient">
+            <div class="containerrow">
+                <table class="ARRform">
+                    <thead class="title">
+                        <tr>
+                            <span class="flag-icon {{getFlag()}}"></span>
                             <label>{{ARRindex}}</label>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <mat-button-toggle-group [(ngModel)]="currency" (click)="getCurrency()">
-                            <mat-button-toggle value="GBP">GBP</mat-button-toggle>
-                            <mat-button-toggle value="EUR">EUR</mat-button-toggle>
-                            <mat-button-toggle value="USD">USD</mat-button-toggle>
-                            <mat-button-toggle value="CHF">CHF</mat-button-toggle>
-                            <mat-button-toggle value="JPY">JPY</mat-button-toggle>
-                        </mat-button-toggle-group>   
-                    </tr>
-                    <tr class="slider-label">
-                        <label>Principal</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_principal" [(ngModel)]="principal" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr>
-                    <tr class="slider-label">
-                        <label>Maturity</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_maturity" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr>
-                    <tr class="slider-label">
-                        <label>Spread</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_spread" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr>
-                    <tr class="slider-label">
-                        <label>Periodicity</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_periodicity" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr> 
-                    <tr class="slider-label">
-                        <label>LookBack</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider">
-                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lookback" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr>
-                    <tr class="slider-label">
-                        <label>Lockout</label>
-                    </tr>  
-                    <tr>
-                        <div class="custom-slider margin10px">
-                            <ngx-slider [options]="opt_ARR" [(ngModel)]="lockout" (click)="Compute()"></ngx-slider>
-                        </div>
-                    </tr> 
-                    <tr>
-                        <mat-button-toggle-group [(ngModel)]="interestMethod" (click)="Compute()">
-                            <mat-button-toggle value="RFRAVRSimple">Simple</mat-button-toggle>
-                            <mat-button-toggle value="RFRAVRCompounding">Compounding</mat-button-toggle>
-                        </mat-button-toggle-group>  
-                    </tr>   
-                    <tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <mat-button-toggle-group [(ngModel)]="currency" (click)="getCurrency()">
+                                <mat-button-toggle value="GBP">GBP</mat-button-toggle>
+                                <mat-button-toggle value="EUR">EUR</mat-button-toggle>
+                                <mat-button-toggle value="USD">USD</mat-button-toggle>
+                                <mat-button-toggle value="CHF">CHF</mat-button-toggle>
+                                <mat-button-toggle value="JPY">JPY</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>Principal</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider">
+                                <ngx-slider [options]="opt_principal" [(ngModel)]="principal" (click)="Compute()">
+                                </ngx-slider>
+                            </div>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>Maturity</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider">
+                                <ngx-slider [options]="opt_maturity" (click)="Compute()"></ngx-slider>
+                            </div>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>Spread</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider">
+                                <ngx-slider [options]="opt_spread" (click)="Compute()"></ngx-slider>
+                            </div>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>Periodicity</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider">
+                                <ngx-slider [options]="opt_periodicity" (click)="Compute()"></ngx-slider>
+                            </div>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>LookBack</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider">
+                                <ngx-slider [options]="opt_ARR" [(ngModel)]="lookback" (click)="Compute()"></ngx-slider>
+                            </div>
+                        </tr>
+                        <tr class="slider-label">
+                            <label>Lockout</label>
+                        </tr>
+                        <tr>
+                            <div class="custom-slider margin10px">
+                                <ngx-slider [options]="opt_ARR" [(ngModel)]="lockout" (click)="Compute()"></ngx-slider>
+                            </div>
+                        </tr>
+                        <tr>
+                            <mat-button-toggle-group [(ngModel)]="interestMethod" (click)="Compute()">
+                                <mat-button-toggle value="RFRAVRSimple">Simple</mat-button-toggle>
+                                <mat-button-toggle value="RFRAVRCompounding">Compounding</mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </tr>
+                        <tr>
                             <mat-button-toggle-group [(ngModel)]="basis" (click)="Compute()">
                                 <mat-button-toggle value="Exact/365">365</mat-button-toggle>
                                 <mat-button-toggle value="Exact/360">360</mat-button-toggle>
                                 <mat-button-toggle value="Exact/Exact">ACT</mat-button-toggle>
-                            </mat-button-toggle-group>    
-                    </tr>                       
-                </tbody>
-        </table>
-        <mat-card class = "card1">  
-<!--             <mat-card-header>
-                <mat-card-title></mat-card-title>
-            </mat-card-header>  -->
-            <mat-card-content>
-                <div class="flex-column">
-                    <div class="spread">
+                            </mat-button-toggle-group>
+                        </tr>
+                    </tbody>
+                </table>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class='containercol'>
+                    <!-- <div class="spread">
                       <span>SPREAD</span>
                       <span>{{clientRateSpread}} % </span>
                     </div>
@@ -119,34 +120,95 @@
                     <div class="outlook" *ngIf="showStatus">
                       <img src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;"/>
                       <span>{{margin}}%</span>
-                    </div>
+                    </div> -->
 
-                </div>    
-            </mat-card-content>
-<!--             <mat-card-actions>
-                <button mat-button>ADJUST</button>
-                <button mat-button>CLEAR</button>
-            </mat-card-actions> -->
-        </mat-card>              
-        <div class="graph">
-            <mat-tab-group>
-                <mat-tab label="Graph">
-                    <div class="containerrow">
-                        <div fxFlex>
-                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="IPData"
-                            [config]="config" [layout]="layoutInt">
-                            </plotly-plot>
-                        </div> 
-                      <!--  <div fxFlex>
-                            <plotly-plot fxFlex [style] = "style" [useResizeHandler]="true" [data]="OPData"
-                            [config]="config" [layout]="layoutOP">
-                            </plotly-plot>
-                        </div> -->
+
+                    <table class="ResTable">
+                        <tr>
+                            <td class="cellviolet"><b>SPREAD</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cellblanc textviolet">
+                                <mat-spinner *ngIf="runningCompute" diameter="35"></mat-spinner>
+                                <span  *ngIf="!runningCompute" class="textorange">{{clientRateSpread| number:'1.2-2'}}%</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="ResTable">
+                        <tr>
+                            <td class="cellorange"><b>FTP</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cellblanc textorange">
+                                <mat-spinner *ngIf="runningCompute" diameter="35"></mat-spinner>
+                                <span  *ngIf="!runningCompute" class="textorange">{{FTP| number:'1.2-2'}}%</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="ResTable">
+                        <tr>
+                            <td class="cellorange"><b>VALUE</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cellblanc textorange">
+                                <mat-spinner *ngIf="runningCompute" diameter="35"></mat-spinner>
+                                <span  *ngIf="!runningCompute" class="textorange">{{currencySymbol}} {{NPV | number:'4.0-0' }}</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="ResTable">
+                        <tr>
+                            <td class="cellorange"><b>MARGIN</b>
+                            </td>
+                        <tr>
+                            <td class="cellblanc textorange">
+                                
+                                <img *ngIf="weatherImage" src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;" />
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="cellblanc textorange">
+
+                                <mat-spinner *ngIf="runningCompute" diameter="35"></mat-spinner>
+                                <span  *ngIf="!runningCompute">{{margin| number:'1.2-2'}}%</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="containercol2 graph ">
+                    <div class="switchMode">
+                        <button mat-flat-button color="primary" dense (click)="switchTable = !switchTable">
+                            <mat-icon *ngIf="switchTable">bar_chart</mat-icon>
+                            <mat-icon *ngIf="!switchTable">table_chart</mat-icon>
+                            {{!switchTable? 'View Table' : 'View Graph' }}
+                        </button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <b>{{ARRindex}} Projection</b>
                     </div>
-                </mat-tab>
-                <div>
-                    <mat-tab label="Table">  
-                        <div>
+                    <div class="containerrow" *ngIf="!switchTable">
+                        <div fxFlex>
+                            <plotly-plot fxFlex [style]="style" [useResizeHandler]="true" [data]="IPData"
+                                [config]="config" [layout]="layoutInt">
+                            </plotly-plot>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        
+
+                        <div *ngIf="switchTable">
                             <table mat-table [dataSource]="dataSource" matSort>
                                 <ng-container matColumnDef="date">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
@@ -174,15 +236,17 @@
                                 </tr>
                             </table>
                             <mat-paginator [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
-                        </div> 
-                            
-                    </mat-tab>
-                </div>  
-            </mat-tab-group>
-        </div>
-        <div class = "card2">
-            <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
-            <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card>
+                        </div>
+
+                        <!-- </mat-tab> -->
+                    </div>
+                    <!-- </mat-tab-group> -->
+                </div>
+                <div class="card2">
+                    <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
+                    <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient"></arro-client-card> -->
+                </div>
+            </div>
         </div>
     </div>
 </div>

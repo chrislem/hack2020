@@ -64,6 +64,7 @@ import { PlotlyModule } from 'angular-plotly.js';
 import { ClientCardComponent } from './components/client-card/client-card.component';
 import { DealrenegoComponent } from './components/dealrenego/dealrenego.component';
 import { DealCardComponent } from './components/deal-card/deal-card.component';
+import { ClientCardHorComponent } from './components/client-card-hor/client-card-hor.component';
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
@@ -78,7 +79,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     OriginationComponent,
     ClientCardComponent,
     DealrenegoComponent,
-    DealCardComponent
+    DealCardComponent,
+    ClientCardHorComponent
   ],
   imports: [
     BrowserModule,
