@@ -14,7 +14,7 @@ export const nestedRoutes: { title: string; routes: Routes }[] = [
     routes: [
       //{ path: 'account', loadChildren: AccountModule },
       { path: 'origination', component: OriginationComponent, data: { title: 'Origination' }  },
-      { path: 'client', component: ClientComponent, data: { title: 'Renegociation' } },
+      { path: 'client', component: ClientComponent, data: { title: 'Renegotiation' } },
       { path: 'rate', component: RateComponent, data: { title: 'Rates Comparison' } }
     ]
   }
