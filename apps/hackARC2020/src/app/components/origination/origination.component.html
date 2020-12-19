@@ -16,6 +16,7 @@
             </mat-list>
             <div class="">
                 <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
+                <b *ngIf="!currentclient" >Select a client to start the Orignition process</b>
                 <arro-client-card-hor *ngIf="currentclient" [client]="currentclient"></arro-client-card-hor>
             </div>
         </div>
