@@ -13,9 +13,9 @@ export const nestedRoutes: { title: string; routes: Routes }[] = [
     title: 'ARRO',
     routes: [
       //{ path: 'account', loadChildren: AccountModule },
-      { path: 'origination', component: OriginationComponent, data: { title: 'Origination' }  },
-      { path: 'client', component: ClientComponent, data: { title: 'Renegotiation' } },
-      { path: 'rate', component: RateComponent, data: { title: 'Rates Comparison' } }
+      { path: 'origination', component: OriginationComponent, data: { title: 'ARR ORIGINATION' }  },
+      { path: 'client', component: ClientComponent, data: { title: 'ARR CONVERSION' } },
+      { path: 'rate', component: RateComponent, data: { title: 'RATES COMPARISON' } }
     ]
   }
 ].map((groups) => {
