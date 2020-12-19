@@ -1,16 +1,17 @@
 import { IContract, ICustomer } from "./interface";
 
 
-export var graphbg = '#3f3f3f'
+export var graphbg = '#ffffff'
 export var barcolor = [
     '#eb823d',
-    '#d1204e',
+    '#ae296d',
     ''
 ]
 
 export var linecolor = [
     '#c85a51',
-    '#ae296d',
+    '#d1204e',
+    
     ''
 ]
 

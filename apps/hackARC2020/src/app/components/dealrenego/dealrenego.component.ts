@@ -47,6 +47,7 @@ margin
 //running
 runningARR: boolean
 runningARRfull: boolean
+switchTable: boolean = false
 
 //Deals
 @Input() originalDeal
@@ -116,6 +117,8 @@ dealARR: any
   
  }
 
+
+
  ngOnInit(): void {
   this.ARRindex = mapCurrencyARR.get(this.originalDeal.currency)
   this.ARRindexFlag = mapFlag.get(this.originalDeal.currency)
@@ -169,12 +172,16 @@ opt_spread: Options = {
    console.log('ok drawbar')
 
    this.layoutInt = {
-     title: 'Interest',
      autosize: true,
      xaxis: {title: 'Date'},
      yaxis: {title: 'Amount'},
      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'},
-     plot_bgcolor: graphbg
+     plot_bgcolor: graphbg,
+     margin: {
+      b: 50,
+      t: 20,
+      pad: 10
+    }
    }
 
 
@@ -182,8 +189,8 @@ opt_spread: Options = {
      responsive: true
    }
    this.style = {
-     width: '600px',
-     height: '500px'
+     width: '780px',
+     height: '550px'
    }
 
 
@@ -409,7 +416,7 @@ ComputeARRFull() {
       x: this.originalDeal.cfInterest.getDates(),
       y: this.originalDeal.cfInterest.getValues(),
       type: 'bar',
-      name: 'Interestst Libor',
+      name: 'Interest Libor',
  
       marker: {size: 200, color: barcolor[0]}
     },
@@ -433,7 +440,7 @@ ComputeARRFull() {
         x: this.dealARR.cfInterest.getDates(),
         y: this.dealARR.cfInterest.getValues(),
         type: 'bar',
-        name: 'Interestst ARR',
+        name: 'Interest ARR',
         marker: {color: barcolor[1]}
       }) 
       
