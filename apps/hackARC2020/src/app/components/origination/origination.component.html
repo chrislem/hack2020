@@ -1,6 +1,6 @@
-<body>
+<div class="page-container">
 
-    <div class="myspacing elevated-block mat-elevation-z2">
+    <div>
         <mat-list class=" list-horizontal ">
           <mat-list-item>
             <mat-form-field>
@@ -18,7 +18,7 @@
 
 
     <div class="containerrow">
-        <table class = "ARRform elevated-block mat-elevation-z2">
+        <table class = "ARRform">
                 <thead class = "title">
                     <tr>
                             <span class ="flag-icon {{getFlag()}}"></span>
@@ -98,7 +98,7 @@
                     </tr>                       
                 </tbody>
         </table>
-        <mat-card class = "card1 elevated-block mat-elevation-z2">  
+        <mat-card class = "card1">  
 <!--             <mat-card-header>
                 <mat-card-title></mat-card-title>
             </mat-card-header>  -->
@@ -128,7 +128,7 @@
                 <button mat-button>CLEAR</button>
             </mat-card-actions> -->
         </mat-card>              
-        <div class="graph elevated-block mat-elevation-z2">
+        <div class="graph">
             <mat-tab-group>
                 <mat-tab label="Graph">
                     <div class="containerrow">
@@ -182,7 +182,7 @@
         </div>
         <div class = "card2">
             <!-- <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card> -->
-            <arro-client-card [client]="currentclient" ></arro-client-card>
+            <arro-client-card *ngIf="currentclient" [client]="currentclient" ></arro-client-card>
         </div>
     </div>
-</body>
+</div>

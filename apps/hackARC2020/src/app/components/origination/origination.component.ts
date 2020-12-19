@@ -187,14 +187,13 @@ opt_spread: Options = {
   }
   drawBarchart() {
     console.log('ok drawbar')
- 
     this.IPData = [
       {
         x: this.contract.cfInterest.getDates(),
         y: this.contract.cfInterest.getValues(),
         type: 'bar',
         name: 'Interests',
-        marker: {color: '#040D14'}
+        marker: {color: '#ae296d'}
       },
       {
         x: this.contract.fixing.getDates(),
@@ -202,7 +201,7 @@ opt_spread: Options = {
         type: 'line',
         name: 'Fixings',
         yaxis: 'y2',
-        line: {color: '#DD1C1A'}
+        line: {color: '#eb823d'}
       }]
 
     this.OPData = [
@@ -217,7 +216,7 @@ opt_spread: Options = {
       }]
        
     this.layoutInt = {
-      title: 'Interest',
+      title: this.ARRindex + ' projection',
       autosize: true,
       xaxis: {title: 'Date'},
       yaxis: {title: 'Amount'},
