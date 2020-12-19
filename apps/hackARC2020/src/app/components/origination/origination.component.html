@@ -131,7 +131,7 @@
                         <tr>
                             <td class="cellblanc textviolet">
                                 <mat-spinner *ngIf="runningCompute" diameter="35"></mat-spinner>
-                                <span  *ngIf="!runningCompute" class="textorange">{{clientRateSpread| number:'1.2-2'}}%</span>
+                                <span  *ngIf="!runningCompute" class="textviolet">{{clientRateSpread| number:'1.2-2'}}%</span>
                             </td>
                         </tr>
                     </table>
@@ -169,7 +169,7 @@
                         <tr>
                             <td class="cellblanc textorange">
                                 
-                                <img *ngIf="weatherImage" src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;" />
+                                <img *ngIf="weatherImage && !runningCompute" src="{{weatherImage}}" alt="HTML5 Icon" style="width:100px;height:100px;" />
                                
                             </td>
                         </tr>

@@ -221,12 +221,10 @@ opt_spread: Options = {
       }]
        
     this.layoutInt = {
-      title: this.ARRindex + ' projection',
       autosize: true,
       xaxis: {title: 'Date'},
       yaxis: {title: 'Amount'},
-      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'},
-      plot_bgcolor:"#D0D1D3"
+      yaxis2: {title: 'Rate (%)', overlaying: 'y', side: 'right'}
     }
 
     this.layoutOP = {
@@ -240,8 +238,8 @@ opt_spread: Options = {
       responsive: true
     }
     this.style = {
-      width: '600px',
-      height: '500px'
+      width: '780px',
+      height: '550px'
     }
     console.log(this.IPData)
 
